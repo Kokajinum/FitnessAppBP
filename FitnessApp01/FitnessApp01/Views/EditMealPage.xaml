@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.EditMealPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:converters="clr-namespace:FitnessApp01.Converters"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="True">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:EditMealPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToDoubleConverter x:Key="stringToDouble" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Margin="0,10,0,0">
+            <Label Text="{Static resources:AppResources.EditMeal}"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center">
+            </Label>
+            <StackLayout Margin="20">
+                <Label Text="{Binding MealName}"
+                       FontAttributes="Bold">
+                </Label>
+                <Label Text="{Binding MealBrand}"
+                       FontAttributes="Bold">
+                </Label>
+            </StackLayout>
+            <Entry Text="{Binding WeightInput, Converter={StaticResource stringToDouble}}"
+                   HorizontalTextAlignment="Center"
+                   Keyboard="Numeric">
+            </Entry>
+            <StackLayout Orientation="Horizontal" 
+                         Margin="10,20"
+                         IsVisible="{Binding IsVisible}">
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Energie: "></Span>
+                            <Span Text="{Binding KcalCalculated}"></Span>
+                            <Span Text="Kcal"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Sacharidy: "></Span>
+                            <Span Text="{Binding CarbsCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Tuky: "></Span>
+                            <Span Text="{Binding FatCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Bílkoviny: "></Span>
+                            <Span Text="{Binding ProteinCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsRunning}">
+            </ActivityIndicator>
+            <Button Text="Upravit záznam"
+                    VerticalOptions="EndAndExpand"
+                    Margin="100,0,100,0"
+                    Command="{Binding EditMealCommand}"
+                    CommandParameter="{Binding CanEdit}">
+            </Button>
+            <ImageButton Source="icon_feed.png"
+                         HorizontalOptions="Center"
+                         Margin="0,0,0,100"
+                         Command="{Binding DeleteMealCommand}">
+            </ImageButton>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

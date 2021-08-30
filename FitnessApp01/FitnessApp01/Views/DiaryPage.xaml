@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.DiaryPage"
+             x:Name="Page"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:DiaryPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshViewCommand}"
+                         Padding="20"
+                         Grid.ColumnSpan="3"
+                         Grid.RowSpan="3">
+                <StackLayout>
+                    <Label Text="{Static resources:AppResources.Diary}" 
+                       FontSize="30" 
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    </Label>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Margin="0,0,0,20">
+                        <ImageButton Source="icon_about.png"
+                                 Command="{Binding PreviousDayCommand}">
+                        </ImageButton>
+                        <Label Text="{Binding NameOfTheDay}">
+                        </Label>
+                        <ImageButton Source="icon_about.png"
+                                     Command="{Binding NextDayCommand}">
+
+                        </ImageButton>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding CaloriesCurrent}"></Span>
+                                    <Span Text="Kcal/"></Span>
+                                    <Span Text="{Binding CaloriesGoal}"></Span>
+                                    <Span Text="Kcal"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding MealGroups}"
+                                    IsGrouped="True"
+                                    x:Name="collectionView">
+                        <CollectionView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,15,0,0">
+                                    <Frame BorderColor="Gray"
+                                           BackgroundColor="LightGreen"
+                                           CornerRadius="5"
+                                           Padding="5">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding ViewName}"
+                                               FontSize="Medium"
+                                               FontAttributes="Bold" 
+                                               LineBreakMode="NoWrap"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="StartAndExpand"/>
+                                            <Button Text="+"
+                                                WidthRequest="40"
+                                                HeightRequest="40"
+                                                CornerRadius="20"
+                                                BackgroundColor="#5BC0EB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:DiaryPageViewModel}},
+                                                         Path=AddMealCommand}"
+                                                CommandParameter="{Binding .}">
+                                            </Button>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupHeaderTemplate>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10,5,10,20">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.ItemTapCommand,
+                                            Source={x:Reference collectionView}}"
+                                            CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                        <!--<TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:DiaryPageViewModel}},
+                                                         Path=ItemTapCommand}"
+                                                CommandParameter="{Binding .}"
+                                                NumberOfTapsRequired="1">
+                                        </TapGestureRecognizer>-->
+                                    </StackLayout.GestureRecognizers>
+                                    <!--<Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>-->
+                                    
+                                    <Label Text="{Binding Name}"
+                                           FontSize="Medium">
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Weight}"></Span>
+                                                    <Span Text="g"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Kcal}"></Span>
+                                                    <Span Text="Kcal"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </RefreshView>
+            <ActivityIndicator IsRunning="{Binding IsRunning}"
+                               Margin="0,0,0,0"
+                               HeightRequest="1"
+                               WidthRequest="1"
+                               Grid.Row="1"
+                               Grid.Column="1">
+            </ActivityIndicator>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

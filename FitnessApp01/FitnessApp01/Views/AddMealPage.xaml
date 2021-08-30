@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.AddMealPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:converters="clr-namespace:FitnessApp01.Converters"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="True">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:AddMealPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToDoubleConverter x:Key="stringToDouble" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Margin="15">
+            <Label Text="{Binding Food.Name}"
+                   FontSize="Large"
+                   FontAttributes="Bold">
+            </Label>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Food.Brand}">
+                </Label>
+                <Label FontSize="Medium"
+                       FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Food.Kcal}"></Span>
+                            <Span Text="Kcal"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Margin="0,50,0,0">
+                <Entry Placeholder="váha"
+                       Keyboard="Numeric"
+                       Text="{Binding UserInput, Converter={StaticResource stringToDouble}}">
+                </Entry>
+                <Picker ItemsSource="{Binding PickerSource}"
+                        SelectedItem="{Binding PickerCurrentItem}">
+                </Picker>
+                <!--<Label Text="g"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center">
+                </Label>-->
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" 
+                         IsVisible="{Binding IsVisible}"
+                         Margin="10,20">
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Energie: "></Span>
+                            <Span Text="{Binding KcalCalculated}"></Span>
+                            <Span Text="Kcal"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Sacharidy: "></Span>
+                            <Span Text="{Binding CarbsCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Tuky: "></Span>
+                            <Span Text="{Binding FatCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Bílkoviny: "></Span>
+                            <Span Text="{Binding ProteinCalculated}"></Span>
+                            <Span Text="g"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsRunning}">
+            </ActivityIndicator>
+            <Button Text="Přidat do jídelníčku"
+                    VerticalOptions="EndAndExpand"
+                    Margin="100"
+                    Command="{Binding AddMealCommand}"
+                    CommandParameter="{Binding CanAdd}">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

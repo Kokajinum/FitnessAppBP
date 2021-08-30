@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.UserPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:UserPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Margin="15">
+            <Label Text="{Binding UserEmail}"
+                   HorizontalOptions="End">
+            </Label>
+            <Frame>
+                
+            </Frame>
+            <Button Text="Odhlásit se" 
+                    Command="{Binding SignOutCommand}"
+                    VerticalOptions="EndAndExpand">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.LoginPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:LoginPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout x:Name="LoginStackLayout" IsVisible="{Binding LoginIsVisible}" VerticalOptions="Center" Padding="10,0,10,0">
+                <Entry Placeholder="{x:Static resources:AppResources.EmailPlaceHolder}" 
+                       Text="{Binding UserEmail, Mode=TwoWay}" Keyboard="Email">
+                </Entry>
+                <Entry Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}" IsPassword="True"
+                       Text="{Binding UserPassword, Mode=TwoWay}">
+                </Entry>
+                <Button Text="{x:Static resources:AppResources.LoginButton}"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding CanLogin}">
+                </Button>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Nemáte účet?">
+                    </Label>
+                    <Label Text="Registrovat" Style="{StaticResource accentLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RegisterLabelTapCommand}" NumberOfTapsRequired="1">
+                            </TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout x:Name="RegisterStackLayout" IsVisible="{Binding RegisterIsVisible}" VerticalOptions="Center" Padding="10,0,10,0">
+                <Entry Placeholder="{x:Static resources:AppResources.EmailPlaceHolder}"
+                       Text="{Binding UserEmail, Mode=TwoWay}" Keyboard="Email"></Entry>
+                <Entry Placeholder="{x:Static resources:AppResources.PasswordPlaceholder}" IsPassword="True" 
+                       Text="{Binding UserPassword, Mode=TwoWay}"></Entry>
+                <Entry Placeholder="{x:Static resources:AppResources.PasswordConfirmPlaceholder}" IsPassword="True"
+                       Text="{Binding UserConfirmPassword, Mode=TwoWay}"></Entry>
+                <Button Text="{x:Static resources:AppResources.RegisterButton}"
+                        Command="{Binding RegisterCommand}"
+                        CommandParameter="{Binding CanRegister}"></Button>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Již máte účet?"></Label>
+                    <Label Text="Přihlásit se" Style="{StaticResource accentLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginLabelTapCommand}" NumberOfTapsRequired="1">
+                            </TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

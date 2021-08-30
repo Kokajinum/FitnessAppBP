@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.AddFoodPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:converters="clr-namespace:FitnessApp01.Converters"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="True">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:AddFoodPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToDoubleConverter x:Key="stringToDouble" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView Margin="15">
+            <StackLayout>
+                <Entry Placeholder="{Static resources:AppResources.FoodName}"
+                       Text="{Binding NameInput, Mode=OneWayToSource}">
+                </Entry>
+                <Entry Placeholder="Název výrobce (volitelné)"
+                       Text="{Binding BrandInput, Mode=OneWayToSource}">
+                </Entry>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Výživové údaje na"
+                           FontSize="Large"
+                           FontAttributes="Bold">
+                    </Label>
+                    <Label Text="100"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           Margin="50,0,0,0">
+                    </Label>
+                    <Picker ItemsSource="{Binding PickerUnits}"
+                            SelectedItem="{Binding PickerCurrentUnit}">
+                    </Picker>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Energetická hodnota"
+                           Text="{Binding KcalInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric">
+                    </Entry>
+                    <Entry Placeholder="Tuky"
+                           Text="{Binding FatInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                </StackLayout>
+                <Entry Placeholder="Z toho nasycené mastné kyseliny (volitelné)"
+                           Text="{Binding SaturatedInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                </Entry>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Sacharidy"
+                           Text="{Binding CarbsInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                    <Entry Placeholder="Z toho cukry"
+                           Text="{Binding SugarInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                </StackLayout>
+                
+                
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Vláknina (volitelné)"
+                           Text="{Binding FiberInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                    <Entry Placeholder="Bílkoviny"
+                           Text="{Binding ProteinInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric" 
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                    <Entry Placeholder="Sůl (volitelné)"
+                           Text="{Binding SaltInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                           Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand">
+                    </Entry>
+                </StackLayout>
+                <Entry Placeholder="Velikost balení/porce (volitelné)"
+                       Text="{Binding PortionSize, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
+                       Margin="0,80,0,0"
+                       HorizontalOptions="Center"
+                       Keyboard="Numeric">
+                </Entry>
+                <Button Text="{Static resources:AppResources.Save}"
+                        VerticalOptions="EndAndExpand"
+                        Margin="50,0,50,0"
+                        Command="{Binding SaveFoodCommand}"
+                        CommandParameter="{Binding CanSave}">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

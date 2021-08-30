@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp01.Views.RegistrationSettingsPage"
+             xmlns:local="clr-namespace:FitnessApp01.ViewModels"
+             xmlns:services="clr-namespace:FitnessApp01.Services"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:behavior="clr-namespace:FitnessApp01.Behaviors"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <!--nastavení viewmodelu-->
+        <local:RegistrationSettingsPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ageInputTemplate">
+            <StackLayout Padding="50,200,50,0"> 
+                <Label Text="{Static resources:AppResources.YourAge}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <Entry Placeholder="{Static resources:AppResources.Age}"
+                       Style="{StaticResource postRegistrationEntry}"
+                       Text="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=AgeInput, Mode=TwoWay}"
+                       MaxLength="3"
+                       behavior:NaturalNumValidationBehavior.AttachBehavior="True">
+                </Entry>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="weightInputTemplate">
+            <StackLayout Padding="50,200,50,0">
+                <Label Text="{Static resources:AppResources.YourWeight}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="{Static resources:AppResources.Weight}"
+                           Style="{StaticResource postRegistrationEntry}"
+                           Text="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                           Path=WeightInput, Mode=TwoWay}"
+                           WidthRequest="70"
+                           MaxLength="5">
+                    </Entry>
+                    <Picker ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},     Path=WeightOptionsList}"
+                            SelectedIndex="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}}, Path=WeightPickerIndex}"
+                            WidthRequest="40">
+                    </Picker>
+                </StackLayout>
+                
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="heightInputTemplate">
+            <StackLayout Padding="50,200,50,0">
+                <Label Text="{Static resources:AppResources.YourHeight}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="{Static resources:AppResources.Height}"
+                       Style="{StaticResource postRegistrationEntry}"
+                       Text="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=HeightInput, Mode=TwoWay}"
+                           WidthRequest="70">
+                    </Entry>
+                    <Label Text="cm" VerticalOptions="Center"></Label>
+                </StackLayout>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="genderInputTemplate">
+            <StackLayout Padding="50,200,50,0" 
+                         RadioButtonGroup.GroupName="gender"
+                         RadioButtonGroup.SelectedValue="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}}, Path=GenderRadioButtonSelected}">
+                <Label Text="{Static resources:AppResources.YourGender}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <RadioButton Value="male" Content="{Static resources:AppResources.Male}"></RadioButton>
+                <RadioButton Value="female" Content="{Static resources:AppResources.Female}"></RadioButton>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="activityInputTemplate">
+            <StackLayout Padding="50,160,50,0"
+                         RadioButtonGroup.GroupName="activity"
+                         RadioButtonGroup.SelectedValue="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}}, Path=ActivityRadioButtonSelected}">
+                <Label Text="{Static resources:AppResources.YourActivity}"
+                       Style="{StaticResource postRegistrationHeaders}"
+                       Margin="0,0,0,10">
+                </Label>
+                <RadioButton Value="1.2" 
+                             Content="sedavé zaměstnání, sportování/cvičení maximálně 1x týdně"
+                             Margin="0,10,0,0">
+                </RadioButton>
+                <RadioButton Value="1.375" 
+                             Content="sportování/cvičení 2-3x týdně"
+                             Margin="0,10,0,0">
+                </RadioButton>
+                <RadioButton Value="1.55" 
+                             Content="sportování/cvičení 4-6x týdně"
+                             Margin="0,10,0,0">
+                </RadioButton>
+                <RadioButton Value="1.725" 
+                             Content="náročné sportování/cvičení každý den"
+                             Margin="0,10,0,0">
+                </RadioButton>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}"
+                        Margin="0,10,0,0">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="goalInputTemplate">
+            <StackLayout Padding="50,200,50,0"
+                         RadioButtonGroup.GroupName="goals"
+                         RadioButtonGroup.SelectedValue="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}}, Path=GoalsRadioButtonSelected}">
+                <Label Text="{Static resources:AppResources.YourGoal}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <RadioButton Value="1" Content="Zhubnout"></RadioButton>
+                <RadioButton Value="2" Content="Přibrat"></RadioButton>
+                <RadioButton Value="3" Content="Udržet současnou váhu"></RadioButton>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+                <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=IsRunning}"
+                                   Margin="0,80,0,0">
+                </ActivityIndicator>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="desiredWeightInputTemplate">
+            <StackLayout Padding="50,200,50,0">
+                <Label Text="{Static resources:AppResources.YourDesiredWeight}"
+                       Style="{StaticResource postRegistrationHeaders}">
+                </Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="{Static resources:AppResources.Weight}"
+                           Style="{StaticResource postRegistrationEntry}"
+                           WidthRequest="70"
+                           Text="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                           Path=DesiredWeightInput, Mode=TwoWay}">
+                    </Entry>
+                    <Picker ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type             local:RegistrationSettingsPageViewModel}}, Path=WeightOptionsList}"
+                            SelectedIndex="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}}, Path=DesiredWeightPickerIndex}"
+                            WidthRequest="40">
+                    </Picker>
+                </StackLayout>
+                <Button Text="{Static resources:AppResources.Next}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=NextPageCommand}">
+                </Button>
+                <Button Text="{Static resources:AppResources.Previous}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=PreviousPageCommand}">
+                </Button>
+                <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
+                        Path=IsRunning}"
+                                   Margin="0,80,0,0">
+                </ActivityIndicator>
+            </StackLayout>
+        </DataTemplate>
+        <services:RegistrationDataTemplateSelector x:Key="registrationDataTemplateSelector"
+                                                   AgeInputTemplate="{StaticResource ageInputTemplate}"
+                                                   WeightInputTemplate="{StaticResource weightInputTemplate}"
+                                                   HeightInputTemplate="{StaticResource heightInputTemplate}"
+                                                   GenderInputTemplate="{StaticResource genderInputTemplate}"
+                                                   ActivityInputTemplate="{StaticResource activityInputTemplate}"
+                                                   GoalInputTemplate="{StaticResource goalInputTemplate}"
+                                                   DesiredWeightInputTemplate="{StaticResource desiredWeightInputTemplate}">
+        </services:RegistrationDataTemplateSelector>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <CarouselView x:Name="MyCarouselView" 
+                          ItemTemplate="{StaticResource registrationDataTemplateSelector}"
+                          ItemsSource="{Binding CarouselSource}"
+                          IndicatorView="indicatorView"
+                          IsSwipeEnabled="False"
+                          Position="{Binding CarouselPosition}">
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                           IndicatorColor="Red"
+                           SelectedIndicatorColor="DarkGray"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,40">
+            </IndicatorView>
+        </StackLayout>
+        
+        
+    </ContentPage.Content>
+</ContentPage>
