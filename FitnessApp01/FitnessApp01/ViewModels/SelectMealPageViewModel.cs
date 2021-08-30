@@ -21,7 +21,7 @@ namespace FitnessApp01.ViewModels
     public class SelectMealPageViewModel : BaseViewModel
     {
         #region API ALGOLIO
-        private readonly string api = "41c31d7aa3377bcd13516945296f3724";
+        private readonly string api = "26a4337998d90c8e47df8b2b331fff49";
         private readonly string index = "food";
         #endregion
 
