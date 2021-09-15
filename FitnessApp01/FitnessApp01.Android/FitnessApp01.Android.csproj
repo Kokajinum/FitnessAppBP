@@ -76,10 +76,10 @@
     <Compile Include="Services\AndroidAuth.cs" />
   </ItemGroup>
   <ItemGroup>
-    <GoogleServicesJson Include="google-services.json" />
     <None Include="..\..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <GoogleServicesJson Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

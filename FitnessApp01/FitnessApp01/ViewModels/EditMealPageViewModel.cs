@@ -35,7 +35,7 @@ namespace FitnessApp01.ViewModels
                 await FirestoreBase.UpdateDayAsync(CurrentDay);
                 await FirestoreBase.RemoveMealAsync(Meal);
             }
-            //todo
+            //todo reseni chyb
             catch (Exception e)
             {
 
@@ -47,11 +47,6 @@ namespace FitnessApp01.ViewModels
                 MessagingCenter.Send<object>(this, "mealEdited");
             }
             
-        }
-
-        private bool EditCanExecute()
-        {
-            return CanEdit;
         }
 
         private async Task EditMeal()
@@ -81,7 +76,27 @@ namespace FitnessApp01.ViewModels
             }
             
         }
-        
+
+        private void InitializeEditMealPageViewModel()
+        {
+            MealName = Meal.Name;
+            MealBrand = Meal.Brand;
+            WeightInput = WeightUnchanged = Meal.Weight;
+            KcalCalculated = Meal.Kcal;
+            CarbsCalculated = Meal.Carbohydrates;
+            ProteinCalculated = Meal.Protein;
+            FatCalculated = Meal.Fat;
+        }
+
+
+
+        #region helpers
+
+        private bool EditCanExecute()
+        {
+            return CanEdit;
+        }
+
         private void UpdateCurrentDay()
         {
             //kcal = aktualni hodnota - nova vypocitana hodnota
@@ -134,17 +149,6 @@ namespace FitnessApp01.ViewModels
             Meal.Salt = SaltCalculated;
         }
 
-        private void InitializeEditMealPageViewModel()
-        {
-            MealName = Meal.Name;
-            MealBrand = Meal.Brand;
-            WeightInput = WeightUnchanged = Meal.Weight;
-            KcalCalculated = Meal.Kcal;
-            CarbsCalculated = Meal.Carbohydrates;
-            ProteinCalculated = Meal.Protein;
-            FatCalculated = Meal.Fat;
-        }
-
         private void CalculateNutrients()
         {
             KcalCalculated = (int)(Meal.KcalOrig * WeightInput / 100);
@@ -156,6 +160,8 @@ namespace FitnessApp01.ViewModels
             FiberCalculated = (double)(Meal.FiberOrig * WeightInput / 100);
             SaltCalculated = (double)(Meal.SaltOrig * WeightInput / 100);
         }
+
+        #endregion
 
         #region Properties
 
