@@ -364,3 +364,7 @@ FodyWeavers.xsd
 
 # Google Services
 google-services.json
+
+# Drive
+./.tmp.drivedownload/
+.tmp.drivedownload/
