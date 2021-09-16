@@ -96,6 +96,12 @@
                        HorizontalOptions="Center"
                        Keyboard="Numeric">
                 </Entry>
+                <Label Text="prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp; a #"
+                       TextColor="Red"
+                       Margin="10"
+                       HorizontalTextAlignment="Center"
+                       IsVisible="{Binding IsVisible}">
+                </Label>
                 <Button Text="{Static resources:AppResources.Save}"
                         VerticalOptions="EndAndExpand"
                         Margin="50,0,50,0"

@@ -15,7 +15,7 @@ namespace FitnessApp01.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((string)value == "")
+            if ((string)value == "" || value == null)
             {
                 return null;
             }

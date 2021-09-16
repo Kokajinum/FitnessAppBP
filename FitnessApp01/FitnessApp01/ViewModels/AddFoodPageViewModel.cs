@@ -49,6 +49,7 @@ namespace FitnessApp01.ViewModels
 
         private bool SaveCanExecute()
         {
+            IsVisible = !CanSave;
             return CanSave;
         }
 
@@ -150,6 +151,19 @@ namespace FitnessApp01.ViewModels
             {
                 return CheckNameInput() && KcalInput > 0 && CarbsInput >= 0 &&
                      SugarInput >= 0 && ProteinInput >= 0 && FatInput >= 0;
+            }
+        }
+
+        private bool _isVisible = true;
+        public bool IsVisible
+        {
+            get
+            {
+                return _isVisible;
+            }
+            set
+            {
+                SetProperty(ref _isVisible, value);
             }
         }
 
