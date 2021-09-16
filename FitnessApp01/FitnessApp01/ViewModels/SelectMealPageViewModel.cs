@@ -33,19 +33,14 @@ namespace FitnessApp01.ViewModels
             FoodTapCommand = new Command<Food>(async (food) => await SelectMeal(food));
         }
 
-        /*public void ApplyQueryAttributes(IDictionary<string, string> query)
-        {
-            MealType = HttpUtility.UrlDecode(query["mealType"]);
-            string mealType = HttpUtility.UrlDecode(query["mealType"]);
-            Console.WriteLine(mealType);
-            var it = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
-            var m = it.MealGroups.FirstOrDefault(x => x.Name == mealType);
-            m.Add(new Meal("jidlo", 5555, 5555));
-        }
-        */
         private async Task SelectMeal(Food food)
         {
             var jsonString = JsonConvert.SerializeObject(food);
+            /*
+             * food.Name nesmí obsahovat '&', '#', Json pak vyvolá výjimku
+             * a) povolit uživateli vložit '&' a poté do databáze uložit 'a'
+             * b) znemožnit uživateli vložit '&'
+             */
 
             try
             {
@@ -53,9 +48,10 @@ namespace FitnessApp01.ViewModels
                     await Shell.Current.GoToAsync($"AddMealPage?mealType={MealType}&foodJson={jsonString}" +
                         $"&caloriesGoal={CaloriesGoal}&macros={MacrosString}");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new Exception(e.Message);
+                await App.Current.MainPage.DisplayAlert("Chyba", "Něco se pokazilo", "ok");
+                await Shell.Current.GoToAsync("..");
             }
             
         }

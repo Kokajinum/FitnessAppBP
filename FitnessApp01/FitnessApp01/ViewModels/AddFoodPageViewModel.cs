@@ -148,9 +148,16 @@ namespace FitnessApp01.ViewModels
         {
             get
             {
-               return !string.IsNullOrEmpty(NameInput) && KcalInput > 0 && CarbsInput >= 0 &&
-                    SugarInput >= 0 && ProteinInput >= 0 && FatInput >= 0;
+                return CheckNameInput() && KcalInput > 0 && CarbsInput >= 0 &&
+                     SugarInput >= 0 && ProteinInput >= 0 && FatInput >= 0;
             }
+        }
+
+        private bool CheckNameInput()
+        {
+            return !string.IsNullOrEmpty(NameInput)
+                && !NameInput.Contains("#")
+                && !NameInput.Contains("&");
         }
 
         #endregion

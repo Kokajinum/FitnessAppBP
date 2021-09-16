@@ -20,7 +20,7 @@ namespace FitnessApp01.Services
         {
             var result = await Index.SearchAsync<Food>(new Query(searchString)
             {
-                HitsPerPage = 5
+                HitsPerPage = 8
             });
             return result;
         }
