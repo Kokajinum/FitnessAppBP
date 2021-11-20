@@ -7,7 +7,7 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
+    <ContentPage.BindingContext>    
         <!--nastavení viewmodelu-->
         <local:LoginPageViewModel/>
     </ContentPage.BindingContext>

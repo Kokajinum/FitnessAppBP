@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Firebase.Auth;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Resx;
 using FitnessApp01.Services;
 using System;

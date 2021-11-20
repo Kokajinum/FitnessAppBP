@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessApp01.Services
+namespace FitnessApp01.Interfaces
 {
     public interface IAuth
     {
