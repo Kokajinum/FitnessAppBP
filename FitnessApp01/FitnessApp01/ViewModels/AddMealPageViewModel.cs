@@ -150,9 +150,9 @@ namespace FitnessApp01.ViewModels
             PickerCurrentItem = PickerSource[0];
         }
 
-        private Food ConvertJsonToFood()
+        private Food ConvertJsonToFood(string json)
         {
-            return JsonConvert.DeserializeObject<Food>(FoodJson);
+            return JsonConvert.DeserializeObject<Food>(json);
         }
 
         private void CalculateNutrients()
@@ -185,7 +185,7 @@ namespace FitnessApp01.ViewModels
                 SetProperty(ref _foodJson, value);
                 if (!string.IsNullOrEmpty(MealType))
                 {
-                    Food = ConvertJsonToFood();
+                    Food = ConvertJsonToFood(_foodJson);
                     InitializeAddMealPageViewModel();
                 }       
             }

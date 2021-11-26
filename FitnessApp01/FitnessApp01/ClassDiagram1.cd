@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FitnessApp01.Behaviors.NaturalNumValidationBehavior" Collapsed="true">
+    <Position X="33" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAgAAIAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Behaviors\NaturalNumValidationBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Converters.DoubleToKcalStringConverter" Collapsed="true">
+    <Position X="34.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\DoubleToKcalStringConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Converters.StringToDoubleConverter" BaseTypeListCollapsed="true">
+    <Position X="26" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\StringToDoubleConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FitnessApp01.Helpers.EventAggregator" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAA=</HashCode>
+      <FileName>Helpers\EventAggregator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Helpers.UnixSecondsString" Collapsed="true">
+    <Position X="27.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\UnixSecondsString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Day" Collapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAAAAgIAIAAAAAAAAAAAAAhAAAIAAAAIEAIAEABA=</HashCode>
+      <FileName>Models\Day.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Diary" Collapsed="true">
+    <Position X="29.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\Diary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Food" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAhAAAUAgIAAAAAAAAAAAAQAABAAAIAAAAAIAAAFAAA=</HashCode>
+      <FileName>Models\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.MealsOfTheDay" Collapsed="true">
+    <Position X="31.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Models\MealsOfTheDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Breakfast" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealsOfTheDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Lunch" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealsOfTheDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Snack" Collapsed="true">
+    <Position X="34.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealsOfTheDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Dinner" Collapsed="true">
+    <Position X="33" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealsOfTheDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.RegistrationSettings" Collapsed="true">
+    <Position X="26" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAQAAAAACEBAAAAAAAAAAAAAgQJAAQAAAIAAACAACA=</HashCode>
+      <FileName>Models\RegistrationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.SelectedDay" Collapsed="true">
+    <Position X="31.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAIAACAgAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SelectedDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Resx.AppResources" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgCjgKIAJCQECwAQEEABEABAFSAACzAAAAIAgIIAAMA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Services.AuthBase" Collapsed="true">
+    <Position X="34.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAACAAAAAAgAAAAgAACAAAIAEAAAAAAAAAA=</HashCode>
+      <FileName>Services\AuthBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Services.FirestoreBase" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIAAAQAIAAAIAAABAAAAABAACAAAAEAAABAAAkAAA=</HashCode>
+      <FileName>Services\FirestoreBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Services.RegistrationDataTemplateSelector" Collapsed="true">
+    <Position X="34.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAEQIAAAAAAIAQEAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Services\RegistrationDataTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Services.SearchBase" Collapsed="true">
+    <Position X="29.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAAIAAAAQ=</HashCode>
+      <FileName>Services\SearchBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.AddFoodPageViewModel" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAgAAQEBAQYEEAAQAAQSIACAEBgIAGACwRAIgABgEA=</HashCode>
+      <FileName>ViewModels\AddFoodPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.AddMealPageViewModel" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAIAAMAADBIAGhABAoBGwYAAIhMigABBBAcQIkhCAAA=</HashCode>
+      <FileName>ViewModels\AddMealPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.BaseViewModel" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.DiaryPageViewModel" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAEEJQADAAAIQAZQEIgEBAAAAkAEIHIIAARgA=</HashCode>
+      <FileName>ViewModels\DiaryPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.EditMealPageViewModel" Collapsed="true">
+    <Position X="23.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAIEEAADQQAGkACA6ZAQBAAAgYiACDRDADQIwgCBAA=</HashCode>
+      <FileName>ViewModels\EditMealPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.HomePageViewModel" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgQAAJAGxBBAAAAIIAQAAohWBAACBCgUIBoNACQgA=</HashCode>
+      <FileName>ViewModels\HomePageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.LoginPageViewModel" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAEAQBEAABCAAIAgAgBoBIIDAIABQCQKAEAA=</HashCode>
+      <FileName>ViewModels\LoginPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.MainViewModel" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECAAAAAAAAAIAoAAAAAAAEAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.RegistrationSettingsPageViewModel" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAYQACAAVUBAAEEAYIAShoAQAQJIAYQCAQAkACiAH8=</HashCode>
+      <FileName>ViewModels\RegistrationSettingsPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.SelectMealPageViewModel" Collapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAIoAAAAAAABABAAAAAAQAJQAkAAgAACIAgAIBEAA=</HashCode>
+      <FileName>ViewModels\SelectMealPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.ViewModels.UserPageViewModel" Collapsed="true">
+    <Position X="21.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECAAAAAAAAAAAAAAAAAAAAAAIAAAAAAACAAAAAA=</HashCode>
+      <FileName>ViewModels\UserPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.AddFoodPage" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AddFoodPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.AddMealPage" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AddMealPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.DiaryPage" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DiaryPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.EditMealPage" Collapsed="true">
+    <Position X="26" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\EditMealPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.HomePage" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HomePage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.LoginPage" Collapsed="true">
+    <Position X="34.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\LoginPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.RegistrationSettingsPage" Collapsed="true">
+    <Position X="27.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\RegistrationSettingsPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.SelectMealPage" Collapsed="true">
+    <Position X="33" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\SelectMealPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.UserPage" Collapsed="true">
+    <Position X="29.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\UserPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Views.WelcomePage" Collapsed="true">
+    <Position X="31.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\WelcomePage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.App" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.AppShell" Collapsed="true">
+    <Position X="33" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AppShell.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.Meal" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AApACwEAgIIAAAAAEAACAAQAADAAAIAAAAAAAgAFAAA=</HashCode>
+      <FileName>Models\Meal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessApp01.Models.MealGroup" Collapsed="true">
+    <Position X="29.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="FitnessApp01.Interfaces.IAuth" Collapsed="true">
+    <Position X="26" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAACAAAAAAgAAAAgAACAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAuth.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

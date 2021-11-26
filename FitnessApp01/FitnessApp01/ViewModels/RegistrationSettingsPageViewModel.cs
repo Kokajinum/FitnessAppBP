@@ -96,6 +96,8 @@ namespace FitnessApp01.ViewModels
                 IsRunning = true;
                 await SetRegSettingsAndDB();
                 EventAggregator.BroadCast2();
+                CarouselPosition = 0;
+                IsRunning = false;
                 await Shell.Current.GoToAsync("//main-content");
                 
                 return;
@@ -110,13 +112,26 @@ namespace FitnessApp01.ViewModels
 
         private async Task<bool> SetRegSettingsAndDB()
         {
-            var macros = new Dictionary<string, double>
+            RegistrationSettings = GenerateRegistrationSettings();
+            try
             {
-                { "protein", 30 },
-                { "carbohydrates", 40 },
-                { "fat", 30 }
-            };
-            RegistrationSettings = new RegistrationSettings
+                await FirestoreBase.InsertRegistrationSettings(RegistrationSettings);
+                return true;
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message + " " + e.InnerException, "ok");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Vygeneruje RegistrationSettings na základě vstupu od uživatele
+        /// </summary>
+        /// <returns></returns>
+        private RegistrationSettings GenerateRegistrationSettings()
+        {
+            return new RegistrationSettings
             {
                 Email = AuthBase.GetUserEmail(),
                 AgeDB = this.AgeDB,
@@ -129,10 +144,22 @@ namespace FitnessApp01.ViewModels
                 WeightMeasureDB = this.WeightMeasureDB,
                 DesiredWeightMeasureDB = this.DesiredWeightMeasureDB,
                 CaloriesGoal = CalculateCaloriesGoal(),
-                Macros = macros 
+                Macros = GenerateMacros()
             };
-            var result = await FirestoreBase.InsertRegistrationSettings(RegistrationSettings);
-            return result;
+        }
+
+        /// <summary>
+        /// Creates default macros
+        /// </summary>
+        /// <returns></returns>
+        private IDictionary<string,double> GenerateMacros()
+        {
+            return new Dictionary<string, double>
+            {
+                { "protein", 30 },
+                { "carbohydrates", 40 },
+                { "fat", 30 }
+            };
         }
 
         private int CalculateCaloriesGoal()

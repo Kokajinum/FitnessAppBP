@@ -91,6 +91,7 @@ namespace FitnessApp01.ViewModels
                 await App.Current.MainPage
                     .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
                 await Shell.Current.GoToAsync("//RegistrationSettingsPage");
+                IsRunning = false;
             }
             
             isValid = await LoadDiaryData();

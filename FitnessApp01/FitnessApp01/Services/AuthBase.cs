@@ -11,11 +11,11 @@ namespace FitnessApp01.Services
     {
         private static readonly IAuth auth = DependencyService.Get<IAuth>();
 
-        public static async Task<bool> RegisterUser(string email, string password)
+        public static async Task<bool> RegisterUserAsync(string email, string password)
         {
             try
             {
-                return await auth.RegisterUser(email, password);
+                return await auth.RegisterUserAsync(email, password);
             }
             catch (Exception e)
             {
@@ -24,11 +24,11 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task<bool> LoginUser(string email, string password)
+        public static async Task<bool> LoginUserAsync(string email, string password)
         {
             try
             {
-                return await auth.LoginUser(email, password);
+                return await auth.LoginUserAsync(email, password);
             }
             catch (Exception e)
             {

@@ -42,7 +42,7 @@ namespace FitnessApp01.ViewModels
         {
             if ((UserConfirmPassword != UserPassword) || !ValidateEmail())
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Hesla se neshodují", "ok");
+                await DisplayAlertAsync("Error", "Hesla se neshodují", "ok");
                 return;
             }
             try
@@ -51,15 +51,16 @@ namespace FitnessApp01.ViewModels
             }
             catch (FormatException)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Neplatná emailová adresa", "ok");
+                await DisplayAlertAsync("Error", "Neplatná emailová adresa", "ok");
                 return;
             }
             
-            bool result = await AuthBase.RegisterUser(UserEmail, UserPassword);
+            bool result = await AuthBase.RegisterUserAsync(UserEmail, UserPassword);
             if (result) //registrovaný uživatel je zároveň přihlášený
             {
                 LoginLabelTap();
-                await Shell.Current.GoToAsync("//WelcomePage");
+                await GoToPageAsync("//WelcomePage");
+                //await Shell.Current.GoToAsync("//WelcomePage");
                 ResetFields();
             }
 
@@ -72,10 +73,10 @@ namespace FitnessApp01.ViewModels
 
         private async Task Login()
         {
-            bool result = await AuthBase.LoginUser(UserEmail, UserPassword);
+            bool result = await AuthBase.LoginUserAsync(UserEmail, UserPassword);
             if (result)
             {
-                await Shell.Current.GoToAsync("//main-content");
+                await GoToPageAsync("//main-content");
                 ResetFields();
             }
         }

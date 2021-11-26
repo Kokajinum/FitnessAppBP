@@ -37,13 +37,13 @@ namespace FitnessApp01.ViewModels
             var saved = await FirestoreBase.SaveFoodData(newFood);
             if (!saved)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Nepodařilo se uložit data", "ok");
-                await Shell.Current.GoToAsync("..");
+                await DisplayAlertAsync("Error", "Nepodařilo se uložit data", "ok");
+                await GoToPageAsync("..");
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Done", "Podařilo se", "ok");
-                await Shell.Current.GoToAsync("..");
+                await DisplayAlertAsync("Done", "Podařilo se", "ok");
+                await GoToPageAsync("..");
             }
         }
 

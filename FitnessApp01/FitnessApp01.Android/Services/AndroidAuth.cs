@@ -37,7 +37,7 @@ namespace FitnessApp01.Droid.Services
             return mAuth.CurrentUser != null;
         }
 
-        public async Task<bool> LoginUser(string email, string password)
+        public async Task<bool> LoginUserAsync(string email, string password)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace FitnessApp01.Droid.Services
             }
         }
 
-        public async Task<bool> RegisterUser(string email, string password)
+        public async Task<bool> RegisterUserAsync(string email, string password)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace FitnessApp01.Droid.Services
 
             catch (FirebaseAuthUserCollisionException e)
             {
-                throw new Exception("user collision" + e.Message);
+                throw new Exception("user collision " + e.Message);
             }
 
             catch (Exception e)

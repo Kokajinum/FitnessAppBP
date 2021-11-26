@@ -14,7 +14,7 @@ namespace FitnessApp01.Services
 {
     public class FirestoreBase
     {
-        public static async Task<bool> InsertRegistrationSettings(RegistrationSettings registrationSettings)
+        public static async Task InsertRegistrationSettings(RegistrationSettings registrationSettings)
         {
             try
             {
@@ -22,17 +22,18 @@ namespace FitnessApp01.Services
                     .Collection("users")
                     .Document(AuthBase.GetUserId())
                     .SetAsync(registrationSettings);
-                return true;
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message + " " + e.ErrorType, "ok");
-                return false;
+                /*await App.Current.MainPage.DisplayAlert("Error", e.Message + " " + e.ErrorType, "ok");
+                return false;*/
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return false;
+                /*await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
+                return false;*/
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -99,23 +100,17 @@ namespace FitnessApp01.Services
                     //
                     var breakfastListMeals = await LoadMealData("breakfast");
                     model.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, breakfastListMeals));
-                    //model.Breakfast = new Breakfast(breakfastListMeals);
                     //
                     var lunchListMeals = await LoadMealData("lunch");
                     model.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, lunchListMeals));
-                    //model.Lunch = new Lunch(lunchListMeals);
                     //
                     var snackListMeals = await LoadMealData("snack");
                     model.MealGroups.Add(new MealGroup("snack", AppResources.Snack, snackListMeals));
-                    //model.Snack = new Snack(snackListMeals);
                     //
                     var dinnerListMeals = await LoadMealData("dinner");
                     model.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, dinnerListMeals));
-                    //model.Dinner = new Dinner(dinnerListMeals);
                     //
                     obs.Add(model);
-                    /*var list = new List<Day>();
-                    list.Add(model);*/
                     return obs;
                 }
                 else
