@@ -110,6 +110,10 @@ namespace FitnessApp01.ViewModels
 
         #region Helpers
 
+        /// <summary>
+        /// Získá RegistrationSettings a uloží do databáze
+        /// </summary>
+        /// <returns></returns>
         private async Task<bool> SetRegSettingsAndDB()
         {
             RegistrationSettings = GenerateRegistrationSettings();

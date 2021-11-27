@@ -29,7 +29,7 @@ namespace FitnessApp01.ViewModels
         {
             SearchBase = new SearchBase(api, index);
             AddFoodCommand = new Command(async () => await AddFood());
-            FoodSearchCommand = new Command<string>(async (searchString) => await FoodSearch(searchString, SearchBase));
+            FoodSearchCommand = new Command<string>(async (searchString) => await FoodSearch(searchString));
             FoodTapCommand = new Command<Food>(async (food) => await SelectMeal(food));
         }
 
@@ -56,11 +56,10 @@ namespace FitnessApp01.ViewModels
             
         }
 
-        private async Task FoodSearch(string searchString, SearchBase searchBase)
+        private async Task FoodSearch(string searchString)
         {
             SearchIsRunning = true;
-            var result = await searchBase.GetResultAsync(searchString);
-            var foodList = searchBase.GetHits(result);
+            var foodList = await SearchBase.GetResultsAsync(searchString);
             FoodCollection = new ObservableCollection<Food>(foodList);
             SearchIsRunning = false;
         }
@@ -95,7 +94,7 @@ namespace FitnessApp01.ViewModels
                 SetProperty(ref _searchText, value);
                 if (_searchText.Length == 4 || _searchText.Length == 7)
 #pragma warning disable CS4014 // Protože se toto volání neočekává, vykonávání aktuální metody pokračuje před dokončením volání.
-                    FoodSearch(_searchText, SearchBase);
+                    FoodSearch(_searchText);
 #pragma warning restore CS4014 // Protože se toto volání neočekává, vykonávání aktuální metody pokračuje před dokončením volání.
             }
         }

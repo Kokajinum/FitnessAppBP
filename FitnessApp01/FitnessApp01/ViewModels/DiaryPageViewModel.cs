@@ -107,36 +107,52 @@ namespace FitnessApp01.ViewModels
 
         private async Task<bool> LoadDiaryData()
         {
-            Diary.Days = await FirestoreBase.LoadDiaryData();
+            try
+            {
+                Diary.Days = await FirestoreBase.LoadDiaryData();
+            }
+            catch (Exception)
+            {
+                await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
+                Diary.Days = new ObservableCollection<Day>();
+            }
             return SetDiaryData(Diary.Days);
         }
 
         private bool SetDiaryData(ObservableCollection<Day> days)
         {
-            Day it;
+            Day day;
             try
             {
-                it = days.First(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString()); //testovani, pak SelectedDay
+                day = days.First(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
             }
             catch (InvalidOperationException)
             {
-                it = days.First();
-                it.CaloriesGoal = RegistrationSettings.CaloriesGoal;
+                day = days.First();
+                day.CaloriesGoal = RegistrationSettings.CaloriesGoal;
             }
-            CaloriesGoal = it.CaloriesGoal;
-            CaloriesCurrent = it.CaloriesCurrent;
+            CaloriesGoal = day.CaloriesGoal;
+            CaloriesCurrent = day.CaloriesCurrent;
             if (CaloriesGoal != 0)
             {
                 CaloriesProgress = (double)CaloriesCurrent / (double)CaloriesGoal;
             }
-            MealGroups = it.MealGroups;
+            MealGroups = day.MealGroups;
             MessagingCenter.Send<object>(this, "diaryUpdated");
             return true;
         }
 
         private async Task<bool> LoadRegistrationSettings()
         {
-            RegistrationSettings = await FirestoreBase.LoadRegistrationSettings();
+            try
+            {
+                RegistrationSettings = await FirestoreBase.LoadRegistrationSettings();
+            }
+            catch (Exception)
+            {
+                RegistrationSettings = new RegistrationSettings();
+                await DisplayAlertAsync("Error", "nepodařilo se stáhnout nastavení", "ok");
+            }
             return CheckRegistrationSettings();
         }
 

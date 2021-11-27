@@ -32,17 +32,17 @@ namespace FitnessApp01.ViewModels
 
         private async Task SaveFood()
         {
-            var newFood = new Food(NameInput, (int)KcalInput, (double)CarbsInput, (double)SugarInput, (double)ProteinInput, (double)FatInput, 
-                AuthBase.GetUserId(), PickerCurrentUnit, (double)SaturatedInput, (double)FiberInput, (double)SaltInput, BrandInput, (double)PortionSize);
-            var saved = await FirestoreBase.SaveFoodData(newFood);
-            if (!saved)
+            try
             {
-                await DisplayAlertAsync("Error", "Nepodařilo se uložit data", "ok");
+                var newFood = new Food(NameInput, (int)KcalInput, (double)CarbsInput, (double)SugarInput, (double)ProteinInput, (double)FatInput,
+                AuthBase.GetUserId(), PickerCurrentUnit, (double)SaturatedInput, (double)FiberInput, (double)SaltInput, BrandInput, (double)PortionSize);
+                await FirestoreBase.SaveFoodData(newFood);
+                await DisplayAlertAsync("Done", "Podařilo se", "ok");
                 await GoToPageAsync("..");
             }
-            else
+            catch (Exception)
             {
-                await DisplayAlertAsync("Done", "Podařilo se", "ok");
+                await DisplayAlertAsync("Error", "Nepodařilo se uložit data", "ok");
                 await GoToPageAsync("..");
             }
         }

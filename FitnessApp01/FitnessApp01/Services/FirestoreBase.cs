@@ -25,14 +25,10 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                /*await App.Current.MainPage.DisplayAlert("Error", e.Message + " " + e.ErrorType, "ok");
-                return false;*/
                 throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                /*await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return false;*/
                 throw new Exception(e.Message, e.InnerException);
             }
         }
@@ -48,13 +44,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return new RegistrationSettings();
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return new RegistrationSettings();
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -76,8 +70,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return new List<Meal>();
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -90,13 +87,11 @@ namespace FitnessApp01.Services
                 Console.WriteLine(SelectedDay.ToUnixSecondsString());
                 Console.WriteLine("/diary/" + AuthBase.GetUserId() + "/days/" + SelectedDay.ToUnixSecondsString());
                 var doc = await CrossCloudFirestore.Current.Instance
-                    //.Document("/diary/6tyEdoVGxI10YXSdxJdT/days/1627171200")
                     .Document("/diary/" + AuthBase.GetUserId() + "/days/" + SelectedDay.ToUnixSecondsString())
                     .GetAsync();
                 if (doc.Exists)
                 {
                     var model = doc.ToObject<Day>();
-                   
                     //
                     var breakfastListMeals = await LoadMealData("breakfast");
                     model.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, breakfastListMeals));
@@ -115,47 +110,50 @@ namespace FitnessApp01.Services
                 }
                 else
                 {
-                    var model = new Day();
-                    model.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
-                    model.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
-                    model.MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
-                    model.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
+                    var model = CreateEmptyDay();
                     obs.Add(model);
                     return obs;
                 }
             }
-            catch (CloudFirestoreException e)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return new ObservableCollection<Day>();
-            }
             catch (Exception e)
             {
                 await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return new ObservableCollection<Day>();
+                var model = CreateEmptyDay();
+                var obs = new ObservableCollection<Day>();
+                obs.Add(model);
+                return obs;
             }
         }
 
-        public static async Task<bool> SaveFoodData(Food food)
+        private static Day CreateEmptyDay()
+        {
+            var day = new Day();
+            day.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
+            return day;
+        }
+
+        public static async Task SaveFoodData(Food food)
         {
             try
             {
                 await CrossCloudFirestore.Current.Instance
                     .Collection("food")
                     .AddAsync(food);
-                return true;
             }
             catch (CloudFirestoreException e)
             {
-                return false;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                return false;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
-        public static async Task<IDocumentReference> GetFoodReference(string name)
+        /*public static async Task<IDocumentReference> GetFoodReference(string name)
         {
             IDocumentReference foodRef = null;
             try
@@ -171,13 +169,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return foodRef;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return foodRef;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -196,7 +192,7 @@ namespace FitnessApp01.Services
                 await Shell.Current.GoToAsync("..");
                 return new Food();
             }
-        }
+        }*/
 
         public static async Task InsertNewDayAsync(Day newDay)
         {
@@ -208,13 +204,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message + e.ErrorType, "ok");
-                throw;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                throw;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -229,13 +223,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.InnerException.Message, "ok");
-                throw;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.InnerException.Message, "ok");
-                throw;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -254,13 +246,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message + e.ErrorType, "ok");
-                throw;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.InnerException.Message, "ok");
-                throw;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -274,13 +264,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message + e.ErrorType, "ok");
-                throw;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.InnerException.Message, "ok");
-                throw;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
 
@@ -299,13 +287,11 @@ namespace FitnessApp01.Services
             }
             catch (CloudFirestoreException e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message + e.ErrorType, "ok");
-                throw;
+                throw new Exception(e.Message + " " + e.ErrorType, e.InnerException);
             }
             catch (Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.InnerException.Message, "ok");
-                throw;
+                throw new Exception(e.Message, e.InnerException);
             }
         }
     }

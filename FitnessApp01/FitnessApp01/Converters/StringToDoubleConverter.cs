@@ -17,7 +17,7 @@ namespace FitnessApp01.Converters
         {
             if ((string)value == "" || value == null)
             {
-                return null;
+                return (double)0;
             }
             double.TryParse((string)value, out double num);
             return num;

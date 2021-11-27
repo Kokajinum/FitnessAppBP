@@ -1,5 +1,6 @@
 ﻿using Algolia.Search.Clients;
 using Algolia.Search.Models.Search;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp01.Services
 {
-    public class SearchBase
+    public class SearchBase : ISearch<Food>
     {
         public SearchBase(string api, string indexName)
         {
@@ -16,7 +17,13 @@ namespace FitnessApp01.Services
             Index = Client.InitIndex(indexName);
         }
 
-        public async Task<SearchResponse<Food>> GetResultAsync(string searchString)
+        public async Task<IEnumerable<Food>> GetResultsAsync(string searchString)
+        {
+            var response = await GetResponseAsync(searchString);
+            return GetHits(response);
+        }
+
+        private async Task<SearchResponse<Food>> GetResponseAsync(string searchString)
         {
             var result = await Index.SearchAsync<Food>(new Query(searchString)
             {
@@ -25,7 +32,7 @@ namespace FitnessApp01.Services
             return result;
         }
 
-        public List<Food> GetHits(SearchResponse<Food> searchResponse)
+        private IEnumerable<Food> GetHits(SearchResponse<Food> searchResponse)
         {
             return searchResponse.Hits;
         }
