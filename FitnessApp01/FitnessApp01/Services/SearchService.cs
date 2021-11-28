@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FitnessApp01.Services
 {
-    public class SearchBase : ISearch<Food>
+    public class SearchService : ISearch<Food>
     {
-        public SearchBase(string api, string indexName)
+        public SearchService(string api, string indexName)
         {
             Client = new SearchClient("PKXN76JWVJ", api);
             Index = Client.InitIndex(indexName);

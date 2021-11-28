@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Models;
+﻿using FitnessApp01.Interfaces;
+using FitnessApp01.Models;
 using FitnessApp01.Services;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace FitnessApp01.ViewModels
             SaveFoodCommand = new Command(
                 execute: async () => await SaveFood(),
                 canExecute: () => SaveCanExecute());
+            FirestoreBase = DependencyService.Get<IDatabase>();
             InitializeAddFoodPageViewModel();
         }
 
@@ -36,7 +38,7 @@ namespace FitnessApp01.ViewModels
             {
                 var newFood = new Food(NameInput, (int)KcalInput, (double)CarbsInput, (double)SugarInput, (double)ProteinInput, (double)FatInput,
                 AuthBase.GetUserId(), PickerCurrentUnit, (double)SaturatedInput, (double)FiberInput, (double)SaltInput, BrandInput, (double)PortionSize);
-                await FirestoreBase.SaveFoodData(newFood);
+                await FirestoreBase.CreateFoodDataAsync(newFood);
                 await DisplayAlertAsync("Done", "Podařilo se", "ok");
                 await GoToPageAsync("..");
             }
@@ -54,6 +56,8 @@ namespace FitnessApp01.ViewModels
         }
 
         #region Properties
+
+        private IDatabase FirestoreBase { get; set; }
 
         private string _nameInput;
         public string NameInput

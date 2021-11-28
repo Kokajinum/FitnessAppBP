@@ -26,7 +26,7 @@ namespace FitnessApp01.ViewModels
 
         private async void LoadRegistrationSettingsAsync()
         {
-            RegistrationSettings = await FirestoreBase.LoadRegistrationSettings();
+            //RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
         }
 
         private async void SignOut(object obj)

@@ -1,4 +1,5 @@
 ﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using FitnessApp01.Services;
@@ -26,6 +27,7 @@ namespace FitnessApp01.ViewModels
             AddMealCommand = new Command(
                 execute: async () => await AddMeal(),
                 canExecute: () => AddCanExecute());
+            FirestoreBase = DependencyService.Get<IDatabase>();
             //InitializeAddMealPageViewModel();
         }
 
@@ -52,8 +54,8 @@ namespace FitnessApp01.ViewModels
                 var updatedDay = UpdateExistingDay(day);
                 try
                 {
-                    await FirestoreBase.InsertNewDayAsync(updatedDay);
-                    await FirestoreBase.InsertNewMealAsync(meal);
+                    await FirestoreBase.CreateDayAsync(updatedDay);
+                    await FirestoreBase.CreateMealAsync(meal);
                 }
                 catch (Exception)
                 {
@@ -70,8 +72,8 @@ namespace FitnessApp01.ViewModels
                 mealGroup.Add(meal);
                 try
                 {
-                    await FirestoreBase.InsertNewDayAsync(newDay);
-                    await FirestoreBase.InsertNewMealAsync(meal);
+                    await FirestoreBase.CreateDayAsync(newDay);
+                    await FirestoreBase.CreateMealAsync(meal);
                 }
                 catch (Exception)
                 {
@@ -174,6 +176,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties 
 
+        private IDatabase FirestoreBase { get; set; }
         public string MealType { get; set; }
 
         private string _foodJson;

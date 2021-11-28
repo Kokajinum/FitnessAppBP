@@ -27,7 +27,7 @@ namespace FitnessApp01.ViewModels
 
         public SelectMealPageViewModel()
         {
-            SearchBase = new SearchBase(api, index);
+            SearchService = new SearchService(api, index);
             AddFoodCommand = new Command(async () => await AddFood());
             FoodSearchCommand = new Command<string>(async (searchString) => await FoodSearch(searchString));
             FoodTapCommand = new Command<Food>(async (food) => await SelectMeal(food));
@@ -59,7 +59,7 @@ namespace FitnessApp01.ViewModels
         private async Task FoodSearch(string searchString)
         {
             SearchIsRunning = true;
-            var foodList = await SearchBase.GetResultsAsync(searchString);
+            var foodList = await SearchService.GetResultsAsync(searchString);
             FoodCollection = new ObservableCollection<Food>(foodList);
             SearchIsRunning = false;
         }
@@ -99,7 +99,7 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        public SearchBase SearchBase { get; set; }
+        public SearchService SearchService { get; set; }
 
         public string MealType { get; set; }
 

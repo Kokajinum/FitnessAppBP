@@ -1,4 +1,5 @@
 ﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Services;
 using Plugin.CloudFirestore;
@@ -18,9 +19,8 @@ namespace FitnessApp01.ViewModels
         public HomePageViewModel()
         {
             RefreshViewCommand = new Command(() => Refresh());
-            //Home VM dostane zprávu od Diary VM
-            //https://stackoverflow.com/questions/19236068/updating-another-viewmodel-on-propertychanged-of-another-viewmodel
-            //EventAggregator.OnMessageTransmitted1 += OnMessageReceived;
+            FirestoreBase = DependencyService.Get<IDatabase>();
+
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {
                 OnMessageReceived();
@@ -70,7 +70,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task<bool> LoadRegistrationSettings()
         {
-            RegistrationSettings = await FirestoreBase.LoadRegistrationSettings();
+            RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
             return CheckRegistrationSettings();
         }
 
@@ -145,6 +145,8 @@ namespace FitnessApp01.ViewModels
         #endregion
 
         #region Properties 
+
+        private IDatabase FirestoreBase { get; set; }
 
         private bool _isRunning = false;
         public bool IsRunning

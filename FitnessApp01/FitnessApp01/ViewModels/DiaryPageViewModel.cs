@@ -1,4 +1,5 @@
 ﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Services;
 using Newtonsoft.Json;
@@ -24,6 +25,7 @@ namespace FitnessApp01.ViewModels
             PreviousDayCommand = new Command(execute: async () => await PreviousDay());
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
+            FirestoreBase = DependencyService.Get<IDatabase>();
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
                 OnMessageReceived();
@@ -109,7 +111,7 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                Diary.Days = await FirestoreBase.LoadDiaryData();
+                Diary.Days = await FirestoreBase.ReadDiaryDataAsync();
             }
             catch (Exception)
             {
@@ -146,7 +148,7 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                RegistrationSettings = await FirestoreBase.LoadRegistrationSettings();
+                RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
             }
             catch (Exception)
             {
@@ -180,6 +182,8 @@ namespace FitnessApp01.ViewModels
 
 
         #region Properties
+
+        private IDatabase FirestoreBase { get; set; }
 
         private bool _isRunning = false;
         public bool IsRunning

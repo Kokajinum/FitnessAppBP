@@ -1,4 +1,5 @@
 ﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Services;
 using System;
@@ -22,6 +23,7 @@ namespace FitnessApp01.ViewModels
             { "kg", "lbs" };
             NextPageCommand = new Command(execute: async () => await NextPage());
             PreviousPageCommand = new Command(execute: () => PreviousPage());
+            FirestoreBase = DependencyService.Get<IDatabase>();
         }
 
         private void PreviousPage()
@@ -119,7 +121,7 @@ namespace FitnessApp01.ViewModels
             RegistrationSettings = GenerateRegistrationSettings();
             try
             {
-                await FirestoreBase.InsertRegistrationSettings(RegistrationSettings);
+                await FirestoreBase.CreateRegistrationSettingsAsync(RegistrationSettings);
                 return true;
             }
             catch (Exception e)
@@ -283,6 +285,8 @@ namespace FitnessApp01.ViewModels
 
 
         #region Properties
+
+        private IDatabase FirestoreBase { get; set; }
 
         private ObservableCollection<string> _carouselSource;
         public ObservableCollection<string> CarouselSource

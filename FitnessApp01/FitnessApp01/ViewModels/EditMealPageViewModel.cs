@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Models;
+﻿using FitnessApp01.Interfaces;
+using FitnessApp01.Models;
 using FitnessApp01.Services;
 using Newtonsoft.Json;
 using System;
@@ -21,6 +22,7 @@ namespace FitnessApp01.ViewModels
                 canExecute: () => EditCanExecute());
             DeleteMealCommand = new Command(
                 execute: async () => await DeleteMeal());
+            FirestoreBase = DependencyService.Get<IDatabase>();
         }
 
         private async Task DeleteMeal()
@@ -33,7 +35,7 @@ namespace FitnessApp01.ViewModels
                 CalculateNutrients();
                 UpdateCurrentDay();
                 await FirestoreBase.UpdateDayAsync(CurrentDay);
-                await FirestoreBase.RemoveMealAsync(Meal);
+                await FirestoreBase.DeleteMealAsync(Meal);
             }
             //todo reseni chyb
             catch (Exception e)
@@ -165,6 +167,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
+        private IDatabase FirestoreBase { get; set; }
         public Food Food { get; set; }
 
         public Day CurrentDay { get; set; }

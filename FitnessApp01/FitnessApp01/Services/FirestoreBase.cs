@@ -1,6 +1,8 @@
 ﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
+using FitnessApp01.Services;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,9 @@ using Xamarin.Forms;
 
 namespace FitnessApp01.Services
 {
-    public class FirestoreBase
+    public class FirestoreBase : IDatabase
     {
-        public static async Task InsertRegistrationSettings(RegistrationSettings registrationSettings)
+        public async Task CreateRegistrationSettingsAsync(RegistrationSettings registrationSettings)
         {
             try
             {
@@ -33,7 +35,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task<RegistrationSettings> LoadRegistrationSettings()
+        public async Task<RegistrationSettings> ReadRegistrationSettingsAsync()
         {
             try
             {
@@ -52,12 +54,11 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task<List<Meal>> LoadMealData(string meal)
+        public async Task<List<Meal>> ReadMealDataAsync(string meal)
         {
             try
             {
                 var group = await CrossCloudFirestore.Current.Instance
-                    //.Collection("/diary/6tyEdoVGxI10YXSdxJdT/days/1627171200/" + meal)
                     .Collection("/diary/" + AuthBase.GetUserId() + 
                     "/days/" + SelectedDay.ToUnixSecondsString() + "/" + meal)
                     .GetAsync();
@@ -78,14 +79,11 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task<ObservableCollection<Day>> LoadDiaryData()
+        public async Task<ObservableCollection<Day>> ReadDiaryDataAsync()
         {
             try
             {
                 var obs = new ObservableCollection<Day>();
-                Console.WriteLine(AuthBase.GetUserId());
-                Console.WriteLine(SelectedDay.ToUnixSecondsString());
-                Console.WriteLine("/diary/" + AuthBase.GetUserId() + "/days/" + SelectedDay.ToUnixSecondsString());
                 var doc = await CrossCloudFirestore.Current.Instance
                     .Document("/diary/" + AuthBase.GetUserId() + "/days/" + SelectedDay.ToUnixSecondsString())
                     .GetAsync();
@@ -93,16 +91,16 @@ namespace FitnessApp01.Services
                 {
                     var model = doc.ToObject<Day>();
                     //
-                    var breakfastListMeals = await LoadMealData("breakfast");
+                    var breakfastListMeals = await ReadMealDataAsync("breakfast");
                     model.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, breakfastListMeals));
                     //
-                    var lunchListMeals = await LoadMealData("lunch");
+                    var lunchListMeals = await ReadMealDataAsync("lunch");
                     model.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, lunchListMeals));
                     //
-                    var snackListMeals = await LoadMealData("snack");
+                    var snackListMeals = await ReadMealDataAsync("snack");
                     model.MealGroups.Add(new MealGroup("snack", AppResources.Snack, snackListMeals));
                     //
-                    var dinnerListMeals = await LoadMealData("dinner");
+                    var dinnerListMeals = await ReadMealDataAsync("dinner");
                     model.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, dinnerListMeals));
                     //
                     obs.Add(model);
@@ -110,17 +108,15 @@ namespace FitnessApp01.Services
                 }
                 else
                 {
-                    var model = CreateEmptyDay();
-                    obs.Add(model);
+                    obs.Add(CreateEmptyDay());
                     return obs;
                 }
             }
             catch (Exception e)
             {
                 await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                var model = CreateEmptyDay();
                 var obs = new ObservableCollection<Day>();
-                obs.Add(model);
+                obs.Add(CreateEmptyDay());
                 return obs;
             }
         }
@@ -135,13 +131,13 @@ namespace FitnessApp01.Services
             return day;
         }
 
-        public static async Task SaveFoodData(Food food)
+        public async Task CreateFoodDataAsync(Food food)
         {
             try
             {
                 await CrossCloudFirestore.Current.Instance
                     .Collection("food")
-                    .AddAsync(food);
+                    .AddAsync(food); //AddAsync -> Firestore automaticky vygeneruje id dokumentu
             }
             catch (CloudFirestoreException e)
             {
@@ -194,7 +190,7 @@ namespace FitnessApp01.Services
             }
         }*/
 
-        public static async Task InsertNewDayAsync(Day newDay)
+        public async Task CreateDayAsync(Day newDay)
         {
             try
             {
@@ -212,7 +208,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task InsertNewMealAsync(Meal newMeal)
+        public async Task CreateMealAsync(Meal newMeal)
         {
             try
             {
@@ -231,7 +227,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task UpdateMealAsync(Meal updatedMeal)
+        public async Task UpdateMealAsync(Meal updatedMeal)
         {
             try
             {
@@ -254,7 +250,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task UpdateDayAsync(Day updatedDay)
+        public async Task UpdateDayAsync(Day updatedDay)
         {
             try
             {
@@ -272,7 +268,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task RemoveMealAsync(Meal meal)
+        public async Task DeleteMealAsync(Meal meal)
         {
             try
             {
