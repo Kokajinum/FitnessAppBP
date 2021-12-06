@@ -90,6 +90,7 @@ namespace FitnessApp01.ViewModels
             
         }
 
+        //bude implementovat model Day
         private void CleanUp(Day oldDay)
         {
             int i;
@@ -103,7 +104,8 @@ namespace FitnessApp01.ViewModels
         }
 
 
-
+        //nedava smysl, day je predavan referenci, menen, a pak i vracen --> opravit
+        // bude implementovat model Day
         private Day InitializeNewDay(Day day)
         {
             day.UnixSeconds = SelectedDay.ToUnixSecondsString();

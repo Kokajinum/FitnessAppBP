@@ -39,13 +39,8 @@ namespace FitnessApp01.Models
             {"fat", 0 }
         };
 
-        //public MealsOfTheDay MealsOfTheDay { get; set; } = new MealsOfTheDay();
         [Ignored]
         public ObservableCollection<MealGroup> MealGroups { get; set; } = new ObservableCollection<MealGroup>();
-        /*public Breakfast Breakfast { get; set; }
-        public Lunch Lunch { get; set; }
-        public Snack Snack { get; set; }
-        public Dinner Dinner { get; set; }*/
 
         public Day Clone()
         {
