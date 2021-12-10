@@ -25,7 +25,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task DeleteMeal()
         {
-            IsRunning = true;
+            IsBusy = true;
             try
             {
                 RemoveMealFromMealGroup();
@@ -42,7 +42,7 @@ namespace FitnessApp01.ViewModels
             }
             finally
             {
-                IsRunning = false;
+                IsBusy = false;
                 await GoToPageAsync("..");
                 MessagingCenter.Send<object>(this, "mealEdited");
             }
@@ -51,7 +51,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task EditMeal()
         {
-            IsRunning = true;
+            IsBusy = true;
             try
             {
                 var mealgroup = RemoveMealFromMealGroup(); 
@@ -70,7 +70,7 @@ namespace FitnessApp01.ViewModels
             }
             finally
             {
-                IsRunning = false;
+                IsBusy = false;
                 await GoToPageAsync("..");
                 MessagingCenter.Send<object>(this, "mealEdited");
             }
@@ -294,13 +294,6 @@ namespace FitnessApp01.ViewModels
             {
                 return WeightInput != null && WeightInput != WeightUnchanged;
             }
-        }
-
-        private bool _isRunning;
-        public bool IsRunning 
-        { 
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
         }
 
         #endregion

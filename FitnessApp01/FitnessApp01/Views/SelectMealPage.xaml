@@ -22,7 +22,7 @@
                        SearchCommand="{Binding FoodSearchCommand}"
                        SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}">
                 </SearchBar>
-                <ActivityIndicator IsRunning="{Binding SearchIsRunning}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}">
                 </ActivityIndicator>
             </StackLayout>
             <CollectionView ItemsSource="{Binding FoodCollection}">

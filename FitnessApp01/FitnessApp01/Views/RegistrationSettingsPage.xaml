@@ -159,7 +159,7 @@
                         Path=PreviousPageCommand}">
                 </Button>
                 <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
-                        Path=IsRunning}"
+                        Path=IsBusy}"
                                    Margin="0,80,0,0">
                 </ActivityIndicator>
             </StackLayout>
@@ -190,7 +190,7 @@
                         Path=PreviousPageCommand}">
                 </Button>
                 <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
-                        Path=IsRunning}"
+                        Path=IsBusy}"
                                    Margin="0,80,0,0">
                 </ActivityIndicator>
             </StackLayout>

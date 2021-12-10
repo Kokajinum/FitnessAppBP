@@ -149,7 +149,7 @@
                     </CollectionView>
                 </StackLayout>
             </RefreshView>
-            <ActivityIndicator IsRunning="{Binding IsRunning}"
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
                                Margin="0,0,0,0"
                                HeightRequest="1"
                                WidthRequest="1"

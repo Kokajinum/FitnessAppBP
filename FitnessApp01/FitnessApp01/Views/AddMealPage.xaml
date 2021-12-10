@@ -94,7 +94,7 @@
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
-            <ActivityIndicator IsRunning="{Binding IsRunning}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}">
             </ActivityIndicator>
             <Button Text="Přidat do jídelníčku"
                     VerticalOptions="EndAndExpand"

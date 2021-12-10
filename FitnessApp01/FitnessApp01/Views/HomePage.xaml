@@ -43,7 +43,7 @@
                             </Label.FormattedText>
                         </Label>
                     </StackLayout>
-                    <ActivityIndicator IsRunning="{Binding IsRunning}"
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
                                        Margin="0,0,0,-30">
                     </ActivityIndicator>
                     <ProgressBar WidthRequest="250" 

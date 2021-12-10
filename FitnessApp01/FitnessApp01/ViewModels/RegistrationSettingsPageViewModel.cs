@@ -94,11 +94,11 @@ namespace FitnessApp01.ViewModels
             if ((CarouselPosition == 5 && GoalsRadioButtonSelected == "3") ||
                 CarouselPosition == 6)
             {
-                IsRunning = true;
+                IsBusy = true;
                 await SetRegSettingsAndDB();
                 //EventAggregator.BroadCast2();
                 CarouselPosition = 0;
-                IsRunning = false;
+                IsBusy = false;
                 await Shell.Current.GoToAsync("//main-content");
                 
                 return;
@@ -369,13 +369,6 @@ namespace FitnessApp01.ViewModels
         {
             get { return _desiredWeightPickerIndex; }
             set { SetProperty(ref _desiredWeightPickerIndex, value); }
-        }
-
-        private bool _isRunning = false;
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
         }
 
         #region Cloud Firestore

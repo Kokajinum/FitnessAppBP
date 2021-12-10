@@ -52,10 +52,10 @@ namespace FitnessApp01.ViewModels
 
         private async Task FoodSearch(string searchString)
         {
-            SearchIsRunning = true;
+            IsBusy = true;
             var foodList = await SearchService.GetResultsAsync(searchString);
             FoodCollection = new ObservableCollection<Food>(foodList);
-            SearchIsRunning = false;
+            IsBusy = false;
         }
 
         private async Task AddFood()
@@ -70,13 +70,6 @@ namespace FitnessApp01.ViewModels
         {
             get { return _foodCollection; }
             set { SetProperty(ref _foodCollection, value); }
-        }
-
-        private bool _searchIsRunning;
-        public bool SearchIsRunning
-        {
-            get { return _searchIsRunning; }
-            set { SetProperty(ref _searchIsRunning, value); }
         }
 
         private string _searchText;

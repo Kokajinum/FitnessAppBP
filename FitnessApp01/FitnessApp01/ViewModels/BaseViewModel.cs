@@ -44,6 +44,11 @@ namespace FitnessApp01.ViewModels
             await Shell.Current.GoToAsync(shellPagePath);
         }
 
-        
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set { SetProperty(ref _isBusy, value); }
+        }
     }
 }

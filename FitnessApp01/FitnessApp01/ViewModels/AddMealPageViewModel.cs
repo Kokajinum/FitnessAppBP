@@ -34,7 +34,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task AddMeal()
         {
-            IsRunning = true;
+            IsBusy = true;
             var meal = new Meal(Food.Name, Food.Brand, WeightCalculated, KcalCalculated, CarbsCalculated, SugarCalculated,
                     ProteinCalculated, FatCalculated, SaturatedCalculated, FiberCalculated, SaltCalculated, MealType,
                     Food.Kcal, Food.Carbohydrates, Food.Sugar, Food.Protein, Food.Fat, Food.SaturatedFat, Food.Fiber,
@@ -82,7 +82,7 @@ namespace FitnessApp01.ViewModels
             finally
             {
                 await GoToPageAsync("//main-content");
-                IsRunning = false;
+                IsBusy = false;
                 MessagingCenter.Send<object>(this, "mealAdded");
             }
             
@@ -286,13 +286,6 @@ namespace FitnessApp01.ViewModels
             {
                 SetProperty(ref _isVisible, value);
             }
-        }
-
-        private bool _isRunning;
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
         }
 
         private double? _userInput;

@@ -32,9 +32,9 @@ namespace FitnessApp01.ViewModels
 
         private void OnMessageReceived()
         {
-            IsRunning = true;
+            IsBusy = true;
             SetDiaryData();
-            IsRunning = false;
+            IsBusy = false;
         }
 
         //private void PrintSomething(Task arg1)
@@ -44,7 +44,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task InitializeHomePageViewModel()
         {
-            IsRunning = true;
+            IsBusy = true;
             var isValid = await LoadRegistrationSettings();
             if (!isValid)
             {
@@ -60,7 +60,7 @@ namespace FitnessApp01.ViewModels
                     .DisplayAlert("Error", "spatne nactene data", "ok");
             }*/
             SetDiaryData();
-            IsRunning = false;
+            IsBusy = false;
         }
 
         private async Task<bool> LoadRegistrationSettings()
@@ -142,13 +142,6 @@ namespace FitnessApp01.ViewModels
         #region Properties 
 
         private IDatabase FirestoreBase { get; set; }
-
-        private bool _isRunning = false;
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
-        }
 
         private RegistrationSettings _registrationSettings;
         public RegistrationSettings RegistrationSettings
