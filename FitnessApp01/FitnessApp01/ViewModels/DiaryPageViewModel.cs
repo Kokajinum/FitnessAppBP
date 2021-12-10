@@ -20,8 +20,8 @@ namespace FitnessApp01.ViewModels
             PreviousDayCommand = new Command(execute: async () => await PreviousDay());
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
-            FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = DependencyService.Get<IDatabase>();
+            FirestoreBase = Services.FirestoreBase.Instance;
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
                 OnMessageReceived();
@@ -62,14 +62,12 @@ namespace FitnessApp01.ViewModels
 
         private async Task NextDay()
         {
-            //CurrentDay = SelectedDay.Next();
             NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
 
         private async Task PreviousDay()
         {
-            //CurrentDay = SelectedDay.Previous();
             NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
@@ -82,7 +80,6 @@ namespace FitnessApp01.ViewModels
         private async Task InitializeDiaryPageViewModel()
         {
             IsRunning = true;
-            //CurrentDay = SelectedDay.Day;
             //nestabilni chovani po vyplneni nedokoncene registrace
             var isValid = await LoadRegistrationSettings();
             if (!isValid)
@@ -108,9 +105,15 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                Diary.Days = await FirestoreBase.ReadDiaryDataAsync();
+                //Diary.Days = await FirestoreBase.ReadDiaryDataAsync();
+                if (!Diary.Days.Any(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString()))
+                {
+                    Day day = await FirestoreBase.ReadDiaryDataAsync();
+                    Diary.Days.Add(day);
+                }
+                
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
                 Diary.Days = new ObservableCollection<Day>();
@@ -128,8 +131,8 @@ namespace FitnessApp01.ViewModels
             catch (InvalidOperationException)
             {
                 day = days.First();
-                day.CaloriesGoal = RegistrationSettings.CaloriesGoal;
             }
+            day.CaloriesGoal = RegistrationSettings.CaloriesGoal;
             CaloriesGoal = day.CaloriesGoal;
             CaloriesCurrent = day.CaloriesCurrent;
             if (CaloriesGoal != 0)

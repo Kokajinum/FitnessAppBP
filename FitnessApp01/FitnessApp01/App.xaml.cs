@@ -10,7 +10,8 @@ namespace FitnessApp01
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<IDatabase,FirestoreBase>();
+            //DependencyService.Register<IDatabase,FirestoreBase>();
+
             MainPage = new AppShell();
             //MainPage = new LoginPage();
         }

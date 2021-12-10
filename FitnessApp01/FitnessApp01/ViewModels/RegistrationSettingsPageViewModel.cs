@@ -21,7 +21,8 @@ namespace FitnessApp01.ViewModels
             { "kg", "lbs" };
             NextPageCommand = new Command(execute: async () => await NextPage());
             PreviousPageCommand = new Command(execute: () => PreviousPage());
-            FirestoreBase = DependencyService.Get<IDatabase>();
+            //FirestoreBase = DependencyService.Get<IDatabase>();
+            FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         private void PreviousPage()

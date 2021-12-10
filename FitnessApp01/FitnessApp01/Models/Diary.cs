@@ -5,7 +5,7 @@ namespace FitnessApp01.Models
     public static class Diary
     {
         //public static List<Day> Days { get; set; }
-        public static ObservableCollection<Day> Days { get; set; }
+        public static ObservableCollection<Day> Days { get; set; } = new ObservableCollection<Day>();
 
 
 

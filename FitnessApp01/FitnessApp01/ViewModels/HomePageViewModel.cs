@@ -13,7 +13,8 @@ namespace FitnessApp01.ViewModels
         public HomePageViewModel()
         {
             RefreshViewCommand = new Command(() => Refresh());
-            FirestoreBase = DependencyService.Get<IDatabase>();
+            //FirestoreBase = DependencyService.Get<IDatabase>();
+            FirestoreBase = Services.FirestoreBase.Instance;
 
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {

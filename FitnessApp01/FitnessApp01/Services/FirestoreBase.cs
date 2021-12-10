@@ -77,11 +77,11 @@ namespace FitnessApp01.Services
             }
         }
 
-        public async Task<ObservableCollection<Day>> ReadDiaryDataAsync()
+        public async Task<Day> ReadDiaryDataAsync()
         {
             try
             {
-                var obs = new ObservableCollection<Day>();
+                //var obs = new ObservableCollection<Day>();
                 var doc = await CrossCloudFirestore.Current.Instance
                     .Document("/diary/" + AuthBase.GetUserId() + "/days/" + SelectedDay.ToUnixSecondsString())
                     .GetAsync();
@@ -101,13 +101,13 @@ namespace FitnessApp01.Services
                     var dinnerListMeals = await ReadMealDataAsync("dinner");
                     model.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, dinnerListMeals));
                     //
-                    obs.Add(model);
-                    return obs;
+                    //obs.Add(model);
+                    return model;
                 }
                 else
                 {
-                    obs.Add(CreateEmptyDay());
-                    return obs;
+                    //obs.Add(CreateEmptyDay());
+                    return CreateEmptyDay();
                 }
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace FitnessApp01.Services
                 await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
                 var obs = new ObservableCollection<Day>();
                 obs.Add(CreateEmptyDay());
-                return obs;
+                return CreateEmptyDay();
             }
         }
 
@@ -126,6 +126,7 @@ namespace FitnessApp01.Services
             day.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
             day.MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
             day.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
+            day.UnixSeconds = SelectedDay.ToUnixSecondsString();
             return day;
         }
 

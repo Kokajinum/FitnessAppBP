@@ -19,7 +19,8 @@ namespace FitnessApp01.ViewModels
                 canExecute: () => EditCanExecute());
             DeleteMealCommand = new Command(
                 execute: async () => await DeleteMeal());
-            FirestoreBase = DependencyService.Get<IDatabase>();
+            //FirestoreBase = DependencyService.Get<IDatabase>();
+            FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         private async Task DeleteMeal()

@@ -16,7 +16,8 @@ namespace FitnessApp01.ViewModels
             SaveFoodCommand = new Command(
                 execute: async () => await SaveFood(),
                 canExecute: () => SaveCanExecute());
-            FirestoreBase = DependencyService.Get<IDatabase>();
+            //FirestoreBase = DependencyService.Get<IDatabase>();
+            FirestoreBase = Services.FirestoreBase.Instance;
             InitializeAddFoodPageViewModel();
         }
 
