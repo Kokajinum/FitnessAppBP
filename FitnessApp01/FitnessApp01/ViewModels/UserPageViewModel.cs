@@ -1,8 +1,4 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FitnessApp01.Services;
 using System.Windows.Input;
 using Xamarin.Forms;
 

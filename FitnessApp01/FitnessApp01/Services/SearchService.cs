@@ -2,9 +2,7 @@
 using Algolia.Search.Models.Search;
 using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessApp01.Services

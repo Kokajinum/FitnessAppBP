@@ -1,9 +1,4 @@
-﻿using Plugin.CloudFirestore;
-using Plugin.CloudFirestore.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
 namespace FitnessApp01.Models
 {

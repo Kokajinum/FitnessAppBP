@@ -1,13 +1,7 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
-using FitnessApp01.Services;
-using Plugin.CloudFirestore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;

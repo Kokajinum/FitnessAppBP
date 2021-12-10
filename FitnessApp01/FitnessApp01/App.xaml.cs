@@ -1,7 +1,5 @@
 ﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Services;
-using FitnessApp01.Views;
-using Plugin.CloudFirestore;
 using Xamarin.Forms;
 
 namespace FitnessApp01

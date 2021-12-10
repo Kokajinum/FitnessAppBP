@@ -1,7 +1,4 @@
-﻿using FitnessApp01.ViewModels;
-using FitnessApp01.Views;
-using System;
-using System.Collections.Generic;
+﻿using FitnessApp01.Views;
 using Xamarin.Forms;
 
 namespace FitnessApp01

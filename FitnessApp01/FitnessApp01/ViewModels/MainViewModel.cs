@@ -1,9 +1,5 @@
 ﻿using FitnessApp01.Models;
 using FitnessApp01.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

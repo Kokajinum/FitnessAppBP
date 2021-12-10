@@ -1,12 +1,10 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -97,7 +95,7 @@ namespace FitnessApp01.ViewModels
             {
                 IsRunning = true;
                 await SetRegSettingsAndDB();
-                EventAggregator.BroadCast2();
+                //EventAggregator.BroadCast2();
                 CarouselPosition = 0;
                 IsRunning = false;
                 await Shell.Current.GoToAsync("//main-content");

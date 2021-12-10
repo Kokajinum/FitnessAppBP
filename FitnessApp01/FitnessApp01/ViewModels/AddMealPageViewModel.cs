@@ -1,16 +1,11 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
-using FitnessApp01.Resx;
-using FitnessApp01.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -43,6 +38,8 @@ namespace FitnessApp01.ViewModels
                     ProteinCalculated, FatCalculated, SaturatedCalculated, FiberCalculated, SaltCalculated, MealType,
                     Food.Kcal, Food.Carbohydrates, Food.Sugar, Food.Protein, Food.Fat, Food.SaturatedFat, Food.Fiber,
                     Food.Salt);
+            if (string.IsNullOrEmpty(MealType))
+                new Exception("MealType is null");
             try
             {
                 //pokud jeste neexistuje den tak se vyvola vyjimka
@@ -83,7 +80,7 @@ namespace FitnessApp01.ViewModels
             }
             finally
             {
-                await Shell.Current.GoToAsync("//main-content");
+                await GoToPageAsync("//main-content");
                 IsRunning = false;
                 MessagingCenter.Send<object>(this, "mealAdded");
             }
@@ -178,8 +175,10 @@ namespace FitnessApp01.ViewModels
 
         #region Properties 
 
-        private IDatabase FirestoreBase { get; set; }
-        public string MealType { get; set; }
+        private IDatabase FirestoreBase { get; 
+            set; }
+        public string MealType { get; 
+            set; }
 
         private string _foodJson;
         public string FoodJson
@@ -188,11 +187,8 @@ namespace FitnessApp01.ViewModels
             set 
             { 
                 SetProperty(ref _foodJson, value);
-                if (!string.IsNullOrEmpty(MealType))
-                {
-                    Food = ConvertJsonToFood(_foodJson);
-                    InitializeAddMealPageViewModel();
-                }       
+                Food = ConvertJsonToFood(value);
+                InitializeAddMealPageViewModel();
             }
         }
 

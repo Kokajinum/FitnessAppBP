@@ -1,6 +1,6 @@
 ﻿using FitnessApp01.Services;
 using Plugin.CloudFirestore.Attributes;
-using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace FitnessApp01.Models
 {
@@ -23,12 +23,15 @@ namespace FitnessApp01.Models
             PortionSize = portionSize;
             Measure = measure;
             Who = who;
+            IsInitialized = true;
         }
 
         public Food()
         {
 
         }
+
+        #region Properties
 
         [MapTo("name")]
         public string Name { get; set; }
@@ -56,6 +59,11 @@ namespace FitnessApp01.Models
         public string Measure { get; set; }
         [MapTo("who")]
         public string Who { get; set; }
+
+        [Ignored]
+        private bool IsInitialized { get; set; }
+
+        #endregion
 
     }
 }

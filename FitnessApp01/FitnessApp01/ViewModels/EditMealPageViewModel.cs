@@ -1,11 +1,8 @@
 ﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
-using FitnessApp01.Services;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -45,7 +42,7 @@ namespace FitnessApp01.ViewModels
             finally
             {
                 IsRunning = false;
-                await Shell.Current.GoToAsync("..");
+                await GoToPageAsync("..");
                 MessagingCenter.Send<object>(this, "mealEdited");
             }
             
@@ -73,7 +70,7 @@ namespace FitnessApp01.ViewModels
             finally
             {
                 IsRunning = false;
-                await Shell.Current.GoToAsync("..");
+                await GoToPageAsync("..");
                 MessagingCenter.Send<object>(this, "mealEdited");
             }
             

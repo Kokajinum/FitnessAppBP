@@ -1,21 +1,19 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
-using FitnessApp01.Services;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace FitnessApp01.Services
 {
     public class FirestoreBase : IDatabase
     {
+        public readonly static FirestoreBase Instance = new FirestoreBase();
+
         public async Task CreateRegistrationSettingsAsync(RegistrationSettings registrationSettings)
         {
             try

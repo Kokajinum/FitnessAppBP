@@ -1,14 +1,9 @@
-﻿using FitnessApp01.Helpers;
-using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
-using FitnessApp01.Services;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,6 +21,7 @@ namespace FitnessApp01.ViewModels
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
             FirestoreBase = DependencyService.Get<IDatabase>();
+            //FirestoreBase = Services.FirestoreBase.Instance;
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
                 OnMessageReceived();
@@ -54,7 +50,6 @@ namespace FitnessApp01.ViewModels
 
         private void OnInitializeComplete(Task arg)
         {
-            
         }
 
         private async Task Refresh()
@@ -67,13 +62,15 @@ namespace FitnessApp01.ViewModels
 
         private async Task NextDay()
         {
-            CurrentDay = SelectedDay.Next();
+            //CurrentDay = SelectedDay.Next();
+            NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
 
         private async Task PreviousDay()
         {
-            CurrentDay = SelectedDay.Previous();
+            //CurrentDay = SelectedDay.Previous();
+            NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
 
@@ -85,7 +82,7 @@ namespace FitnessApp01.ViewModels
         private async Task InitializeDiaryPageViewModel()
         {
             IsRunning = true;
-            CurrentDay = SelectedDay.Day;
+            //CurrentDay = SelectedDay.Day;
             //nestabilni chovani po vyplneni nedokoncene registrace
             var isValid = await LoadRegistrationSettings();
             if (!isValid)
@@ -202,11 +199,11 @@ namespace FitnessApp01.ViewModels
         private string _nameOfTheDay;
         public string NameOfTheDay
         {
-            get { return _nameOfTheDay; }
+            get { return SelectedDay.Current().ToString("D", Thread.CurrentThread.CurrentCulture); }
             set { SetProperty(ref _nameOfTheDay, value); }
         }
 
-        private DateTime _currentDay;
+        /*private DateTime _currentDay;
         public DateTime CurrentDay
         {
             get { return _currentDay; }
@@ -215,7 +212,7 @@ namespace FitnessApp01.ViewModels
                 SetProperty(ref _currentDay, value);
                 NameOfTheDay = value.ToString("D", Thread.CurrentThread.CurrentCulture);
             }
-        }
+        }*/
 
         private int _caloriesGoal;
         public int CaloriesGoal

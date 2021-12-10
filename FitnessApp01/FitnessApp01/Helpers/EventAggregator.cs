@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,3 +26,4 @@ namespace FitnessApp01.Helpers
         public static Action OnMessageTransmitted3;
     }
 }
+*/
