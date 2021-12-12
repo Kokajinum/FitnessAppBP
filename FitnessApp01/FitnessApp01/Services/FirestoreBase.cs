@@ -126,7 +126,6 @@ namespace FitnessApp01.Services
             day.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
             day.MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
             day.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
-            day.UnixSeconds = SelectedDay.ToUnixSecondsString();
             return day;
         }
 
