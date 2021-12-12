@@ -10,6 +10,10 @@ namespace FitnessApp01.Interfaces
         Task CreateRegistrationSettingsAsync(RegistrationSettings registrationSettings);
         Task<RegistrationSettings> ReadRegistrationSettingsAsync();
         Task<List<Meal>> ReadMealDataAsync(string meal);
+        /// <summary>
+        /// Přečte data diáře z databáze
+        /// </summary>
+        /// <returns></returns>
         Task<Day> ReadDiaryDataAsync();
         Task CreateFoodDataAsync(Food food);
         Task CreateDayAsync(Day day);
