@@ -3,6 +3,7 @@ using FitnessApp01.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace FitnessApp01.ViewModels
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
             //FirestoreBase = DependencyService.Get<IDatabase>();
             FirestoreBase = Services.FirestoreBase.Instance;
+            DiaryPageAttributes = new DiaryPageAttributes();
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
                 OnMessageReceived();
@@ -31,7 +33,10 @@ namespace FitnessApp01.ViewModels
                 OnMessageReceived();
             });
             InitializeDiaryPageViewModel().ContinueWith(OnInitializeComplete);
+
+
             
+
         }
 
         private async Task ItemTap(Meal meal)
@@ -54,7 +59,7 @@ namespace FitnessApp01.ViewModels
 
         private async Task Refresh()
         {
-            IsRefreshing = false;
+            DiaryPageAttributes.IsRefreshing = false;
             IsBusy = true;
             await LoadDiaryData();
             IsBusy = false;
@@ -62,13 +67,13 @@ namespace FitnessApp01.ViewModels
 
         private async Task NextDay()
         {
-            NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
+            DiaryPageAttributes.NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
 
         private async Task PreviousDay()
         {
-            NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
+            DiaryPageAttributes.NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
             await Refresh();
         }
 
@@ -106,8 +111,10 @@ namespace FitnessApp01.ViewModels
             try
             {
                 //Diary.Days = await FirestoreBase.ReadDiaryDataAsync();
+                //Před komunikací s DB kontrola, jestli se den už nenachází v kolekci
                 if (!Diary.Days.Any(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString()))
                 {
+                    //Pokud se den v db nenajde, vrátí se nový "prázdný" den s nastaveným UnixSeconds
                     Day day = await FirestoreBase.ReadDiaryDataAsync();
                     Diary.Days.Add(day);
                 }
@@ -116,6 +123,7 @@ namespace FitnessApp01.ViewModels
             catch (Exception e)
             {
                 await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
+                Console.WriteLine(e.Message);
                 Diary.Days = new ObservableCollection<Day>();
             }
             return SetDiaryData(Diary.Days);
@@ -133,11 +141,11 @@ namespace FitnessApp01.ViewModels
                 day = days.First();
             }
             day.CaloriesGoal = RegistrationSettings.CaloriesGoal;
-            CaloriesGoal = day.CaloriesGoal;
-            CaloriesCurrent = day.CaloriesCurrent;
-            if (CaloriesGoal != 0)
+            DiaryPageAttributes.CaloriesGoal = day.CaloriesGoal;
+            DiaryPageAttributes.CaloriesCurrent = day.CaloriesCurrent;
+            if (DiaryPageAttributes.CaloriesGoal != 0)
             {
-                CaloriesProgress = (double)CaloriesCurrent / (double)CaloriesGoal;
+                DiaryPageAttributes.CaloriesProgress = (double)DiaryPageAttributes.CaloriesCurrent / (double)DiaryPageAttributes.CaloriesGoal;
             }
             MealGroups = day.MealGroups;
             MessagingCenter.Send<object>(this, "diaryUpdated");
@@ -162,8 +170,9 @@ namespace FitnessApp01.ViewModels
 
         private bool CheckRegistrationSettings()
         {
-            bool v1 = RegistrationSettings.ActivityDB > 1; //activity always > 1
-            //double,int default value = 0
+            //activity always > 1, range: <1.2,1.725>
+            bool v1 = RegistrationSettings.ActivityDB > 1; 
+            //double,int default value == 0
             bool v2 = RegistrationSettings.AgeDB > 0;
             bool v3 = RegistrationSettings.CaloriesGoal > 0;
             bool v4 = RegistrationSettings.DesiredWeightDB > 1;
@@ -183,54 +192,15 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        private IDatabase FirestoreBase { get; set; }
+        public IDatabase FirestoreBase { get; set; }
 
-        private bool _isRefreshing = false;
-        public bool IsRefreshing
+        private DiaryPageAttributes _diaryPageAttributes;
+        public DiaryPageAttributes DiaryPageAttributes
         {
-            get { return _isRefreshing; }
-            set { SetProperty(ref _isRefreshing, value); }
+            get { return _diaryPageAttributes; }
+            set { SetProperty(ref _diaryPageAttributes, value);}
         }
-
-        private string _nameOfTheDay;
-        public string NameOfTheDay
-        {
-            get { return SelectedDay.Current().ToString("D", Thread.CurrentThread.CurrentCulture); }
-            set { SetProperty(ref _nameOfTheDay, value); }
-        }
-
-        /*private DateTime _currentDay;
-        public DateTime CurrentDay
-        {
-            get { return _currentDay; }
-            set
-            {
-                SetProperty(ref _currentDay, value);
-                NameOfTheDay = value.ToString("D", Thread.CurrentThread.CurrentCulture);
-            }
-        }*/
-
-        private int _caloriesGoal;
-        public int CaloriesGoal
-        {
-            get { return _caloriesGoal; }
-            set { SetProperty(ref _caloriesGoal, value); }
-        }
-
-        private int _caloriesCurrent;
-        public int CaloriesCurrent
-        {
-            get { return _caloriesCurrent; }
-            set { SetProperty(ref _caloriesCurrent, value); }
-        }
-
-        private double _caloriesProgress;
-        public double CaloriesProgress
-        {
-            get { return _caloriesProgress; }
-            set { SetProperty(ref _caloriesProgress, value); }
-        }
-
+ 
         private ObservableCollection<MealGroup> _mealGroups;
         public ObservableCollection<MealGroup> MealGroups
         {

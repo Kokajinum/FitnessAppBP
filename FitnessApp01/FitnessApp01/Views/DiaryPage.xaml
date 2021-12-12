@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+            <RefreshView IsRefreshing="{Binding DiaryPageAttributes.IsRefreshing}"
                          Command="{Binding RefreshViewCommand}"
                          Padding="20"
                          Grid.ColumnSpan="3"
@@ -42,7 +42,7 @@
                         <ImageButton Source="icon_about.png"
                                  Command="{Binding PreviousDayCommand}">
                         </ImageButton>
-                        <Label Text="{Binding NameOfTheDay}">
+                        <Label Text="{Binding DiaryPageAttributes.NameOfTheDay}">
                         </Label>
                         <ImageButton Source="icon_about.png"
                                      Command="{Binding NextDayCommand}">
@@ -53,9 +53,9 @@
                         <Label HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding CaloriesCurrent}"></Span>
+                                    <Span Text="{Binding DiaryPageAttributes.CaloriesCurrent}"></Span>
                                     <Span Text="Kcal/"></Span>
-                                    <Span Text="{Binding CaloriesGoal}"></Span>
+                                    <Span Text="{Binding DiaryPageAttributes.CaloriesGoal}"></Span>
                                     <Span Text="Kcal"></Span>
                                 </FormattedString>
                             </Label.FormattedText>
@@ -101,29 +101,11 @@
                                             Source={x:Reference collectionView}}"
                                             CommandParameter="{Binding .}">
                                         </TapGestureRecognizer>
-                                        <!--<TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:DiaryPageViewModel}},
-                                                         Path=ItemTapCommand}"
-                                                CommandParameter="{Binding .}"
-                                                NumberOfTapsRequired="1">
-                                        </TapGestureRecognizer>-->
                                     </StackLayout.GestureRecognizers>
-                                    <!--<Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>-->
-                                    
                                     <Label Text="{Binding Name}"
                                            FontSize="Medium">
                                     </Label>
                                     <StackLayout Orientation="Horizontal">
-                                        
                                         <Label>
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -140,9 +122,8 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        
+
                                     </StackLayout>
-                                    
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

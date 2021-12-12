@@ -15,6 +15,7 @@ namespace FitnessApp01.ViewModels
             RefreshViewCommand = new Command(() => Refresh());
             //FirestoreBase = DependencyService.Get<IDatabase>();
             FirestoreBase = Services.FirestoreBase.Instance;
+            HomePageAttributes = new HomePageAttributes();
 
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {
@@ -27,7 +28,7 @@ namespace FitnessApp01.ViewModels
         private void Refresh()
         {
             SetDiaryData();
-            IsRefreshing = false;
+            HomePageAttributes.IsRefreshing = false;
         }
 
         private void OnMessageReceived()
@@ -92,25 +93,29 @@ namespace FitnessApp01.ViewModels
                 {
                     it = Diary.Days.First();
                 }
-                CaloriesGoal = RegistrationSettings.CaloriesGoal;
-                CaloriesCurrent = it.CaloriesCurrent;
-                CarbohydratesCurrent = Math.Round(it.Carbohydrates, 1);
-                ProteinCurrent = Math.Round(it.Protein, 1);
-                FatCurrent = Math.Round(it.Fat, 1);
-                SugarCurrent = Math.Round(it.Sugar, 1);
-                SaturatedFatCurrent = Math.Round(it.SaturatedFat, 1);
-                FiberCurrent = Math.Round(it.Fiber,1);
-                SaltCurrent = Math.Round(it.Salt, 1);
-                CaloriesProgress = CaloriesGoal == 0 ? 0 : (double)CaloriesCurrent / (double)CaloriesGoal;
-                CarbohydratesMacro = RegistrationSettings.Macros
+                HomePageAttributes.CaloriesGoal = RegistrationSettings.CaloriesGoal;
+                HomePageAttributes.CaloriesCurrent = it.CaloriesCurrent;
+                HomePageAttributes.CarbohydratesCurrent = Math.Round(it.Carbohydrates, 1);
+                HomePageAttributes.ProteinCurrent = Math.Round(it.Protein, 1);
+                HomePageAttributes.FatCurrent = Math.Round(it.Fat, 1);
+                HomePageAttributes.SugarCurrent = Math.Round(it.Sugar, 1);
+                HomePageAttributes.SaturatedFatCurrent = Math.Round(it.SaturatedFat, 1);
+                HomePageAttributes.FiberCurrent = Math.Round(it.Fiber,1);
+                HomePageAttributes.SaltCurrent = Math.Round(it.Salt, 1);
+                HomePageAttributes.CaloriesProgress = HomePageAttributes.CaloriesGoal == 0 ? 
+                    0 : (double)HomePageAttributes.CaloriesCurrent / (double)HomePageAttributes.CaloriesGoal;
+                HomePageAttributes.CarbohydratesMacro = RegistrationSettings.Macros
                     .Where(x => x.Key == "carbohydrates").First().Value;
-                ProteinMacro = RegistrationSettings.Macros
+                HomePageAttributes.ProteinMacro = RegistrationSettings.Macros
                     .Where(x => x.Key == "protein").First().Value;
-                FatMacro = RegistrationSettings.Macros
+                HomePageAttributes.FatMacro = RegistrationSettings.Macros
                     .Where(x => x.Key == "fat").First().Value;
-                CarbohydratesGoal = Math.Round(CaloriesGoal * (CarbohydratesMacro / 100) / carbohydratesGramKcal, 1);
-                ProteinGoal = Math.Round(CaloriesGoal * (ProteinMacro / 100) / proteinGramKcal, 1);
-                FatGoal = Math.Round(CaloriesGoal * (FatMacro / 100) / fatGramKcal, 1);
+                HomePageAttributes.CarbohydratesGoal = 
+                    Math.Round(HomePageAttributes.CaloriesGoal * (HomePageAttributes.CarbohydratesMacro / 100) / carbohydratesGramKcal, 1);
+                HomePageAttributes.ProteinGoal = 
+                    Math.Round(HomePageAttributes.CaloriesGoal * (HomePageAttributes.ProteinMacro / 100) / proteinGramKcal, 1);
+                HomePageAttributes.FatGoal = 
+                    Math.Round(HomePageAttributes.CaloriesGoal * (HomePageAttributes.FatMacro / 100) / fatGramKcal, 1);
                 return true;
             }
             return false;
@@ -150,6 +155,14 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _registrationSettings, value); }
         }
 
+        private HomePageAttributes _homePageAttributes;
+        public HomePageAttributes HomePageAttributes
+        {
+            get { return _homePageAttributes; }
+            set { SetProperty(ref _homePageAttributes, value); }
+        }
+
+        /*
         private int _caloriesGoal;
         public int CaloriesGoal
         {
@@ -268,6 +281,7 @@ namespace FitnessApp01.ViewModels
             get { return _fatMacro; }
             set { SetProperty(ref _fatMacro, value); }
         }
+        */
         #endregion
 
         #region Commands

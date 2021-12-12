@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using FitnessApp01.Models;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -50,5 +51,6 @@ namespace FitnessApp01.ViewModels
             get => _isBusy;
             set { SetProperty(ref _isBusy, value); }
         }
+
     }
 }
