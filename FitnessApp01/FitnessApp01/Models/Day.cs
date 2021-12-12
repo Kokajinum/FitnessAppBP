@@ -6,6 +6,11 @@ namespace FitnessApp01.Models
 {
     public class Day
     {
+        public Day()
+        {
+            UnixSeconds = SelectedDay.ToUnixSecondsString();
+        }
+
         [MapTo("unixSeconds")]
         public string UnixSeconds { get; set; }
         [MapTo("caloriesGoal")]
