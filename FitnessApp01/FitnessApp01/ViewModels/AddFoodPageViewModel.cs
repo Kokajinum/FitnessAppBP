@@ -17,11 +17,13 @@ namespace FitnessApp01.ViewModels
                 execute: async () => await SaveFood(),
                 canExecute: () => SaveCanExecute());
             //FirestoreBase = DependencyService.Get<IDatabase>();
+            
             FirestoreBase = Services.FirestoreBase.Instance;
+            Attrs = new AddFoodPageAttributes();
             InitializeAddFoodPageViewModel();
         }
 
-        private void InitializeAddFoodPageViewModel()
+        public void InitializeAddFoodPageViewModel()
         {
             PickerUnits = new ObservableCollection<string>()
             {
@@ -31,12 +33,12 @@ namespace FitnessApp01.ViewModels
             PickerCurrentUnit = PickerUnits[0];
         }
 
-        private async Task SaveFood()
+        public async Task SaveFood()
         {
             try
             {
-                var newFood = new Food(NameInput, (int)KcalInput, (double)CarbsInput, (double)SugarInput, (double)ProteinInput, (double)FatInput,
-                AuthBase.GetUserId(), PickerCurrentUnit, (double)SaturatedInput, (double)FiberInput, (double)SaltInput, BrandInput, (double)PortionSize);
+                var newFood = new Food(Attrs.NameInput, (int)Attrs.KcalInput, (double)Attrs.CarbsInput, (double)Attrs.SugarInput, (double)Attrs.ProteinInput, (double)Attrs.FatInput,
+                AuthBase.GetUserId(), PickerCurrentUnit, (double)Attrs.SaturatedInput, (double)Attrs.FiberInput, (double)Attrs.SaltInput, Attrs.BrandInput, (double)Attrs.PortionSize);
                 await FirestoreBase.CreateFoodDataAsync(newFood);
                 await DisplayAlertAsync("Done", "Podařilo se", "ok");
                 await GoToPageAsync("..");
@@ -58,6 +60,18 @@ namespace FitnessApp01.ViewModels
 
         private IDatabase FirestoreBase { get; set; }
 
+        //z nejakeho duvodu nefunguje
+        private AddFoodPageAttributes _addFoodPageAttributes;
+        public AddFoodPageAttributes Attrs
+        {
+            get { return _addFoodPageAttributes; }
+            set 
+            { 
+                SetProperty(ref _addFoodPageAttributes, value); 
+                OnPropertyChanged("CanSave"); }
+        }
+
+        /*
         private string _nameInput;
         public string NameInput
         {
@@ -138,6 +152,7 @@ namespace FitnessApp01.ViewModels
             get { return _portionSize; }
             set { SetProperty(ref _portionSize, value); }
         }
+        */
 
         private ObservableCollection<string> _pickerUnits;
         public ObservableCollection<string> PickerUnits
@@ -152,8 +167,8 @@ namespace FitnessApp01.ViewModels
         {
             get
             {
-                return CheckNameInput() && KcalInput > 0 && CarbsInput >= 0 &&
-                     SugarInput >= 0 && ProteinInput >= 0 && FatInput >= 0;
+                return CheckNameInput() && Attrs.KcalInput > 0 && Attrs.CarbsInput >= 0 &&
+                     Attrs.SugarInput >= 0 && Attrs.ProteinInput >= 0 && Attrs.FatInput >= 0;
             }
         }
 
@@ -172,9 +187,9 @@ namespace FitnessApp01.ViewModels
 
         private bool CheckNameInput()
         {
-            return !string.IsNullOrEmpty(NameInput)
-                && !NameInput.Contains("#")
-                && !NameInput.Contains("&");
+            return !string.IsNullOrEmpty(Attrs.NameInput)
+                && !Attrs.NameInput.Contains("#")
+                && !Attrs.NameInput.Contains("&");
         }
 
         #endregion
