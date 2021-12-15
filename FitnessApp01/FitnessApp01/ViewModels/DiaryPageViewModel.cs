@@ -16,7 +16,7 @@ namespace FitnessApp01.ViewModels
     {
         public DiaryPageViewModel()
         {
-            RefreshViewCommand = new Command(execute: async () => await Refresh());
+            //RefreshViewCommand = new Command(execute: async () => await Refresh());
             NextDayCommand = new Command(execute: async () => await NextDay());
             PreviousDayCommand = new Command(execute: async () => await PreviousDay());
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
@@ -45,7 +45,7 @@ namespace FitnessApp01.ViewModels
             await Shell.Current.GoToAsync($"EditMealPage?mealString={jsonString}");
         }
 
-        private async Task AddMeal(MealGroup meals)
+        public async Task AddMeal(MealGroup meals)
         {
             var jsonString = JsonConvert.SerializeObject(RegistrationSettings.Macros);
             await Shell.Current.GoToAsync($"SelectMealPage?mealType={meals.Name}" +
@@ -57,45 +57,53 @@ namespace FitnessApp01.ViewModels
         {
         }
 
+        /*
         private async Task Refresh()
         {
             DiaryPageAttributes.IsRefreshing = false;
             IsBusy = true;
-            await LoadDiaryData();
+            await LoadAndSetDiaryData();
             IsBusy = false;
         }
+        */
 
-        private async Task NextDay()
+        public async Task NextDay()
         {
             DiaryPageAttributes.NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
-            await Refresh();
+            //await Refresh();
+            await InitializeDiaryPageViewModel();
         }
 
-        private async Task PreviousDay()
+        public async Task PreviousDay()
         {
             DiaryPageAttributes.NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
-            await Refresh();
+            //await Refresh();
+            await InitializeDiaryPageViewModel();
         }
 
         private void OnMessageReceived()
         {
-            SetDiaryData(Diary.Days);
+            SetDiaryData();
         }
 
-        private async Task InitializeDiaryPageViewModel()
+        public async Task InitializeDiaryPageViewModel()
         {
             IsBusy = true;
+            bool isValid;
             //nestabilni chovani po vyplneni nedokoncene registrace
-            var isValid = await LoadRegistrationSettings();
-            if (!isValid)
+            if (RegistrationSettings == null)
             {
-                await App.Current.MainPage
-                    .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
-                await Shell.Current.GoToAsync("//RegistrationSettingsPage");
-                IsBusy = false;
+                isValid = await LoadRegistrationSettings();
+                if (!isValid)
+                {
+                    await App.Current.MainPage
+                        .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
+                    await Shell.Current.GoToAsync("//RegistrationSettingsPage");
+                    IsBusy = false;
+                }
             }
             
-            isValid = await LoadDiaryData();
+            isValid = await LoadAndSetDiaryData();
             /*if (!isValid)
             {
                 await App.Current.MainPage
@@ -106,7 +114,7 @@ namespace FitnessApp01.ViewModels
 
         
 
-        private async Task<bool> LoadDiaryData()
+        public async Task<bool> LoadAndSetDiaryData()
         {
             try
             {
@@ -126,11 +134,12 @@ namespace FitnessApp01.ViewModels
                 Console.WriteLine(e.Message);
                 Diary.Days = new ObservableCollection<Day>();
             }
-            return SetDiaryData(Diary.Days);
+            return SetDiaryData();
         }
 
-        private bool SetDiaryData(ObservableCollection<Day> days)
+        private bool SetDiaryData()
         {
+            var days = Diary.Days;
             Day day;
             try
             {

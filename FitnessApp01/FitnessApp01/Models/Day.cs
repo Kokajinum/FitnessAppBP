@@ -1,4 +1,5 @@
-﻿using Plugin.CloudFirestore.Attributes;
+﻿using FitnessApp01.Resx;
+using Plugin.CloudFirestore.Attributes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -9,6 +10,13 @@ namespace FitnessApp01.Models
         public Day()
         {
             UnixSeconds = SelectedDay.ToUnixSecondsString();
+            /*if (MealGroups.Count == 0)
+            {
+                MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
+                MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
+                MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
+                MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
+            }*/
         }
 
         [MapTo("unixSeconds")]

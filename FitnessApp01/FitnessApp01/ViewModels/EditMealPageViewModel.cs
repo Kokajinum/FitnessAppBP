@@ -2,15 +2,17 @@
 using FitnessApp01.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace FitnessApp01.ViewModels
 {
-    [QueryProperty(nameof(MealString), "mealString")]
-    public class EditMealPageViewModel : BaseViewModel
+   // [QueryProperty(nameof(MealString), "mealString")]
+    public class EditMealPageViewModel : BaseViewModel, IQueryAttributable
     {
         public EditMealPageViewModel()
         {
@@ -23,7 +25,14 @@ namespace FitnessApp01.ViewModels
             FirestoreBase = Services.FirestoreBase.Instance;
         }
 
-        private async Task DeleteMeal()
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
+        {
+            MealString = HttpUtility.UrlDecode(query["mealString"]);
+            Meal = JsonConvert.DeserializeObject<Meal>(MealString);
+            InitializeBasicProperties();
+        }
+
+        public async Task DeleteMeal()
         {
             IsBusy = true;
             try
@@ -49,7 +58,7 @@ namespace FitnessApp01.ViewModels
             
         }
 
-        private async Task EditMeal()
+        public async Task EditMeal()
         {
             IsBusy = true;
             try
@@ -77,7 +86,7 @@ namespace FitnessApp01.ViewModels
             
         }
 
-        private void InitializeEditMealPageViewModel()
+        public void InitializeBasicProperties()
         {
             MealName = Meal.Name;
             MealBrand = Meal.Brand;
@@ -184,8 +193,6 @@ namespace FitnessApp01.ViewModels
             set
             { 
                 SetProperty(ref _mealString, value);
-                Meal = JsonConvert.DeserializeObject<Meal>(_mealString);
-                InitializeEditMealPageViewModel();
             }
         }
 

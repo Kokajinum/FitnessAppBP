@@ -25,7 +25,7 @@ namespace FitnessApp01.ViewModels
             FirestoreBase = Services.FirestoreBase.Instance;
         }
 
-        private void PreviousPage()
+        public void PreviousPage()
         {
             if (CarouselPosition == 0)
             {
@@ -34,7 +34,7 @@ namespace FitnessApp01.ViewModels
             CarouselPosition--;
         }
 
-        private async Task NextPage()
+        public async Task NextPage()
         {
             switch (CarouselPosition)
             {
@@ -285,7 +285,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        private IDatabase FirestoreBase { get; set; }
+        public IDatabase FirestoreBase { get; set; }
 
         private ObservableCollection<string> _carouselSource;
         public ObservableCollection<string> CarouselSource

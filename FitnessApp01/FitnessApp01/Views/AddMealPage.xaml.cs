@@ -11,5 +11,6 @@ namespace FitnessApp01.Views
         {
             InitializeComponent();
         }
+
     }
 }

@@ -14,7 +14,8 @@
     
     <ContentPage.Content>
         <RefreshView IsRefreshing="{Binding HomePageAttributes.IsRefreshing}"
-                     Command="{Binding RefreshViewCommand}">
+                     Command="{Binding RefreshViewCommand}"
+                     IsEnabled="False">
             <ScrollView>
                 <StackLayout Padding="30">
                     <StackLayout Orientation="Horizontal">

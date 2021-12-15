@@ -35,7 +35,7 @@ namespace FitnessApp01.ViewModels
             return CanRegister;
         }
 
-        private async Task Register()
+        public async Task Register()
         {
             if ((UserConfirmPassword != UserPassword) || !ValidateEmail())
             {
@@ -68,7 +68,7 @@ namespace FitnessApp01.ViewModels
             return CanLogin;
         }
 
-        private async Task Login()
+        public async Task Login()
         {
             bool result = await AuthBase.LoginUserAsync(UserEmail, UserPassword);
             if (result)
@@ -126,7 +126,7 @@ namespace FitnessApp01.ViewModels
         }
 
         private string _userEmail = string.Empty;
-        public string UserEmail
+        private string UserEmail
         {
             get { return _userEmail; }
             set
@@ -138,7 +138,7 @@ namespace FitnessApp01.ViewModels
         }
 
         private string _userPassword = string.Empty;
-        public string UserPassword
+        private string UserPassword
         {
             get { return _userPassword; }
             set
@@ -150,7 +150,7 @@ namespace FitnessApp01.ViewModels
         }
 
         private string _userConfirmPassword = string.Empty;
-        public string UserConfirmPassword
+        private string UserConfirmPassword
         {
             get { return _userConfirmPassword; }
             set

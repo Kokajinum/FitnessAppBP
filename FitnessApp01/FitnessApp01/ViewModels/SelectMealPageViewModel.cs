@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Models;
+﻿using FitnessApp01.Interfaces;
+using FitnessApp01.Models;
 using FitnessApp01.Services;
 using Newtonsoft.Json;
 using System;
@@ -22,12 +23,12 @@ namespace FitnessApp01.ViewModels
         public SelectMealPageViewModel()
         {
             SearchService = new SearchService(api, index);
-            AddFoodCommand = new Command(async () => await AddFood());
+            AddFoodCommand = new Command(async () => await AddNewFood());
             FoodSearchCommand = new Command<string>(async (searchString) => await FoodSearch(searchString));
             FoodTapCommand = new Command<Food>(async (food) => await SelectMeal(food));
         }
 
-        private async Task SelectMeal(Food food)
+        public async Task SelectMeal(Food food)
         {
             var jsonString = JsonConvert.SerializeObject(food);
             /*
@@ -50,15 +51,26 @@ namespace FitnessApp01.ViewModels
             
         }
 
-        private async Task FoodSearch(string searchString)
+        public async Task FoodSearch(string searchString)
         {
-            IsBusy = true;
-            var foodList = await SearchService.GetResultsAsync(searchString);
-            FoodCollection = new ObservableCollection<Food>(foodList);
-            IsBusy = false;
+            try
+            {
+                IsBusy = true;
+                var foodList = await SearchService.GetResultsAsync(searchString);
+                FoodCollection = new ObservableCollection<Food>(foodList);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+            
         }
 
-        private async Task AddFood()
+        public async Task AddNewFood()
         {
             await Shell.Current.GoToAsync("AddFoodPage");
         }
@@ -86,7 +98,7 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        public SearchService SearchService { get; set; }
+        public ISearch<Food> SearchService { get; set; }
 
         public string MealType { get; set; }
 

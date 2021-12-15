@@ -29,7 +29,8 @@
                          Command="{Binding RefreshViewCommand}"
                          Padding="20"
                          Grid.ColumnSpan="3"
-                         Grid.RowSpan="3">
+                         Grid.RowSpan="3"
+                         IsEnabled="False">
                 <StackLayout>
                     <Label Text="{Static resources:AppResources.Diary}" 
                        FontSize="30" 

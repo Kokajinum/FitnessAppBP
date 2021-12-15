@@ -38,28 +38,19 @@ namespace FitnessApp01.ViewModels
             IsBusy = false;
         }
 
-        //private void PrintSomething(Task arg1)
-        //{
-           
-        //}
-
         private async Task InitializeHomePageViewModel()
         {
             IsBusy = true;
-            var isValid = await LoadRegistrationSettings();
-            if (!isValid)
+            if (RegistrationSettings == null)
             {
-                await App.Current.MainPage
-                    .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
-                await Shell.Current.GoToAsync("//RegistrationSettingsPage");
+                var isValid = await LoadRegistrationSettings();
+                if (!isValid)
+                {
+                    await App.Current.MainPage
+                        .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
+                    await Shell.Current.GoToAsync("//RegistrationSettingsPage");
+                }
             }
-
-            /*isValid = await LoadDiaryData();
-            if (!isValid)
-            {
-                await App.Current.MainPage
-                    .DisplayAlert("Error", "spatne nactene data", "ok");
-            }*/
             SetDiaryData();
             IsBusy = false;
         }
@@ -70,9 +61,9 @@ namespace FitnessApp01.ViewModels
             return CheckRegistrationSettings();
         }
 
-        /*private async Task<bool> LoadDiaryData()
+        /*private async Task<bool> LoadAndSetDiaryData()
         {
-            Diary.Days = await FirestoreBase.LoadDiaryData();
+            Diary.Days = await FirestoreBase.LoadAndSetDiaryData();
             return SetDiaryData();
         }*/
 
@@ -146,7 +137,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties 
 
-        private IDatabase FirestoreBase { get; set; }
+        public IDatabase FirestoreBase { get; set; }
 
         private RegistrationSettings _registrationSettings;
         public RegistrationSettings RegistrationSettings
@@ -162,126 +153,6 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _homePageAttributes, value); }
         }
 
-        /*
-        private int _caloriesGoal;
-        public int CaloriesGoal
-        {
-            get { return _caloriesGoal; }
-            set { SetProperty(ref _caloriesGoal, value); }
-        }
-
-        private int _caloriesCurrent;
-        public int CaloriesCurrent       
-        {
-            get { return _caloriesCurrent; }
-            set { SetProperty(ref _caloriesCurrent, value); }
-        }
-
-        private double _caloriesProgress;
-        public double CaloriesProgress
-        {
-            get { return _caloriesProgress; }
-            set { SetProperty(ref _caloriesProgress, value); }
-        }
-
-        private bool _isRefreshing;
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set { SetProperty(ref _isRefreshing, value); }
-        }
-
-        private double _carbohydratesCurrent;
-        public double CarbohydratesCurrent
-        {
-            get { return _carbohydratesCurrent; }
-            set { SetProperty(ref _carbohydratesCurrent, value); }
-        }
-
-        private double _proteinCurrent;
-        public double ProteinCurrent
-        {
-            get { return _proteinCurrent; }
-            set { SetProperty(ref _proteinCurrent, value); }
-        }
-
-        private double _fatCurrent;
-        public double FatCurrent
-        {
-            get { return _fatCurrent; }
-            set { SetProperty(ref _fatCurrent, value); }
-        }
-
-        private double _carbohydratesGoal;
-        public double CarbohydratesGoal
-        {
-            get { return _carbohydratesGoal; }
-            set { SetProperty(ref _carbohydratesGoal, value); }
-        }
-
-        private double _proteinGoal;
-        public double ProteinGoal
-        {
-            get { return _proteinGoal; }
-            set { SetProperty(ref _proteinGoal, value); }
-        }
-
-        private double _fatGoal;
-        public double FatGoal
-        {
-            get { return _fatGoal; }
-            set { SetProperty(ref _fatGoal, value); }
-        }
-
-        private double _saturatedFatCurrent;
-        public double SaturatedFatCurrent
-        {
-            get { return _saturatedFatCurrent; }
-            set { SetProperty(ref _saturatedFatCurrent, value); }
-        }
-
-        private double _sugarCurrent;
-        public double SugarCurrent
-        {
-            get { return _sugarCurrent; }
-            set { SetProperty(ref _sugarCurrent, value); }
-        }
-
-        private double _fiberCurrent;
-        public double FiberCurrent
-        {
-            get { return _fiberCurrent; }
-            set { SetProperty(ref _fiberCurrent, value); }
-        }
-
-        private double _saltCurrent;
-        public double SaltCurrent
-        {
-            get { return _saltCurrent; }
-            set { SetProperty(ref _saltCurrent, value); }
-        }
-
-        private double _carbohydratesMacro;
-        public double CarbohydratesMacro
-        {
-            get { return _carbohydratesMacro; }
-            set { SetProperty(ref _carbohydratesMacro, value); }
-        }
-
-        private double _proteinMacro;
-        public double ProteinMacro
-        {
-            get { return _proteinMacro; }
-            set { SetProperty(ref _proteinMacro, value); }
-        }
-
-        private double _fatMacro;
-        public double FatMacro
-        {
-            get { return _fatMacro; }
-            set { SetProperty(ref _fatMacro, value); }
-        }
-        */
         #endregion
 
         #region Commands

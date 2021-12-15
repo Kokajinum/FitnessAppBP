@@ -1,21 +1,23 @@
 ﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace FitnessApp01.ViewModels
 {
-    [QueryProperty(nameof(MealType), "mealType")]
+    /*[QueryProperty(nameof(MealType), "mealType")]
     [QueryProperty(nameof(FoodJson), "foodJson")]
     [QueryProperty(nameof(CaloriesGoal), "caloriesGoal")]
-    [QueryProperty(nameof(MacrosString), "macros")]
-    public class AddMealPageViewModel : BaseViewModel
+    [QueryProperty(nameof(MacrosJson), "macros")] //zbytecne?*/
+    public class AddMealPageViewModel : BaseViewModel, IQueryAttributable
     {
         public AddMealPageViewModel()
         {
@@ -27,26 +29,76 @@ namespace FitnessApp01.ViewModels
             //InitializeAddMealPageViewModel();
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
+        {
+            MealType = HttpUtility.UrlDecode(query["mealType"]);
+            var caloriesGoalJson = HttpUtility.UrlDecode(query["caloriesGoal"]);
+            CaloriesGoal = int.Parse(caloriesGoalJson);
+            FoodJson = HttpUtility.UrlDecode(query["foodJson"]);
+            MacrosJson = HttpUtility.UrlDecode(query["macros"]);
+
+            Food = JsonToObject<Food>(FoodJson);
+            Macros = JsonToObject<Dictionary<string, double>>(MacrosJson);
+
+            InitializeAddMealPageViewModel();
+        }
+
+        private void InitializeAddMealPageViewModel()
+        {
+            PickerSource = new ObservableCollection<string>();
+            if (string.IsNullOrEmpty(Food.Measure))
+            {
+                Food.Measure = "g";
+            }
+            if (Food.PortionSize != 0)
+            {
+                PickerSource.Add(" x " + Food.PortionSize.ToString() + Food.Measure);
+                PickerSource.Add(Food.Measure);
+            }
+            else
+            {
+                PickerSource.Add(Food.Measure);
+            }
+            PickerCurrentItem = PickerSource[0];
+
+        }
+
         private bool AddCanExecute()
         {
             return CanAdd;
         }
 
-        private async Task AddMeal()
+        public async Task AddMeal()
         {
             IsBusy = true;
+            MealGroup mealGroup;
+            Day oldDay;
             var meal = new Meal(Food.Name, Food.Brand, WeightCalculated, KcalCalculated, CarbsCalculated, SugarCalculated,
                     ProteinCalculated, FatCalculated, SaturatedCalculated, FiberCalculated, SaltCalculated, MealType,
                     Food.Kcal, Food.Carbohydrates, Food.Sugar, Food.Protein, Food.Fat, Food.SaturatedFat, Food.Fiber,
                     Food.Salt);
-            if (string.IsNullOrEmpty(MealType))
-                new Exception("MealType is null");
+            
             try
             {
-                //pokud jeste neexistuje den tak se vyvola vyjimka
-                var day = Diary.Days.First(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
-                var oldDay = day.Clone();
-                var mealGroup = day.MealGroups.FirstOrDefault(x => x.Name == MealType);
+                if (string.IsNullOrEmpty(MealType))
+                    throw new Exception("MealType is null");
+
+                //day == null pokud z nejakeho duvodu neexistuje
+                var day = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
+                if (day != null)
+                {
+                    oldDay = day.Clone();
+                    mealGroup = day.MealGroups.FirstOrDefault(x => x.Name == MealType);
+                    
+                }
+                else
+                {
+                    day = new Day();
+                    Diary.Days.Add(day);
+                    oldDay = day.Clone();
+                    var newDay = InitializeNewDay(day);
+                    mealGroup = newDay.MealGroups.FirstOrDefault(x => x.Name == MealType);
+                }
                 mealGroup.Add(meal);
                 //updatnou vsechny dokumenty + pridat nove
                 var updatedDay = UpdateExistingDay(day);
@@ -61,23 +113,9 @@ namespace FitnessApp01.ViewModels
                     CleanUp(oldDay);
                 }
             } 
-            //inicializace noveho dne
-            catch (InvalidOperationException)
+            catch (Exception e)
             {
-                var oldDay = Diary.Days.FirstOrDefault().Clone();
-                var newDay = InitializeNewDay(Diary.Days.FirstOrDefault());
-                var mealGroup = newDay.MealGroups.FirstOrDefault(x => x.Name == MealType);
-                mealGroup.Add(meal);
-                try
-                {
-                    await FirestoreBase.CreateDayAsync(newDay);
-                    await FirestoreBase.CreateMealAsync(meal);
-                }
-                catch (Exception)
-                {
-                    mealGroup.Remove(meal);
-                    CleanUp(oldDay);
-                }
+
             }
             finally
             {
@@ -103,7 +141,8 @@ namespace FitnessApp01.ViewModels
 
 
         //nedava smysl, day je predavan referenci, menen, a pak i vracen --> opravit
-        // bude implementovat model Day
+        //nahradit jako konstruktor v Day?
+        //zbytečná, nahradí ji UpdateExistingDay
         private Day InitializeNewDay(Day day)
         {
             day.UnixSeconds = SelectedDay.ToUnixSecondsString();
@@ -117,11 +156,16 @@ namespace FitnessApp01.ViewModels
             day.Salt = SaltCalculated;
             day.Sugar = SugarCalculated;
             day.Macros = Macros;
+            day.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("snack", AppResources.Snack, new List<Meal>()));
+            day.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
             return day;
         }
 
         private Day UpdateExistingDay(Day day)
         {
+
             day.CaloriesCurrent += KcalCalculated;
             day.Protein += ProteinCalculated;
             day.Carbohydrates += CarbsCalculated;
@@ -133,28 +177,11 @@ namespace FitnessApp01.ViewModels
             return day;
         }
 
-        private void InitializeAddMealPageViewModel()
-        {
-            PickerSource = new ObservableCollection<string>();
-            if (string.IsNullOrEmpty(Food.Measure))
-            {
-                Food.Measure = "g";
-            }
-            if (Food.PortionSize != 0)
-            {
-                PickerSource.Add(" x " + Food.PortionSize.ToString() + Food.Measure);
-                PickerSource.Add(Food.Measure);
-            }
-            else
-            {
-                PickerSource.Add(Food.Measure);
-            }
-            PickerCurrentItem = PickerSource[0];
-        }
+        
 
-        private Food ConvertJsonToFood(string json)
+        private T JsonToObject<T>(string json)
         {
-            return JsonConvert.DeserializeObject<Food>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         private void CalculateNutrients()
@@ -174,9 +201,11 @@ namespace FitnessApp01.ViewModels
             SaltCalculated = (double)(Food.Salt * WeightCalculated / 100);
         }
 
+        
+
         #region Properties 
 
-        private IDatabase FirestoreBase { get; 
+        public IDatabase FirestoreBase { get; 
             set; }
         public string MealType { get; 
             set; }
@@ -188,21 +217,21 @@ namespace FitnessApp01.ViewModels
             set 
             { 
                 SetProperty(ref _foodJson, value);
-                Food = ConvertJsonToFood(value);
-                InitializeAddMealPageViewModel();
+                //Food = ConvertJsonToFood(value);
+                //InitializeAddMealPageViewModel();
             }
         }
 
         public int CaloriesGoal { get; set; }
 
         private string _macrosString;
-        public string MacrosString
+        public string MacrosJson
         {
             get { return _macrosString; }
             set
             {
                 SetProperty(ref _macrosString, value);
-                Macros = JsonConvert.DeserializeObject<Dictionary<string, double>>(_macrosString);
+               // Macros = JsonConvert.DeserializeObject<Dictionary<string, double>>(_macrosString);
             }
         }
 
