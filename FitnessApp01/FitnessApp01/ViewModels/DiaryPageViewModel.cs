@@ -70,20 +70,19 @@ namespace FitnessApp01.ViewModels
         public async Task NextDay()
         {
             DiaryPageAttributes.NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
-            //await Refresh();
             await InitializeDiaryPageViewModel();
         }
 
         public async Task PreviousDay()
         {
             DiaryPageAttributes.NameOfTheDay = SelectedDay.Previous().ToString("D", Thread.CurrentThread.CurrentCulture);
-            //await Refresh();
             await InitializeDiaryPageViewModel();
         }
 
         private void OnMessageReceived()
         {
-            SetDiaryData();
+            var selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
+            SetDiaryData(selectedDay);
         }
 
         public async Task InitializeDiaryPageViewModel()
@@ -116,48 +115,49 @@ namespace FitnessApp01.ViewModels
 
         public async Task<bool> LoadAndSetDiaryData()
         {
+            Day selectedDay;
             try
             {
+                selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
                 //Před komunikací s DB kontrola, jestli se den už nenachází v kolekci
-                if (!Diary.Days.Any(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString()))
+                if (selectedDay == null)
                 {
                     //Pokud se den v db nenajde, vrátí se nový "prázdný" den s nastaveným UnixSeconds
-                    Day day = await FirestoreBase.ReadDiaryDataAsync();
-                    Diary.Days.Add(day);
+                    selectedDay = await FirestoreBase.ReadDiaryDataAsync();
+                    Diary.Days.Add(selectedDay);
                 }
+                return SetDiaryData(selectedDay);
             }
             catch (Exception e)
             {
                 await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
                 Console.WriteLine(e.Message);
-                Diary.Days = new ObservableCollection<Day>();
+                //Diary.Days = new ObservableCollection<Day>();
+                return false;
             }
-            return SetDiaryData();
         }
 
-        private bool SetDiaryData()
+        private bool SetDiaryData(Day selectedDay)
         {
-            var days = Diary.Days;
-            
-            Day day;
             try
             {
-                day = days.First(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
+                selectedDay.CaloriesGoal = RegistrationSettings.CaloriesGoal;
+                DiaryPageAttributes.CaloriesGoal = selectedDay.CaloriesGoal;
+                DiaryPageAttributes.CaloriesCurrent = selectedDay.CaloriesCurrent;
+                if (DiaryPageAttributes.CaloriesGoal != 0)
+                {
+                    DiaryPageAttributes.CaloriesProgress = (double)DiaryPageAttributes.CaloriesCurrent / (double)DiaryPageAttributes.CaloriesGoal;
+                }
+                MealGroups = selectedDay.MealGroups;
+                MessagingCenter.Send<object>(this, "diaryUpdated");
+                return true;
             }
-            catch (InvalidOperationException)
+            catch(Exception e)
             {
-                day = days.First();
+                DisplayAlert("Error", "Nepodařilo se nastavit diář. zpráva: " + e.Message, "ok");
+                return false;
             }
-            day.CaloriesGoal = RegistrationSettings.CaloriesGoal;
-            DiaryPageAttributes.CaloriesGoal = day.CaloriesGoal;
-            DiaryPageAttributes.CaloriesCurrent = day.CaloriesCurrent;
-            if (DiaryPageAttributes.CaloriesGoal != 0)
-            {
-                DiaryPageAttributes.CaloriesProgress = (double)DiaryPageAttributes.CaloriesCurrent / (double)DiaryPageAttributes.CaloriesGoal;
-            }
-            MealGroups = day.MealGroups;
-            MessagingCenter.Send<object>(this, "diaryUpdated");
-            return true;
+            
         }
 
         private async Task<bool> LoadRegistrationSettings()
@@ -206,7 +206,12 @@ namespace FitnessApp01.ViewModels
         public DiaryPageAttributes DiaryPageAttributes
         {
             get { return _diaryPageAttributes; }
-            set { SetProperty(ref _diaryPageAttributes, value);}
+            set 
+            {
+                //SetProperty(ref _diaryPageAttributes, value);
+                if (_diaryPageAttributes != value)
+                    _diaryPageAttributes = value;
+            }
         }
  
         private ObservableCollection<MealGroup> _mealGroups;
