@@ -10,6 +10,13 @@ namespace FitnessApp01.Models
         public Day()
         {
             UnixSeconds = SelectedDay.ToUnixSecondsString();
+            Macros = new Dictionary<string, double>
+            {
+                {"carbohydrates", 0 },
+                {"protein", 0 },
+                {"fat", 0 }
+            };
+            MealGroups = new ObservableCollection<MealGroup>();
             /*if (MealGroups.Count == 0)
             {
                 MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
@@ -40,15 +47,10 @@ namespace FitnessApp01.Models
         [MapTo("salt")]
         public double Salt { get; set; }
         [MapTo("macros")]
-        public IDictionary<string, double> Macros { get; set; } = new Dictionary<string, double>
-        {
-            {"carbohydrates", 0 },
-            {"protein", 0 },
-            {"fat", 0 }
-        };
+        public IDictionary<string, double> Macros { get; set; }
 
         [Ignored]
-        public ObservableCollection<MealGroup> MealGroups { get; set; } = new ObservableCollection<MealGroup>();
+        public ObservableCollection<MealGroup> MealGroups { get; set; }
 
         public Day Clone()
         {
