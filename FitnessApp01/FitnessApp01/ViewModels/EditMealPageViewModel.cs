@@ -22,7 +22,7 @@ namespace FitnessApp01.ViewModels
             DeleteMealCommand = new Command(
                 execute: async () => await DeleteMeal());
             //FirestoreBase = DependencyService.Get<IDatabase>();
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, string> query)
@@ -174,7 +174,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        private IDatabase FirestoreBase { get; set; }
+        //private IDatabase FirestoreBase { get; set; }
         public Food Food { get; set; }
 
         public Day CurrentDay { get; set; }

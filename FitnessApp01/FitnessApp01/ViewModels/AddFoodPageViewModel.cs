@@ -18,7 +18,7 @@ namespace FitnessApp01.ViewModels
                 canExecute: () => SaveCanExecute());
             //FirestoreBase = DependencyService.Get<IDatabase>();
             
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
             Attrs = new AddFoodPageAttributes();
             InitializeAddFoodPageViewModel();
         }
@@ -58,7 +58,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        private IDatabase FirestoreBase { get; set; }
+        //private IDatabase FirestoreBase { get; set; }
 
         //z nejakeho duvodu nefunguje
         private AddFoodPageAttributes _addFoodPageAttributes;

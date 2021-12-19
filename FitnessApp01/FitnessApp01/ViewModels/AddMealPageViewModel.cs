@@ -25,7 +25,7 @@ namespace FitnessApp01.ViewModels
                 execute: async () => await AddMeal(),
                 canExecute: () => AddCanExecute());
             //FirestoreBase = DependencyService.Get<IDatabase>();
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
             //InitializeAddMealPageViewModel();
         }
 
@@ -205,8 +205,8 @@ namespace FitnessApp01.ViewModels
 
         #region Properties 
 
-        public IDatabase FirestoreBase { get; 
-            set; }
+        //public IDatabase FirestoreBase { get; 
+        //    set; }
         public string MealType { get; 
             set; }
 

@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Models;
+﻿using FitnessApp01.Interfaces;
+using FitnessApp01.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -52,5 +53,6 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
+        protected IDatabase FirestoreBase { get; set; } = Services.FirestoreBase.Instance;
     }
 }

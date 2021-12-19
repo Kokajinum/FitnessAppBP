@@ -22,7 +22,7 @@ namespace FitnessApp01.ViewModels
             NextPageCommand = new Command(execute: async () => await NextPage());
             PreviousPageCommand = new Command(execute: () => PreviousPage());
             //FirestoreBase = DependencyService.Get<IDatabase>();
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         public void PreviousPage()
@@ -285,7 +285,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        public IDatabase FirestoreBase { get; set; }
+        //public IDatabase FirestoreBase { get; set; }
 
         private ObservableCollection<string> _carouselSource;
         public ObservableCollection<string> CarouselSource

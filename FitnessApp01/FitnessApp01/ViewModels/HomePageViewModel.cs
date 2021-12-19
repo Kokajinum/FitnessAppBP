@@ -14,7 +14,7 @@ namespace FitnessApp01.ViewModels
         {
             RefreshViewCommand = new Command(() => Refresh());
             //FirestoreBase = DependencyService.Get<IDatabase>();
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
             HomePageAttributes = new HomePageAttributes();
 
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
@@ -137,7 +137,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties 
 
-        public IDatabase FirestoreBase { get; set; }
+        //public IDatabase FirestoreBase { get; set; }
 
         private RegistrationSettings _registrationSettings;
         public RegistrationSettings RegistrationSettings

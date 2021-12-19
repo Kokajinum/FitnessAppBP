@@ -22,7 +22,7 @@ namespace FitnessApp01.ViewModels
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
             //FirestoreBase = DependencyService.Get<IDatabase>();
-            FirestoreBase = Services.FirestoreBase.Instance;
+            //FirestoreBase = Services.FirestoreBase.Instance;
             DiaryPageAttributes = new DiaryPageAttributes();
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
@@ -118,7 +118,6 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                //Diary.Days = await FirestoreBase.ReadDiaryDataAsync();
                 //Před komunikací s DB kontrola, jestli se den už nenachází v kolekci
                 if (!Diary.Days.Any(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString()))
                 {
@@ -126,7 +125,6 @@ namespace FitnessApp01.ViewModels
                     Day day = await FirestoreBase.ReadDiaryDataAsync();
                     Diary.Days.Add(day);
                 }
-                
             }
             catch (Exception e)
             {
@@ -140,6 +138,7 @@ namespace FitnessApp01.ViewModels
         private bool SetDiaryData()
         {
             var days = Diary.Days;
+            
             Day day;
             try
             {
@@ -201,7 +200,7 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        public IDatabase FirestoreBase { get; set; }
+        //public IDatabase FirestoreBase { get; set; }
 
         private DiaryPageAttributes _diaryPageAttributes;
         public DiaryPageAttributes DiaryPageAttributes
