@@ -52,23 +52,23 @@ namespace FitnessApp01.ViewModels
 
         private bool SaveCanExecute()
         {
-            IsVisible = !CanSave;
-            return CanSave;
+            IsVisible = !Attrs.CanSave;
+            return Attrs.CanSave;
         }
 
         #region Properties
 
         //private IDatabase FirestoreBase { get; set; }
 
-        //z nejakeho duvodu nefunguje
         private AddFoodPageAttributes _addFoodPageAttributes;
         public AddFoodPageAttributes Attrs
         {
             get { return _addFoodPageAttributes; }
             set 
-            { 
-                SetProperty(ref _addFoodPageAttributes, value); 
-                OnPropertyChanged("CanSave"); }
+            {
+                if (_addFoodPageAttributes != value)
+                    _addFoodPageAttributes = value;
+            }
         }
 
         /*
@@ -163,14 +163,14 @@ namespace FitnessApp01.ViewModels
         
         public string PickerCurrentUnit { get; set; }
 
-        public bool CanSave
+        /*public bool CanSave
         {
             get
             {
                 return CheckNameInput() && Attrs.KcalInput > 0 && Attrs.CarbsInput >= 0 &&
                      Attrs.SugarInput >= 0 && Attrs.ProteinInput >= 0 && Attrs.FatInput >= 0;
             }
-        }
+        }*/
 
         private bool _isVisible = true;
         public bool IsVisible
@@ -185,12 +185,12 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        private bool CheckNameInput()
+        /*private bool CheckNameInput()
         {
             return !string.IsNullOrEmpty(Attrs.NameInput)
                 && !Attrs.NameInput.Contains("#")
                 && !Attrs.NameInput.Contains("&");
-        }
+        }*/
 
         #endregion
 

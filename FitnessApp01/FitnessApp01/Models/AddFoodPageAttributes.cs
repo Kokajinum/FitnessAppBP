@@ -28,7 +28,11 @@ namespace FitnessApp01.Models
         public int? KcalInput
         {
             get { return _kcalInput; }
-            set { SetProperty(ref _kcalInput, value); OnPropertyChanged("CanSave"); }
+            set 
+            { 
+                SetProperty(ref _kcalInput, value); 
+                OnPropertyChanged("CanSave"); 
+            }
         }
 
         private double? _carbsInput;
@@ -85,6 +89,22 @@ namespace FitnessApp01.Models
         {
             get { return _portionSize; }
             set { SetProperty(ref _portionSize, value); }
+        }
+
+        public bool CanSave
+        {
+            get
+            {
+                return CheckNameInput() && KcalInput > 0 && CarbsInput > 0 &&
+                     SugarInput > 0 && ProteinInput > 0 && FatInput > 0;
+            }
+        }
+
+        private bool CheckNameInput()
+        {
+            return !string.IsNullOrEmpty(NameInput)
+                && !NameInput.Contains("#")
+                && !NameInput.Contains("&");
         }
     }
 }

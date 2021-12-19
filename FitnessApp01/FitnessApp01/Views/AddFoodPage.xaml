@@ -106,7 +106,7 @@
                         VerticalOptions="EndAndExpand"
                         Margin="50,0,50,0"
                         Command="{Binding SaveFoodCommand}"
-                        CommandParameter="{Binding CanSave}">
+                        CommandParameter="{Binding Attrs.CanSave}">
                 </Button>
             </StackLayout>
         </ScrollView>
