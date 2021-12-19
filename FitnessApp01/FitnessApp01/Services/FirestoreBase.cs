@@ -37,10 +37,23 @@ namespace FitnessApp01.Services
         {
             try
             {
-                var doc = await CrossCloudFirestore.Current.Instance
+                if (Diary.RegistrationSettings == null)
+                {
+                    var doc = await CrossCloudFirestore.Current.Instance
                     .Document("users/" + AuthBase.GetUserId())
                     .GetAsync();
-                return doc.Exists ? doc.ToObject<RegistrationSettings>() : new RegistrationSettings();
+                    if (doc.Exists)
+                    {
+                        var result = doc.ToObject<RegistrationSettings>();
+                        Diary.RegistrationSettings = result;
+                        return result;
+                    }
+                    return new RegistrationSettings();
+                }
+                else
+                {
+                    return Diary.RegistrationSettings;
+                }
             }
             catch (CloudFirestoreException e)
             {
