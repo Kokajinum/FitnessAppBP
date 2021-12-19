@@ -13,7 +13,7 @@ namespace FitnessApp01.Interfaces
         /// <summary>
         /// Přečte data diáře z databáze
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Vrátí data dne podle SelectedDay. Pokud den v databázi neexistuje, vrátí prázdný den.</returns>
         Task<Day> ReadDiaryDataAsync();
         Task CreateFoodDataAsync(Food food);
         Task CreateDayAsync(Day day);
