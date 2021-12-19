@@ -1,16 +1,26 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace FitnessApp01.Models
 {
     public static class Diary
     {
-        //public static List<Day> Days { get; set; }
         public static ObservableCollection<Day> Days { get; set; } = new ObservableCollection<Day>();
 
-        /*public Day GetSelectedDay()
-        {
+        public static RegistrationSettings RegistrationSettings { get; set; }
 
-        }*/
+        public static Day GetSelectedDay()
+        {
+            try
+            {
+
+            } 
+            catch(Exception ex)
+            {
+
+            }
+            return new Day();
+        }
 
         //[MapTo("UnixSeconds")]
         //public Timestamp Timestamp { get; set; }
