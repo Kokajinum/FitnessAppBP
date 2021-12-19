@@ -9,7 +9,7 @@ namespace FitnessApp01.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,6 +39,11 @@ namespace FitnessApp01.ViewModels
         protected virtual async Task DisplayAlertAsync(string title, string message, string cancel)
         {
             await App.Current.MainPage.DisplayAlert(title, message, cancel);
+        }
+
+        protected virtual void DisplayAlert(string title, string message, string cancel)
+        {
+            App.Current.MainPage.DisplayAlert(title, message, cancel);
         }
 
         protected virtual async Task GoToPageAsync(string shellPagePath)
