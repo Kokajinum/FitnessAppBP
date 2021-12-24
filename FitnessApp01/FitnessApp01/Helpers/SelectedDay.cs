@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace FitnessApp01.Models
+namespace FitnessApp01.Helpers
 {
     public static class SelectedDay
     {
-        public static DateTime Day { get; set; } = DateTime.UtcNow.Date; //je potřeba UTC!
+        private static DateTime Day { get; set; } = DateTime.UtcNow.Date; //je potřeba UTC!
 
         /// <summary>
         /// Vrátí aktuální den

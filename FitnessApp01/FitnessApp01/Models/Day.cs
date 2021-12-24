@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Resx;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Resx;
 using Plugin.CloudFirestore.Attributes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +26,8 @@ namespace FitnessApp01.Models
                 MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, new List<Meal>()));
             }*/
         }
+
+
 
         [MapTo("unixSeconds")]
         public string UnixSeconds { get; set; }

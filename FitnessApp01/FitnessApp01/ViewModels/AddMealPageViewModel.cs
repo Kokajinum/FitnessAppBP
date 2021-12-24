@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using Newtonsoft.Json;
@@ -83,13 +84,12 @@ namespace FitnessApp01.ViewModels
                 if (string.IsNullOrEmpty(MealType))
                     throw new Exception("MealType is null");
 
-                //day == null pokud z nejakeho duvodu neexistuje
+                //day == null pokud z nejakeho duvodu neexistuje, ale mělo by vždy již existovat
                 var day = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
                 if (day != null)
                 {
                     oldDay = day.Clone();
                     mealGroup = day.MealGroups.FirstOrDefault(x => x.Name == MealType);
-                    
                 }
                 else
                 {

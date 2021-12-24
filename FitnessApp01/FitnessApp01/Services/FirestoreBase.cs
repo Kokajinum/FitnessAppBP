@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using Plugin.CloudFirestore;
@@ -132,7 +133,7 @@ namespace FitnessApp01.Services
             }
         }
 
-        private static Day CreateEmptyDay()
+        private Day CreateEmptyDay()
         {
             var day = new Day();
             day.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, new List<Meal>()));
