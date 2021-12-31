@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Services;
+﻿using FitnessApp01.Resx;
+using FitnessApp01.Services;
 using System;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -15,12 +16,10 @@ namespace FitnessApp01.ViewModels
             LoginLabelTapCommand = new Command(() => LoginLabelTap());
 
             LoginCommand = new Command(
-                execute : async () => await Login(),
-                canExecute: () => LoginCanExecute());
+                execute : async () => await Login());
 
             RegisterCommand = new Command(
-                execute: async () => await Register(),
-                canExecute: () => RegisterCanExecute());
+                execute: async () => await Register());
 
             SettingsStartCommand = new Command(async () => await SettingsStart());
         }
@@ -30,13 +29,27 @@ namespace FitnessApp01.ViewModels
             await Shell.Current.GoToAsync("//RegistrationSettingsPage");
         }
 
-        private bool RegisterCanExecute()
-        {
-            return CanRegister;
-        }
+        //private bool RegisterCanExecute()
+        //{
+        //    if (CanRegister)
+        //    {
+        //        RegisterButtonOpacity = 1;
+        //    }
+        //    else
+        //    {
+        //        RegisterButtonOpacity = 0.4;
+        //    }
+
+        //    return CanRegister;
+        //}
 
         public async Task Register()
         {
+            if (!CanRegister)
+            {
+                await DisplayAlertAsync(AppResources.Error, AppResources.LoginPage_NoEmailOrPassword, "Ok");
+                return;
+            }
             if ((UserConfirmPassword != UserPassword) || !ValidateEmail())
             {
                 await DisplayAlertAsync("Error", "Hesla se neshodují", "ok");
@@ -63,13 +76,27 @@ namespace FitnessApp01.ViewModels
 
         }
 
-        private bool LoginCanExecute()
-        {
-            return CanLogin;
-        }
+        //private bool LoginCanExecute()
+        //{
+        //    if (CanLogin)
+        //    {
+        //        LoginButtonOpacity = 1;
+        //    }
+        //    else
+        //    {
+        //        LoginButtonOpacity = 0.4;
+        //    }
+                
+        //    return CanLogin;
+        //}
 
         public async Task Login()
         {
+            if (!CanLogin)
+            {
+                await DisplayAlertAsync(AppResources.Error, AppResources.LoginPage_NoEmailOrPassword, "Ok");
+                return;
+            }
             bool result = await AuthBase.LoginUserAsync(UserEmail, UserPassword);
             if (result)
             {
@@ -107,6 +134,30 @@ namespace FitnessApp01.ViewModels
             return true;
         }
 
+        private void CanLoginChanged()
+        {
+            if (CanLogin)
+            {
+                LoginButtonOpacity = 1;
+            }
+            else
+            {
+                LoginButtonOpacity = 0.4;
+            }
+        }
+
+        private void CanRegisterChanged()
+        {
+            if (CanRegister)
+            {
+                RegisterButtonOpacity = 1;
+            }
+            else
+            {
+                RegisterButtonOpacity = 0.4;
+            }
+        }
+
         #endregion
 
         #region Properties
@@ -126,38 +177,54 @@ namespace FitnessApp01.ViewModels
         }
 
         private string _userEmail = string.Empty;
-        private string UserEmail
+        public string UserEmail
         {
             get { return _userEmail; }
             set
             {
                 SetProperty(ref _userEmail, value);
-                OnPropertyChanged("CanLogin");
-                OnPropertyChanged("CanRegister");
+                CanLoginChanged();
+                CanRegisterChanged();
             }
         }
 
         private string _userPassword = string.Empty;
-        private string UserPassword
+        public string UserPassword
         {
             get { return _userPassword; }
             set
             {
                 SetProperty(ref _userPassword, value);
-                OnPropertyChanged("CanLogin");
-                OnPropertyChanged("CanRegister");
+                CanLoginChanged();
+                CanRegisterChanged();
             }
         }
 
+        
+
         private string _userConfirmPassword = string.Empty;
-        private string UserConfirmPassword
+        public string UserConfirmPassword
         {
             get { return _userConfirmPassword; }
             set
             {
                 SetProperty(ref _userConfirmPassword, value);
-                OnPropertyChanged("CanRegister");
+                CanRegisterChanged();
             }
+        }
+
+        private double _loginButtonOpacity = 0.2;
+        public double LoginButtonOpacity
+        {
+            get { return _loginButtonOpacity; }
+            set { SetProperty(ref _loginButtonOpacity, value); }
+        }
+
+        private double _registerButtonOpacity = 0.2;
+        public double RegisterButtonOpacity
+        {
+            get { return _registerButtonOpacity; }
+            set { SetProperty(ref _registerButtonOpacity, value); }
         }
 
         public bool CanLogin
