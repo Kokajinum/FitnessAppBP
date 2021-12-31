@@ -1,7 +1,0 @@
-FitnessApp todolist
-
-* dodělat emailValidator
-* validace u cilove hmotnosti
-* při přidávání potraviny do db zkontrolovat duplikát
-DONE* znovu dokoncit registraci pokud uzivatel nedokonci zakladni nastaveni (v DB by chybely data)
-* dodelat splash screen
