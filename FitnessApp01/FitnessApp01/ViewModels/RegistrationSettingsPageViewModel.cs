@@ -112,7 +112,7 @@ namespace FitnessApp01.ViewModels
         #region Helpers
 
         /// <summary>
-        /// Získá RegistrationSettings a uloží do databáze
+        /// Vygeneruje RegistrationSettings a uloží do databáze
         /// </summary>
         /// <returns></returns>
         private async Task<bool> SetRegSettingsAndDB()
@@ -169,16 +169,17 @@ namespace FitnessApp01.ViewModels
 
         private int CalculateCaloriesGoal()
         {
-            //The Mifflin St Jeor equation
+            //The Mifflin St Jeor equation RMR
             int s = GenderDB == "male" ? 5 : -161;
             double res = ((10 * WeightDB)
                          + (6.25 * HeightDB)
-                         - (5 * AgeDB) + s) * ActivityDB;
+                         - (5 * AgeDB) + s) * ActivityDB;   
             switch (GoalDB)
             {
                 //lose weight
                 case 1:
-                    res -= 300;
+                    //res -= 300;
+                    res *= 0.85;
                     break;
                 //gain weight
                 case 2:
@@ -187,8 +188,6 @@ namespace FitnessApp01.ViewModels
                 //maintain weight
                 default:
                     break;
-                    
-
             }
             return (int)res;
         }
