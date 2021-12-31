@@ -6,9 +6,8 @@
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
-    
+
     <ContentPage.BindingContext>
-        <!--nastavení viewmodelu-->
         <local:HomePageViewModel/>
     </ContentPage.BindingContext>
     
@@ -45,7 +44,8 @@
                         </Label>
                     </StackLayout>
                     <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                       Margin="0,0,0,-30">
+                                       Margin="0,0,0,-30"
+                                       Scale="2">
                     </ActivityIndicator>
                     <ProgressBar WidthRequest="250" 
                                  Progress="{Binding HomePageAttributes.CaloriesProgress}">

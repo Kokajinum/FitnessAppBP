@@ -9,7 +9,6 @@
              Shell.NavBarIsVisible="False">
 
     <ContentPage.BindingContext>
-        <!--nastavení viewmodelu-->
         <local:DiaryPageViewModel/>
     </ContentPage.BindingContext>
 

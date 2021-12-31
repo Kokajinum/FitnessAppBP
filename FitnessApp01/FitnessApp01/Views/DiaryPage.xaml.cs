@@ -10,6 +10,8 @@ namespace FitnessApp01.Views
         public DiaryPage()
         {
             InitializeComponent();
+            var vm = BindingContext as ViewModels.DiaryPageViewModel;
+            vm.InitializeViewModel.Execute(null);
         }
     }
 }

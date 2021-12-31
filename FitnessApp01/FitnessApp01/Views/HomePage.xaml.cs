@@ -10,6 +10,9 @@ namespace FitnessApp01.Views
         public HomePage()
         {
             InitializeComponent();
+            //var vm = new ViewModels.HomePageViewModel();
+            var vm = BindingContext as ViewModels.HomePageViewModel;
+            vm.InitializeViewModel.Execute(null);
         }
     }
 }

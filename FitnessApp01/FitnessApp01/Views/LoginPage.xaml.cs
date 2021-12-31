@@ -16,6 +16,7 @@ namespace FitnessApp01.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            //await AuthBase.SignOut();
             if (AuthBase.IsAuthenticated())
             {
                 await Shell.Current.GoToAsync("//main-content");
