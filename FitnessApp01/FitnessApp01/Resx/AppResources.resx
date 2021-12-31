@@ -138,9 +138,6 @@
   <data name="EditMeal" xml:space="preserve">
     <value>Úprava záznamu</value>
   </data>
-  <data name="EmailPlaceHolder" xml:space="preserve">
-    <value>Email</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>Chyba</value>
   </data>
@@ -156,8 +153,35 @@
   <data name="Height" xml:space="preserve">
     <value>Výška</value>
   </data>
-  <data name="LoginButton" xml:space="preserve">
+  <data name="LoginPage_AlreadyHaveAccount" xml:space="preserve">
+    <value>Již máte účet?</value>
+  </data>
+  <data name="LoginPage_EmailPlaceHolder" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LoginPage_Login" xml:space="preserve">
     <value>Přihlásit se</value>
+  </data>
+  <data name="LoginPage_LoginButton" xml:space="preserve">
+    <value>Přihlásit se</value>
+  </data>
+  <data name="LoginPage_NoAccount" xml:space="preserve">
+    <value>Nemáte účet?</value>
+  </data>
+  <data name="LoginPage_NoEmailOrPassword" xml:space="preserve">
+    <value>Musíte vyplnit emailovou adresu a heslo.</value>
+  </data>
+  <data name="LoginPage_PasswordConfirmPlaceholder" xml:space="preserve">
+    <value>Heslo znovu</value>
+  </data>
+  <data name="LoginPage_PasswordPlaceholder" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="LoginPage_Register" xml:space="preserve">
+    <value>Registrovat</value>
+  </data>
+  <data name="LoginPage_RegisterButton" xml:space="preserve">
+    <value>Registrovat se</value>
   </data>
   <data name="Lunch" xml:space="preserve">
     <value>Oběd</value>
@@ -168,17 +192,8 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
-  <data name="PasswordConfirmPlaceholder" xml:space="preserve">
-    <value>Heslo znovu</value>
-  </data>
-  <data name="PasswordPlaceholder" xml:space="preserve">
-    <value>Heslo</value>
-  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
-  </data>
-  <data name="RegisterButton" xml:space="preserve">
-    <value>Registrovat se</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
