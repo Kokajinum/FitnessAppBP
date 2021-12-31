@@ -22,6 +22,8 @@ namespace FitnessApp01.ViewModels
             PreviousDayCommand = new Command(execute: async () => await PreviousDay());
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
+            InitializeViewModel = new Command(execute: async () => await InitializeDiaryPageViewModel());
+
             //FirestoreBase = DependencyService.Get<IDatabase>();
             //FirestoreBase = Services.FirestoreBase.Instance;
             DiaryPageAttributes = new DiaryPageAttributes();
@@ -33,7 +35,7 @@ namespace FitnessApp01.ViewModels
             {
                 OnMessageReceived();
             });
-            InitializeDiaryPageViewModel().ContinueWith(OnInitializeComplete);
+            //InitializeDiaryPageViewModel().ContinueWith(OnInitializeComplete);
 
 
             
@@ -241,6 +243,7 @@ namespace FitnessApp01.ViewModels
         public ICommand RefreshViewCommand { get; set; }
         public ICommand AddMealCommand { get; set; }
         public ICommand ItemTapCommand { get; set; }
+        public ICommand InitializeViewModel { get; set; }
 
         #endregion
     }

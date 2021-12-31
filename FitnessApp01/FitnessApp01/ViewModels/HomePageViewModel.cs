@@ -14,15 +14,17 @@ namespace FitnessApp01.ViewModels
         public HomePageViewModel()
         {
             RefreshViewCommand = new Command(() => Refresh());
-            //FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
+            //test
+            InitializeViewModel = new Command(async () => await InitializeHomePageViewModel());
+            //
             HomePageAttributes = new HomePageAttributes();
+            
 
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {
                 OnMessageReceived();
             });
-            InitializeHomePageViewModel().ConfigureAwait(true);
+            //InitializeHomePageViewModel().ConfigureAwait(true);
 
         }
 
@@ -159,6 +161,8 @@ namespace FitnessApp01.ViewModels
         #region Commands
 
         public ICommand RefreshViewCommand { get; set; }
+
+        public ICommand InitializeViewModel { get; set; }
 
         #endregion
     }
