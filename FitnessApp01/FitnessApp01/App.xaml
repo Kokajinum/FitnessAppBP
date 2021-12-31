@@ -6,10 +6,25 @@
         Define global resources and styles here, that apply to all pages in your app.
     -->
     <Application.Resources>
-        <Color x:Key="accentColor">#ea526f</Color>
+        <!--<Color x:Key="accentColor">#f46036</Color>-->
+        <Color x:Key="primaryColor">#00171F</Color>
+        <Color x:Key="secondaryColor">#f46036</Color>
 
-        <Style x:Key="accentLabel" TargetType="Label">
+        <!--<Style x:Key="accentLabel" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource accentColor}"></Setter>
+        </Style>-->
+
+        <Style 
+            x:Key="secondaryLabel"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource secondaryColor}"></Setter>
+        </Style>
+
+        <Style
+            x:Key="primaryButton"
+            TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource primaryColor}"></Setter>
+            <Setter Property="CornerRadius" Value="25"></Setter>
         </Style>
 
         <Style x:Key="postRegistrationHeaders" TargetType="Label">
