@@ -14,18 +14,13 @@ namespace FitnessApp01.ViewModels
         public HomePageViewModel()
         {
             RefreshViewCommand = new Command(() => Refresh());
-            //test
             InitializeViewModel = new Command(async () => await InitializeHomePageViewModel());
-            //
-            HomePageAttributes = new HomePageAttributes();
-            
 
+            HomePageAttributes = new HomePageAttributes();
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {
                 OnMessageReceived();
             });
-            //InitializeHomePageViewModel().ConfigureAwait(true);
-
         }
 
         private void Refresh()
@@ -139,8 +134,6 @@ namespace FitnessApp01.ViewModels
         #endregion
 
         #region Properties 
-
-        //public IDatabase FirestoreBase { get; set; }
 
         private RegistrationSettings _registrationSettings;
         public RegistrationSettings RegistrationSettings

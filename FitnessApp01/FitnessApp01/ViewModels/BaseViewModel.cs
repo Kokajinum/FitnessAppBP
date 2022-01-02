@@ -1,5 +1,6 @@
 ﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -44,6 +45,16 @@ namespace FitnessApp01.ViewModels
         protected virtual void DisplayAlert(string title, string message, string cancel)
         {
             App.Current.MainPage.DisplayAlert(title, message, cancel);
+        }
+
+        /// <summary>
+        /// Klasický DisplayAlert s předvyplněným title a cancel
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        protected virtual async Task DisplayErrorAsync(string message)
+        {
+            await App.Current.MainPage.DisplayAlert(AppResources.Error, message, "Ok");
         }
 
         protected virtual async Task GoToPageAsync(string shellPagePath)

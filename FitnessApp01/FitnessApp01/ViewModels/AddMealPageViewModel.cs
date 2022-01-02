@@ -23,8 +23,7 @@ namespace FitnessApp01.ViewModels
         public AddMealPageViewModel()
         {
             AddMealCommand = new Command(
-                execute: async () => await AddMeal(),
-                canExecute: () => AddCanExecute());
+                execute: async () => await AddMeal());
             //FirestoreBase = DependencyService.Get<IDatabase>();
             //FirestoreBase = Services.FirestoreBase.Instance;
             //InitializeAddMealPageViewModel();
@@ -64,13 +63,13 @@ namespace FitnessApp01.ViewModels
 
         }
 
-        private bool AddCanExecute()
-        {
-            return CanAdd;
-        }
-
         public async Task AddMeal()
         {
+            if (!CanAdd)
+            {
+                await DisplayErrorAsync(AppResources.CanNotSave);
+                return;
+            }
             IsBusy = true;
             MealGroup mealGroup;
             Day oldDay;
@@ -332,7 +331,7 @@ namespace FitnessApp01.ViewModels
                     CalculateNutrients();
                     IsVisible = true;
                 }
-                OnPropertyChanged("CanAdd");
+                CanAddChanged();
 
             }
         }
@@ -362,7 +361,26 @@ namespace FitnessApp01.ViewModels
         {
             get
             {
-                return UserInput != null;
+                return UserInput != null && UserInput != 0;
+            }
+        }
+
+        private double _addButtonOpacity = 0.2;
+        public double AddButtonOpacity
+        {
+            get { return _addButtonOpacity; }
+            set => SetProperty(ref _addButtonOpacity, value);
+        }
+
+        private void CanAddChanged()
+        {
+            if (CanAdd)
+            {
+                AddButtonOpacity = 1;
+            }
+            else
+            {
+                AddButtonOpacity = 0.2;
             }
         }
 

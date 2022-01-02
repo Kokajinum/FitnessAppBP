@@ -1,5 +1,6 @@
 ﻿using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using FitnessApp01.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -14,8 +15,7 @@ namespace FitnessApp01.ViewModels
         public AddFoodPageViewModel()
         {
             SaveFoodCommand = new Command(
-                execute: async () => await SaveFood(),
-                canExecute: () => SaveCanExecute());
+                execute: async () => await SaveFood());
             //FirestoreBase = DependencyService.Get<IDatabase>();
             
             //FirestoreBase = Services.FirestoreBase.Instance;
@@ -35,6 +35,11 @@ namespace FitnessApp01.ViewModels
 
         public async Task SaveFood()
         {
+            if (!Attrs.CanSave)
+            {
+                await DisplayErrorAsync(AppResources.CanNotSave);
+                return;
+            }
             try
             {
                 var newFood = new Food(Attrs.NameInput, (int)Attrs.KcalInput, (double)Attrs.CarbsInput, (double)Attrs.SugarInput, (double)Attrs.ProteinInput, (double)Attrs.FatInput,
@@ -50,15 +55,13 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        private bool SaveCanExecute()
-        {
-            IsVisible = !Attrs.CanSave;
-            return Attrs.CanSave;
-        }
+        //private bool SaveCanExecute()
+        //{
+        //    IsVisible = !Attrs.CanSave;
+        //    return Attrs.CanSave;
+        //}
 
         #region Properties
-
-        //private IDatabase FirestoreBase { get; set; }
 
         private AddFoodPageAttributes _addFoodPageAttributes;
         public AddFoodPageAttributes Attrs
@@ -71,89 +74,6 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        /*
-        private string _nameInput;
-        public string NameInput
-        {
-            get { return _nameInput; }
-            set 
-            { 
-                SetProperty(ref _nameInput, value);
-                OnPropertyChanged("CanSave");
-            }
-        }
-
-        private string _brandInput;
-        public string BrandInput
-        {
-            get { return _brandInput; }
-            set { SetProperty(ref _brandInput, value); }
-        }
-
-        private int? _kcalInput;
-        public int? KcalInput
-        {
-            get { return _kcalInput; }
-            set { SetProperty(ref _kcalInput, value); OnPropertyChanged("CanSave"); }
-        }
-
-        private double? _carbsInput;
-        public double? CarbsInput
-        {
-            get { return _carbsInput; }
-            set { SetProperty(ref _carbsInput, value); OnPropertyChanged("CanSave"); }
-        }
-
-        private double? _sugarInput;
-        public double? SugarInput
-        {
-            get { return _sugarInput; }
-            set { SetProperty(ref _sugarInput, value); OnPropertyChanged("CanSave"); }
-        }
-
-        private double? _proteinInput;
-        public double? ProteinInput
-        {
-            get { return _proteinInput; }
-            set { SetProperty(ref _proteinInput, value); OnPropertyChanged("CanSave"); }
-        }
-
-        private double? _fatInput;
-        public double? FatInput
-        {
-            get { return _fatInput; }
-            set { SetProperty(ref _fatInput, value); OnPropertyChanged("CanSave"); }
-        }
-
-        private double? _saturatedInput;
-        public double? SaturatedInput
-        {
-            get { return _saturatedInput; }
-            set { SetProperty(ref _saturatedInput, value); }
-        }
-
-        private double? _fiberInput;
-        public double? FiberInput
-        {
-            get { return _fiberInput; }
-            set { SetProperty(ref _fiberInput, value); }
-        }
-
-        private double? _saltInput;
-        public double? SaltInput
-        {
-            get { return _saltInput; }
-            set { SetProperty(ref _saltInput, value); }
-        }
-
-        private double? _portionSize;
-        public double? PortionSize
-        {
-            get { return _portionSize; }
-            set { SetProperty(ref _portionSize, value); }
-        }
-        */
-
         private ObservableCollection<string> _pickerUnits;
         public ObservableCollection<string> PickerUnits
         {
@@ -163,14 +83,33 @@ namespace FitnessApp01.ViewModels
         
         public string PickerCurrentUnit { get; set; }
 
-        /*public bool CanSave
-        {
-            get
-            {
-                return CheckNameInput() && Attrs.KcalInput > 0 && Attrs.CarbsInput >= 0 &&
-                     Attrs.SugarInput >= 0 && Attrs.ProteinInput >= 0 && Attrs.FatInput >= 0;
-            }
-        }*/
+        //public bool CanSave
+        //{
+        //    get
+        //    {
+        //        return CheckNameInput() && Attrs.KcalInput > 0 && Attrs.CarbsInput >= 0 &&
+        //             Attrs.SugarInput >= 0 && Attrs.ProteinInput >= 0 && Attrs.FatInput >= 0;
+        //    }
+        //}
+        
+        //private bool CheckNameInput()
+        //{
+        //    return !string.IsNullOrEmpty(Attrs.NameInput)
+        //        && !Attrs.NameInput.Contains("#")
+        //        && !Attrs.NameInput.Contains("&");
+        //}
+
+        //private void CanSaveChanged()
+        //{
+        //    if (CanSave)
+        //    {
+        //        SaveButtonOpacity = 1;
+        //    }
+        //    else
+        //    {
+        //        SaveButtonOpacity = 0.4;
+        //    }
+        //}
 
         private bool _isVisible = true;
         public bool IsVisible
@@ -185,12 +124,12 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        /*private bool CheckNameInput()
-        {
-            return !string.IsNullOrEmpty(Attrs.NameInput)
-                && !Attrs.NameInput.Contains("#")
-                && !Attrs.NameInput.Contains("&");
-        }*/
+        //private double _saveButtonOpacity = 0.2;
+        //public double SaveButtonOpacity
+        //{
+        //    get { return _saveButtonOpacity; }
+        //    set => SetProperty(ref _saveButtonOpacity, value);
+        //}
 
         #endregion
 

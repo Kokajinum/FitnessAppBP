@@ -29,20 +29,6 @@ namespace FitnessApp01.ViewModels
             await Shell.Current.GoToAsync("//RegistrationSettingsPage");
         }
 
-        //private bool RegisterCanExecute()
-        //{
-        //    if (CanRegister)
-        //    {
-        //        RegisterButtonOpacity = 1;
-        //    }
-        //    else
-        //    {
-        //        RegisterButtonOpacity = 0.4;
-        //    }
-
-        //    return CanRegister;
-        //}
-
         public async Task Register()
         {
             if (!CanRegister)
@@ -52,7 +38,7 @@ namespace FitnessApp01.ViewModels
             }
             if ((UserConfirmPassword != UserPassword) || !ValidateEmail())
             {
-                await DisplayAlertAsync("Error", "Hesla se neshodují", "ok");
+                await DisplayAlertAsync(AppResources.Error, AppResources.PasswordConfirmError, "Ok");
                 return;
             }
             try
@@ -61,34 +47,22 @@ namespace FitnessApp01.ViewModels
             }
             catch (FormatException)
             {
-                await DisplayAlertAsync("Error", "Neplatná emailová adresa", "ok");
+                await DisplayAlertAsync(AppResources.Error, AppResources.InvalidEmail, "Ok");
                 return;
             }
-            
-            bool result = await AuthBase.RegisterUserAsync(UserEmail, UserPassword);
-            if (result) //registrovaný uživatel je zároveň přihlášený
+            try
             {
+                //registrovaný uživatel je zároveň přihlášený
+                await AuthBase.RegisterUserAsync(UserEmail, UserPassword);
                 LoginLabelTap();
                 await GoToPageAsync("//WelcomePage");
-                //await Shell.Current.GoToAsync("//WelcomePage");
                 ResetFields();
             }
-
+            catch(Exception ex)
+            {
+                await DisplayAlertAsync(AppResources.Error, ex.Message, "Ok");
+            }
         }
-
-        //private bool LoginCanExecute()
-        //{
-        //    if (CanLogin)
-        //    {
-        //        LoginButtonOpacity = 1;
-        //    }
-        //    else
-        //    {
-        //        LoginButtonOpacity = 0.4;
-        //    }
-                
-        //    return CanLogin;
-        //}
 
         public async Task Login()
         {
@@ -97,11 +71,24 @@ namespace FitnessApp01.ViewModels
                 await DisplayAlertAsync(AppResources.Error, AppResources.LoginPage_NoEmailOrPassword, "Ok");
                 return;
             }
-            bool result = await AuthBase.LoginUserAsync(UserEmail, UserPassword);
-            if (result)
+            try
             {
+                new MailAddress(UserEmail);
+            }
+            catch (FormatException)
+            {
+                await DisplayAlertAsync(AppResources.Error, AppResources.InvalidEmail, "Ok");
+                return;
+            }
+            try
+            {
+                await AuthBase.LoginUserAsync(UserEmail, UserPassword);
                 await GoToPageAsync("//main-content");
                 ResetFields();
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlertAsync(AppResources.Error, ex.Message, "Ok");
             }
         }
 
@@ -142,7 +129,7 @@ namespace FitnessApp01.ViewModels
             }
             else
             {
-                LoginButtonOpacity = 0.4;
+                LoginButtonOpacity = 0.2;
             }
         }
 
@@ -154,7 +141,7 @@ namespace FitnessApp01.ViewModels
             }
             else
             {
-                RegisterButtonOpacity = 0.4;
+                RegisterButtonOpacity = 0.2;
             }
         }
 

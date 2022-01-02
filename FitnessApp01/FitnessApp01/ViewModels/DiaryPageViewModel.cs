@@ -1,6 +1,7 @@
 ﻿using FitnessApp01.Helpers;
 using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FitnessApp01.ViewModels
@@ -17,15 +19,12 @@ namespace FitnessApp01.ViewModels
     {
         public DiaryPageViewModel()
         {
-            //RefreshViewCommand = new Command(execute: async () => await Refresh());
             NextDayCommand = new Command(execute: async () => await NextDay());
             PreviousDayCommand = new Command(execute: async () => await PreviousDay());
             AddMealCommand = new Command<MealGroup>(execute: async (mealgroup) => await AddMeal(mealgroup));
             ItemTapCommand = new Command<Meal>(execute: async (meal) => await ItemTap(meal));
             InitializeViewModel = new Command(execute: async () => await InitializeDiaryPageViewModel());
 
-            //FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
             DiaryPageAttributes = new DiaryPageAttributes();
             MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
             {
@@ -35,11 +34,6 @@ namespace FitnessApp01.ViewModels
             {
                 OnMessageReceived();
             });
-            //InitializeDiaryPageViewModel().ContinueWith(OnInitializeComplete);
-
-
-            
-
         }
 
         private async Task ItemTap(Meal meal)
@@ -60,16 +54,6 @@ namespace FitnessApp01.ViewModels
         {
         }
 
-        /*
-        private async Task Refresh()
-        {
-            DiaryPageAttributes.IsRefreshing = false;
-            IsBusy = true;
-            await LoadAndSetDiaryData();
-            IsBusy = false;
-        }
-        */
-
         public async Task NextDay()
         {
             DiaryPageAttributes.NameOfTheDay = SelectedDay.Next().ToString("D", Thread.CurrentThread.CurrentCulture);
@@ -88,8 +72,27 @@ namespace FitnessApp01.ViewModels
             SetDiaryData(selectedDay);
         }
 
+        private async void ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                await DisplayAlertAsync(AppResources.Change, AppResources.InternetAvailable, "Ok");
+                Connectivity.ConnectivityChanged -= ConnectivityChanged;
+            }
+            else
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+            }
+        }
+
         public async Task InitializeDiaryPageViewModel()
         {
+            //test na dostupnost internetu
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                Connectivity.ConnectivityChanged += ConnectivityChanged;
+                await DisplayErrorAsync(AppResources.InternetRequired);
+            }
             IsBusy = true;
             bool isValid;
             //nestabilni chovani po vyplneni nedokoncene registrace
@@ -196,6 +199,7 @@ namespace FitnessApp01.ViewModels
             bool v11 = RegistrationSettings.WeightMeasureDB != string.Empty;
 
             return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11;
+            
         }
 
         #endregion
@@ -203,15 +207,12 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        //public IDatabase FirestoreBase { get; set; }
-
         private DiaryPageAttributes _diaryPageAttributes;
         public DiaryPageAttributes DiaryPageAttributes
         {
             get { return _diaryPageAttributes; }
             set 
             {
-                //SetProperty(ref _diaryPageAttributes, value);
                 if (_diaryPageAttributes != value)
                     _diaryPageAttributes = value;
             }
