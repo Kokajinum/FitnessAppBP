@@ -13,7 +13,7 @@ namespace FitnessApp01.Models
             set
             {
                 SetProperty(ref _nameInput, value);
-                OnPropertyChanged("CanSave");
+                CanSaveChanged();
             }
         }
 
@@ -30,8 +30,8 @@ namespace FitnessApp01.Models
             get { return _kcalInput; }
             set 
             { 
-                SetProperty(ref _kcalInput, value); 
-                OnPropertyChanged("CanSave"); 
+                SetProperty(ref _kcalInput, value);
+                CanSaveChanged(); 
             }
         }
 
@@ -39,28 +39,28 @@ namespace FitnessApp01.Models
         public double? CarbsInput
         {
             get { return _carbsInput; }
-            set { SetProperty(ref _carbsInput, value); OnPropertyChanged("CanSave"); }
+            set { SetProperty(ref _carbsInput, value); CanSaveChanged(); }
         }
 
         private double? _sugarInput;
         public double? SugarInput
         {
             get { return _sugarInput; }
-            set { SetProperty(ref _sugarInput, value); OnPropertyChanged("CanSave"); }
+            set { SetProperty(ref _sugarInput, value); CanSaveChanged(); }
         }
 
         private double? _proteinInput;
         public double? ProteinInput
         {
             get { return _proteinInput; }
-            set { SetProperty(ref _proteinInput, value); OnPropertyChanged("CanSave"); }
+            set { SetProperty(ref _proteinInput, value); CanSaveChanged(); }
         }
 
         private double? _fatInput;
         public double? FatInput
         {
             get { return _fatInput; }
-            set { SetProperty(ref _fatInput, value); OnPropertyChanged("CanSave"); }
+            set { SetProperty(ref _fatInput, value); CanSaveChanged(); }
         }
 
         private double? _saturatedInput;
@@ -105,6 +105,25 @@ namespace FitnessApp01.Models
             return !string.IsNullOrEmpty(NameInput)
                 && !NameInput.Contains("#")
                 && !NameInput.Contains("&");
+        }
+
+        private double _saveButtonOpacity = 0.2;
+        public double SaveButtonOpacity
+        {
+            get { return _saveButtonOpacity; }
+            set => SetProperty(ref _saveButtonOpacity, value);
+        }
+
+        private void CanSaveChanged()
+        {
+            if (CanSave)
+            {
+                SaveButtonOpacity = 1;
+            }
+            else
+            {
+                SaveButtonOpacity = 0.2;
+            }
         }
     }
 }
