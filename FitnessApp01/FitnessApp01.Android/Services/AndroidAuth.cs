@@ -21,6 +21,44 @@ namespace FitnessApp01.Droid.Services
     public class AndroidAuth : IAuth
     {
         private readonly FirebaseAuth mAuth = FirebaseAuth.Instance;
+        
+        private async Task ReAuthenticate(AuthCredential credential)
+        {
+            try
+            {
+                await mAuth.CurrentUser.ReauthenticateAsync(credential);
+            }
+            catch (FirebaseAuthInvalidCredentialsException ex)
+            {
+                throw new Exception(AppResources.BadCredentials, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(AppResources.Reauthenticate_UnexpectedError, ex);
+            }
+        }
+
+        public async Task UpdatePassword(string oldPassword, string oldPasswordConfirm, string password)
+        {
+            try
+            {
+                //if (oldPassword != oldPasswordConfirm)
+                //{
+                //    throw new Exception(AppResources.PasswordConfirmError);
+                //}
+                await ReAuthenticate(EmailAuthProvider.GetCredential(GetUserEmail(), oldPassword));
+                await mAuth.CurrentUser.UpdatePasswordAsync(password);
+            }
+            // u některých metod je za určitých podmínek potřeba reauthentizace
+            //catch (FirebaseAuthRecentLoginRequiredException)
+            //{
+            //    await ReAuthenticate(EmailAuthProvider.GetCredential(GetUserEmail(), oldPassword));
+            //}
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public string GetUserEmail()
         {
@@ -37,65 +75,55 @@ namespace FitnessApp01.Droid.Services
             return mAuth.CurrentUser != null;
         }
 
-        public async Task<bool> LoginUserAsync(string email, string password)
+        public async Task LoginUserAsync(string email, string password)
         {
             try
             {
                 IAuthResult authResult = await mAuth.SignInWithEmailAndPasswordAsync(email, password);
-                return true;
             }
-            catch (FirebaseAuthWeakPasswordException e)
+            catch (FirebaseAuthInvalidCredentialsException ex)
             {
-                throw new Exception(e.Message);
-            }
-
-            catch (FirebaseAuthInvalidCredentialsException e)
-            {
-                throw new Exception(e.Message);
+                throw new Exception(AppResources.BadCredentials, ex);
             }
 
-            catch (FirebaseAuthInvalidUserException e)
+            catch (FirebaseAuthInvalidUserException ex)
             {
-                throw new Exception(e.Message);
+                throw new Exception(AppResources.InvalidUsername, ex);
+            }
+            catch(FirebaseAuthWebException ex)
+            {
+                throw new Exception(AppResources.InternetRequired, ex);
             }
 
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("unknown error " + e.Message);
+                throw new Exception(AppResources.UnknownError, ex);
             }
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string password)
+        public async Task RegisterUserAsync(string email, string password)
         {
             try
             {
                 IAuthResult authResult = await mAuth.CreateUserWithEmailAndPasswordAsync(email, password);
-                /*var profileUpdates = new Firebase.Auth.UserProfileChangeRequest.Builder();
-                profileUpdates.SetDisplayName(userName);
-                var build = profileUpdates.Build();
-                var user = Firebase.Auth.FirebaseAuth.Instance.CurrentUser;
-                await user.UpdateProfileAsync(build);*/
-
-                return true;
             }
-            catch (FirebaseAuthWeakPasswordException e)
+            catch (FirebaseAuthWeakPasswordException ex)
             {
-                throw new Exception(AppResources.WeakPasswordException + e.Message);
+                throw new Exception(AppResources.WeakPasswordException, ex);
             }
 
             catch (FirebaseAuthInvalidCredentialsException e)
             {
                 throw new Exception("invalid credentials " + e.Message);
             }
-
-            catch (FirebaseAuthUserCollisionException e)
+            catch (FirebaseAuthUserCollisionException ex)
             {
-                throw new Exception("user collision " + e.Message);
+                throw new Exception(AppResources.UserCollision, ex);
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new Exception("unknown error " + e.Message);
+                throw;
             }
         }
 

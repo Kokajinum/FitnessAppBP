@@ -9,30 +9,33 @@ namespace FitnessApp01.Services
     {
         private static readonly IAuth auth = DependencyService.Get<IAuth>();
 
-        public static async Task<bool> RegisterUserAsync(string email, string password)
+        public static async Task RegisterUserAsync(string email, string password)
         {
             try
             {
-                return await auth.RegisterUserAsync(email, password);
+                await auth.RegisterUserAsync(email, password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return false;
+                throw;
             }
         }
 
-        public static async Task<bool> LoginUserAsync(string email, string password)
+        public static async Task LoginUserAsync(string email, string password)
         {
             try
             {
-                return await auth.LoginUserAsync(email, password);
+                await auth.LoginUserAsync(email, password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Error", e.Message, "ok");
-                return false;
+                throw;
             }
+        }
+
+        public static async Task UpdatePassword(string oldPassword, string oldPasswordConfirm, string password)
+        {
+            //todo
         }
 
         public static bool IsAuthenticated()
