@@ -61,11 +61,137 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Název výrobce (volitelné).
+        /// </summary>
+        public static string AddFoodPage_Brand {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Brand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sacharidy.
+        /// </summary>
+        public static string AddFoodPage_Carbs {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Carbs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Energetická hodnota.
+        /// </summary>
+        public static string AddFoodPage_Energy {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Energy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuky.
+        /// </summary>
+        public static string AddFoodPage_Fats {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Fats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vláknina (volitelné).
+        /// </summary>
+        public static string AddFoodPage_Fiber {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Fiber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výživové údaje na.
+        /// </summary>
+        public static string AddFoodPage_Nutritions {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Nutritions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp;amp; a #.
+        /// </summary>
+        public static string AddFoodPage_PleaseCheckInputs {
+            get {
+                return ResourceManager.GetString("AddFoodPage_PleaseCheckInputs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Velikost balení/porce (volitelné).
+        /// </summary>
+        public static string AddFoodPage_Portion {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Portion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bílkoviny.
+        /// </summary>
+        public static string AddFoodPage_Protein {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Protein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sůl (volitelné).
+        /// </summary>
+        public static string AddFoodPage_Salt {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Salt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Z toho nasycené mastné kyseliny (volitelné).
+        /// </summary>
+        public static string AddFoodPage_SaturatedFats {
+            get {
+                return ResourceManager.GetString("AddFoodPage_SaturatedFats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Z toho cukry.
+        /// </summary>
+        public static string AddFoodPage_Sugar {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Sugar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tvorba nové potraviny.
+        /// </summary>
+        public static string AddFoodPageTitle {
+            get {
+                return ResourceManager.GetString("AddFoodPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Věk.
         /// </summary>
         public static string Age {
             get {
                 return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neplatné údaje..
+        /// </summary>
+        public static string BadCredentials {
+            get {
+                return ResourceManager.GetString("BadCredentials", resourceCulture);
             }
         }
         
@@ -93,6 +219,24 @@ namespace FitnessApp01.Resx {
         public static string CaloriesGoal {
             get {
                 return ResourceManager.GetString("CaloriesGoal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nelze uložit. Musíte vyplnit potřebné údaje..
+        /// </summary>
+        public static string CanNotSave {
+            get {
+                return ResourceManager.GetString("CanNotSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změna.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
             }
         }
         
@@ -165,6 +309,42 @@ namespace FitnessApp01.Resx {
         public static string Height {
             get {
                 return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Připojení k internetu je dostupné..
+        /// </summary>
+        public static string InternetAvailable {
+            get {
+                return ResourceManager.GetString("InternetAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nepodařilo se připojit k internetu. Zkontrolujte nastavení internetu a zkuste to znovu..
+        /// </summary>
+        public static string InternetRequired {
+            get {
+                return ResourceManager.GetString("InternetRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emailová adresa je neplatná..
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neexistující uživatel..
+        /// </summary>
+        public static string InvalidUsername {
+            get {
+                return ResourceManager.GetString("InvalidUsername", resourceCulture);
             }
         }
         
@@ -286,6 +466,24 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Přehled.
+        /// </summary>
+        public static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesla se neshodují..
+        /// </summary>
+        public static string PasswordConfirmError {
+            get {
+                return ResourceManager.GetString("PasswordConfirmError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předchozí.
         /// </summary>
         public static string Previous {
@@ -295,11 +493,38 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neočekávaná chyba během ověřování uživatele..
+        /// </summary>
+        public static string Reauthenticate_UnexpectedError {
+            get {
+                return ResourceManager.GetString("Reauthenticate_UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uložit.
         /// </summary>
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výběr potraviny.
+        /// </summary>
+        public static string SelectMealPageTitle {
+            get {
+                return ResourceManager.GetString("SelectMealPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nastavení.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
@@ -318,6 +543,33 @@ namespace FitnessApp01.Resx {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neznámá chyba. Zkontrolujte připojení k internetu..
+        /// </summary>
+        public static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uživatel.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vámi zadaný uživatel již existuje..
+        /// </summary>
+        public static string UserCollision {
+            get {
+                return ResourceManager.GetString("UserCollision", resourceCulture);
             }
         }
         

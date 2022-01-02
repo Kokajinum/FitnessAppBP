@@ -117,8 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFoodPageTitle" xml:space="preserve">
+    <value>Tvorba nové potraviny</value>
+  </data>
+  <data name="AddFoodPage_Brand" xml:space="preserve">
+    <value>Název výrobce (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_Carbs" xml:space="preserve">
+    <value>Sacharidy</value>
+  </data>
+  <data name="AddFoodPage_Energy" xml:space="preserve">
+    <value>Energetická hodnota</value>
+  </data>
+  <data name="AddFoodPage_Fats" xml:space="preserve">
+    <value>Tuky</value>
+  </data>
+  <data name="AddFoodPage_Fiber" xml:space="preserve">
+    <value>Vláknina (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_Nutritions" xml:space="preserve">
+    <value>Výživové údaje na</value>
+  </data>
+  <data name="AddFoodPage_PleaseCheckInputs" xml:space="preserve">
+    <value>Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp;amp; a #</value>
+  </data>
+  <data name="AddFoodPage_Portion" xml:space="preserve">
+    <value>Velikost balení/porce (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_Protein" xml:space="preserve">
+    <value>Bílkoviny</value>
+  </data>
+  <data name="AddFoodPage_Salt" xml:space="preserve">
+    <value>Sůl (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_SaturatedFats" xml:space="preserve">
+    <value>Z toho nasycené mastné kyseliny (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_Sugar" xml:space="preserve">
+    <value>Z toho cukry</value>
+  </data>
   <data name="Age" xml:space="preserve">
     <value>Věk</value>
+  </data>
+  <data name="BadCredentials" xml:space="preserve">
+    <value>Neplatné údaje.</value>
   </data>
   <data name="Breakfast" xml:space="preserve">
     <value>Snídaně</value>
@@ -128,6 +170,12 @@
   </data>
   <data name="CaloriesGoal" xml:space="preserve">
     <value>Plánovaný příjem energie:</value>
+  </data>
+  <data name="CanNotSave" xml:space="preserve">
+    <value>Nelze uložit. Musíte vyplnit potřebné údaje.</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Změna</value>
   </data>
   <data name="Diary" xml:space="preserve">
     <value>Diář</value>
@@ -152,6 +200,18 @@
   </data>
   <data name="Height" xml:space="preserve">
     <value>Výška</value>
+  </data>
+  <data name="InternetAvailable" xml:space="preserve">
+    <value>Připojení k internetu je dostupné.</value>
+  </data>
+  <data name="InternetRequired" xml:space="preserve">
+    <value>Nepodařilo se připojit k internetu. Zkontrolujte nastavení internetu a zkuste to znovu.</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Emailová adresa je neplatná.</value>
+  </data>
+  <data name="InvalidUsername" xml:space="preserve">
+    <value>Neexistující uživatel.</value>
   </data>
   <data name="LoginPage_AlreadyHaveAccount" xml:space="preserve">
     <value>Již máte účet?</value>
@@ -192,17 +252,41 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Přehled</value>
+  </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>Hesla se neshodují.</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
   </data>
+  <data name="Reauthenticate_UnexpectedError" xml:space="preserve">
+    <value>Neočekávaná chyba během ověřování uživatele.</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
+  </data>
+  <data name="SelectMealPageTitle" xml:space="preserve">
+    <value>Výběr potraviny</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Nastavení</value>
   </data>
   <data name="Snack" xml:space="preserve">
     <value>Svačina</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Začít</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Neznámá chyba. Zkontrolujte připojení k internetu.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Uživatel</value>
+  </data>
+  <data name="UserCollision" xml:space="preserve">
+    <value>Vámi zadaný uživatel již existuje.</value>
   </data>
   <data name="WeakPasswordException" xml:space="preserve">
     <value>Vámi zadané heslo je příliš slabé (heslo by mělo mít alespoň 6 znaků)</value>
