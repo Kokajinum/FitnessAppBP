@@ -7,7 +7,9 @@
        Title="FitnessApp01"
        x:Class="FitnessApp01.AppShell"
        Shell.FlyoutBehavior="Disabled"
-       Shell.NavBarIsVisible="False">
+       Shell.NavBarIsVisible="False"
+       xmlns:fontawesome="clr-namespace:FitnessApp01.Helpers" 
+       >
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -15,23 +17,25 @@
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
 
-    <!--<Shell.Resources>
+    <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark={StaticResource TabbarColorDark},
+                    Light={StaticResource TabbarColor}}" />
+                <Setter Property="Shell.ForegroundColor" Value="white" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TabbarColorDark},
+                    Light={StaticResource TabbarColor}}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="Yellow"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
-    </Shell.Resources>-->
+    </Shell.Resources>
 
     <ShellItem Route="LoginPage">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}">
@@ -49,25 +53,35 @@
     </ShellItem>
 
     <TabBar Route="main-content">
-        <!--<Tab.Icon>
-                <FontImageSource FontFamily="fa-regular-400.otf" Glyph="&#xf015;">
-                </FontImageSource>
-            </Tab.Icon>-->
-        <ShellContent Title="Diary"
+        <ShellContent Title="{x:Static resources:AppResources.Diary}"
                       x:Name="DiaryItem"
-                      Icon="icon_feed.png"
                       ContentTemplate="{DataTemplate local:DiaryPage}">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="FAS"
+                    Glyph="{x:Static fontawesome:IconFont.Book}">
+                </FontImageSource>
+            </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="Home" 
-                      Icon="icon_about.png" 
-                      ContentTemplate="{DataTemplate local:HomePage}">
-        </ShellContent>
-
         
+        <ShellContent Title="{x:Static resources:AppResources.Overview}"  
+                      ContentTemplate="{DataTemplate local:HomePage}">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="FAS"
+                    Glyph="{x:Static fontawesome:IconFont.ClipboardList}">
+                </FontImageSource>
+            </ShellContent.Icon>
+        </ShellContent>
 
-
-        <ShellContent Title="User"
+        <ShellContent Title="{x:Static resources:AppResources.User}"
                       ContentTemplate="{DataTemplate local:UserPage}">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="FAS"
+                    Glyph="{x:Static fontawesome:IconFont.User}">
+                </FontImageSource>
+            </ShellContent.Icon>
         </ShellContent>
     </TabBar>
 

@@ -25,8 +25,7 @@
                 <Button Text="{x:Static resources:AppResources.LoginPage_LoginButton}"
                         Style="{x:StaticResource primaryButton}"
                         Command="{Binding LoginCommand}"
-                        Opacity="{Binding LoginButtonOpacity}"
-                        TextColor="White">
+                        Opacity="{Binding LoginButtonOpacity}">
                 </Button>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.LoginPage_NoAccount}">
@@ -49,8 +48,7 @@
                 <Button Text="{x:Static resources:AppResources.LoginPage_RegisterButton}"
                         Style="{x:StaticResource primaryButton}"
                         Command="{Binding RegisterCommand}"
-                        Opacity="{Binding RegisterButtonOpacity}"
-                        TextColor="White">
+                        Opacity="{Binding RegisterButtonOpacity}">
                 </Button>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.LoginPage_AlreadyHaveAccount}"></Label>

@@ -6,13 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resx\Fonts\fa-brands-regular-400.otf" />
+    <None Remove="Resx\Fonts\fa-brands-regular.otf" />
     <None Remove="Resx\Fonts\fa-regular-400.otf" />
     <None Remove="Resx\Fonts\fa-solid-900.otf" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resx\Fonts\fa-brands-regular-400.otf" />
+    <EmbeddedResource Include="Resx\Fonts\fa-brands-regular.otf" />
     <EmbeddedResource Include="Resx\Fonts\fa-regular-400.otf" />
     <EmbeddedResource Include="Resx\Fonts\fa-solid-900.otf" />
   </ItemGroup>

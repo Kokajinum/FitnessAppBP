@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="True">
+             Shell.NavBarIsVisible="True"
+             Title="{Static resources:AppResources.SelectMealPageTitle}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -59,7 +60,8 @@
             <Button Text="Přidat novou potravinu do databáze"
                     Command="{Binding AddFoodCommand}"
                     VerticalOptions="EndAndExpand"
-                    Margin="0,0,0,10">
+                    Margin="10,0,10,10"
+                    Style="{x:StaticResource primaryButton}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

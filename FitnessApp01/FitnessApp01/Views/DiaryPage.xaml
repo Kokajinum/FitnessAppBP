@@ -6,130 +6,151 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             xmlns:fontawesome="clr-namespace:FitnessApp01.Helpers"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <local:DiaryPageViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <RefreshView IsRefreshing="{Binding DiaryPageAttributes.IsRefreshing}"
-                         Command="{Binding RefreshViewCommand}"
-                         Padding="20"
-                         Grid.ColumnSpan="3"
-                         Grid.RowSpan="3"
-                         IsEnabled="False">
-                <StackLayout>
-                    <Label Text="{Static resources:AppResources.Diary}" 
+        <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
+            <StackLayout Grid.ColumnSpan="3"
+                             Grid.RowSpan="3"
+                             Padding="20">
+                <Label Text="{Static resources:AppResources.Diary}" 
                        FontSize="30" 
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center">
-                    </Label>
-                    <StackLayout Orientation="Horizontal"
+                </Label>
+                <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Center"
                                  Margin="0,0,0,20">
-                        <ImageButton Source="icon_about.png"
-                                 Command="{Binding PreviousDayCommand}">
-                        </ImageButton>
-                        <Label Text="{Binding DiaryPageAttributes.NameOfTheDay}">
-                        </Label>
-                        <ImageButton Source="icon_about.png"
-                                     Command="{Binding NextDayCommand}">
-
-                        </ImageButton>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding DiaryPageAttributes.CaloriesCurrent}"></Span>
-                                    <Span Text="Kcal/"></Span>
-                                    <Span Text="{Binding DiaryPageAttributes.CaloriesGoal}"></Span>
-                                    <Span Text="Kcal"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-                    <CollectionView ItemsSource="{Binding MealGroups}"
+                    <Button 
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+                                Light={StaticResource backgroundColor}}"
+                            WidthRequest="20" 
+                            HeightRequest="20"
+                            Command="{Binding PreviousDayCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource
+                                    FontFamily="FAS"
+                                    Glyph="{x:Static fontawesome:IconFont.AngleLeft}"
+                                    Color="Black"
+                                    Size="30">
+                            </FontImageSource>
+                        </Button.ImageSource>
+                    </Button>
+                    <Label Text="{Binding DiaryPageAttributes.NameOfTheDay}">
+                    </Label>
+                    <Button 
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+                                Light={StaticResource backgroundColor}}"
+                            WidthRequest="20" 
+                            HeightRequest="20"
+                            Command="{Binding NextDayCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource
+                                    FontFamily="FAS"
+                                    Glyph="{x:Static fontawesome:IconFont.AngleRight}"
+                                    Color="Black"
+                                    Size="30">
+                            </FontImageSource>
+                        </Button.ImageSource>
+                    </Button>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DiaryPageAttributes.CaloriesCurrent}"></Span>
+                                <Span Text="Kcal/"></Span>
+                                <Span Text="{Binding DiaryPageAttributes.CaloriesGoal}"></Span>
+                                <Span Text="Kcal"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                <CollectionView ItemsSource="{Binding MealGroups}"
                                     IsGrouped="True"
                                     x:Name="collectionView">
-                        <CollectionView.GroupHeaderTemplate>
-                            <DataTemplate>
-                                <StackLayout Margin="0,15,0,0">
-                                    <Frame BorderColor="Gray"
-                                           BackgroundColor="LightGreen"
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,15,0,0">
+                                <Frame BorderColor="{StaticResource primaryColor}"
+                                           BackgroundColor="{StaticResource primaryColor}"
                                            CornerRadius="5"
-                                           Padding="5">
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding ViewName}"
+                                           Padding="10,5,0,5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding ViewName}"
                                                FontSize="Medium"
                                                FontAttributes="Bold" 
                                                LineBreakMode="NoWrap"
                                                VerticalOptions="Center"
-                                               HorizontalOptions="StartAndExpand"/>
-                                            <Button Text="+"
-                                                WidthRequest="40"
-                                                HeightRequest="40"
-                                                CornerRadius="20"
-                                                BackgroundColor="#5BC0EB"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:DiaryPageViewModel}},
+                                               HorizontalOptions="StartAndExpand"
+                                               TextColor="White"/>
+                                        <Button
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            CornerRadius="20"
+                                            Margin="0,0,10,0"
+                                            BackgroundColor="{StaticResource secondaryColor}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:DiaryPageViewModel}},
                                                          Path=AddMealCommand}"
                                                 CommandParameter="{Binding .}">
-                                            </Button>
-                                        </StackLayout>
-                                    </Frame>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.GroupHeaderTemplate>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Padding="10,5,10,20">
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer
+                                            <Button.ImageSource>
+                                                <FontImageSource
+                                                    FontFamily="FAS"
+                                                    Glyph="{x:Static fontawesome:IconFont.Plus}"
+                                                    Color="Black"
+                                                    Size="20">
+                                                </FontImageSource>
+                                            </Button.ImageSource>
+                                        </Button>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10,5,10,20">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
                                             Command="{Binding Path=BindingContext.ItemTapCommand,
                                             Source={x:Reference collectionView}}"
                                             CommandParameter="{Binding .}">
-                                        </TapGestureRecognizer>
-                                    </StackLayout.GestureRecognizers>
-                                    <Label Text="{Binding Name}"
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Name}"
                                            FontSize="Medium">
+                                </Label>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Weight}"></Span>
+                                                <Span Text="g"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
                                     </Label>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label>
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="{Binding Weight}"></Span>
-                                                    <Span Text="g"></Span>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label>
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="{Binding Kcal}"></Span>
-                                                    <Span Text="Kcal"></Span>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Kcal}"></Span>
+                                                <Span Text="Kcal"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
 
-                                    </StackLayout>
                                 </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </RefreshView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                Margin="0,0,0,0"
                                HeightRequest="1"

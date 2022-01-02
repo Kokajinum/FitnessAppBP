@@ -100,7 +100,8 @@
                     VerticalOptions="EndAndExpand"
                     Margin="100"
                     Command="{Binding AddMealCommand}"
-                    CommandParameter="{Binding CanAdd}">
+                    Style="{StaticResource primaryButton}"
+                    Opacity="{Binding AddButtonOpacity}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

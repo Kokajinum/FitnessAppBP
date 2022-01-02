@@ -6,13 +6,22 @@
         Define global resources and styles here, that apply to all pages in your app.
     -->
     <Application.Resources>
-        <!--<Color x:Key="accentColor">#f46036</Color>-->
         <Color x:Key="primaryColor">#00171F</Color>
         <Color x:Key="secondaryColor">#f46036</Color>
+        <Color x:Key="backgroundColor">White</Color>
+        <Color x:Key="backgroundColorDark">#232121</Color>
+        <Color x:Key="TabbarColor">#3E92CC</Color>
+        <Color x:Key="TabbarColorDark">#00171F</Color>
+        <Color x:Key="primaryTextColor">black</Color>
+        <Color x:Key="primaryTextColorDark">White</Color>
 
-        <!--<Style x:Key="accentLabel" TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource accentColor}"></Setter>
-        </Style>-->
+        <Style
+            x:Key="primaryText"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark},
+                Light={StaticResource primaryTextColor}}">
+            </Setter>
+        </Style>
 
         <Style 
             x:Key="secondaryLabel"
@@ -25,6 +34,7 @@
             TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource primaryColor}"></Setter>
             <Setter Property="CornerRadius" Value="25"></Setter>
+            <Setter Property="TextColor" Value="White"></Setter>
         </Style>
 
         <Style x:Key="postRegistrationHeaders" TargetType="Label">
@@ -37,6 +47,12 @@
         <Style x:Key="postRegistrationEntry" TargetType="Entry">
             <Setter Property="Keyboard" Value="Numeric"></Setter>
             <Setter Property="Margin" Value="50,0,50,0"></Setter>
+        </Style>
+
+        <Style x:Key="settingsLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark}, Light={StaticResource primaryTextColor}}"></Setter>
+            <Setter Property="Padding" Value="0,5,0,5"></Setter>
         </Style>
         
     </Application.Resources>

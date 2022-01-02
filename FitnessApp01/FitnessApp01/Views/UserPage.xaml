@@ -4,8 +4,11 @@
              x:Class="FitnessApp01.Views.UserPage"
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:helpers="clr-namespace:FitnessApp01.Helpers"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -14,15 +17,51 @@
 
     <ContentPage.Content>
         <StackLayout Margin="15">
-            <Label Text="{Binding UserEmail}"
-                   HorizontalOptions="End">
-            </Label>
-            <Frame>
-                
-            </Frame>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding UserEmail}"
+                   HorizontalOptions="StartAndExpand">
+                </Label>
+                <Label FontFamily="FAS"
+                       Text="{Static helpers:IconFont.Cog}"
+                       FontSize="30"
+                       HorizontalOptions="End"
+                       IsVisible="{Binding IsSettingsVisible}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1">
+
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontFamily="FAS"
+                       Text="{Static helpers:IconFont.User}"
+                       FontSize="30"
+                       HorizontalOptions="End"
+                       IsVisible="{Binding IsUserVisible}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1">
+
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <StackLayout Margin="0,40,0,0">
+                <Label Text="Změnit kalorie" Style="{StaticResource settingsLabel}">
+                </Label>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{StaticResource secondaryColor}"></StackLayout>
+                <Button Text="Změnit věk" HorizontalOptions="StartAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}"></Button>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{StaticResource secondaryColor}"></StackLayout>
+                <Label Text="Změnit věk" Style="{StaticResource settingsLabel}">
+                </Label>
+                <Label Text="Změnit váhu" Style="{StaticResource settingsLabel}">
+                </Label>
+                <Label Text="Změnit výšku" Style="{StaticResource settingsLabel}">
+                </Label>
+            </StackLayout>
             <Button Text="Odhlásit se" 
                     Command="{Binding SignOutCommand}"
-                    VerticalOptions="EndAndExpand">
+                    VerticalOptions="EndAndExpand"
+                    Style="{StaticResource primaryButton}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

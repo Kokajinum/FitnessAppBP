@@ -5,128 +5,125 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <local:HomePageViewModel/>
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Content>
-        <RefreshView IsRefreshing="{Binding HomePageAttributes.IsRefreshing}"
-                     Command="{Binding RefreshViewCommand}"
-                     IsEnabled="False">
-            <ScrollView>
-                <StackLayout Padding="30">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Static resources:AppResources.CaloriesGoal}"
-                               FontSize="20">
-                        </Label>
-                        <Label FontSize="20">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding HomePageAttributes.CaloriesGoal}"></Span>
-                                    <Span Text="Kcal"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Static resources:AppResources.CaloriesCurrent}"
-                               FontSize="20">
-                        </Label>
-                        <Label FontSize="20">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding HomePageAttributes.CaloriesCurrent}"></Span>
-                                    <Span Text="Kcal"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-                    <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                       Margin="0,0,0,-30"
-                                       Scale="2">
-                    </ActivityIndicator>
-                    <ProgressBar WidthRequest="250" 
-                                 Progress="{Binding HomePageAttributes.CaloriesProgress}">
-                    </ProgressBar>
-                    <StackLayout>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Sacharidy: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.CarbohydratesCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.CarbohydratesGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text=" Z toho cukr: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.SugarCurrent}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Bílkoviny: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.ProteinCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.ProteinGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Tuky: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.FatCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.FatGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text=" Z toho nasycené mastné kyseliny: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.SaturatedFatCurrent}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Orientation="Horizontal">
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Vláknina: "></Span>
-                                        <Span Text="{Binding HomePageAttributes.FiberCurrent}"></Span>
-                                        <Span Text="g"></Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Sůl: "></Span>
-                                        <Span Text="{Binding HomePageAttributes.SaltCurrent}"></Span>
-                                        <Span Text="g"></Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
-                        
-                    </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="30,50,30,30">
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center">
+                    <Label FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding HomePageAttributes.CaloriesCurrent}"></Span>
+                                <Span Text="Kcal"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="20">/</Label>
+                    <Label FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Dark=White, Light=Black}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding HomePageAttributes.CaloriesGoal}"></Span>
+                                <Span Text="Kcal"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
-            </ScrollView>
-            
-        </RefreshView>
+                <ActivityIndicator 
+                    IsRunning="{Binding IsBusy}"
+                    Margin="0,0,0,-40"
+                    Scale="2">
+                </ActivityIndicator>
+                <ProgressBar
+                    WidthRequest="300"
+                    Progress="{Binding HomePageAttributes.CaloriesProgress}">
+                </ProgressBar>
+                <StackLayout>
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Sacharidy: "></Span>
+                                <Span Text="{Binding HomePageAttributes.CarbohydratesCurrent}"></Span>
+                                <Span Text="g/"></Span>
+                                <Span Text="{Binding HomePageAttributes.CarbohydratesGoal}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Z toho cukr: "></Span>
+                                <Span Text="{Binding HomePageAttributes.SugarCurrent}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Bílkoviny: "></Span>
+                                <Span Text="{Binding HomePageAttributes.ProteinCurrent}"></Span>
+                                <Span Text="g/"></Span>
+                                <Span Text="{Binding HomePageAttributes.ProteinGoal}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Tuky: "></Span>
+                                <Span Text="{Binding HomePageAttributes.FatCurrent}"></Span>
+                                <Span Text="g/"></Span>
+                                <Span Text="{Binding HomePageAttributes.FatGoal}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Z toho nasycené mastné kyseliny: "></Span>
+                                <Span Text="{Binding HomePageAttributes.SaturatedFatCurrent}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontSize="Medium">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Vláknina: "></Span>
+                                    <Span Text="{Binding HomePageAttributes.FiberCurrent}"></Span>
+                                    <Span Text="g"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="Medium">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Sůl: "></Span>
+                                    <Span Text="{Binding HomePageAttributes.SaltCurrent}"></Span>
+                                    <Span Text="g"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
