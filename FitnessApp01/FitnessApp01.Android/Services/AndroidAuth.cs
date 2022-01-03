@@ -38,25 +38,22 @@ namespace FitnessApp01.Droid.Services
             }
         }
 
-        public async Task UpdatePassword(string oldPassword, string oldPasswordConfirm, string password)
+        public async Task UpdatePassword(string oldPassword, string newPassword)
         {
             try
             {
-                //if (oldPassword != oldPasswordConfirm)
-                //{
-                //    throw new Exception(AppResources.PasswordConfirmError);
-                //}
+                // u některých metod je za určitých podmínek potřeba reauthentizace
                 await ReAuthenticate(EmailAuthProvider.GetCredential(GetUserEmail(), oldPassword));
-                await mAuth.CurrentUser.UpdatePasswordAsync(password);
+                await mAuth.CurrentUser.UpdatePasswordAsync(newPassword);
             }
-            // u některých metod je za určitých podmínek potřeba reauthentizace
-            //catch (FirebaseAuthRecentLoginRequiredException)
-            //{
-            //    await ReAuthenticate(EmailAuthProvider.GetCredential(GetUserEmail(), oldPassword));
-            //}
-            catch (Exception)
+            
+            catch (FirebaseAuthWeakPasswordException ex)
             {
-                throw;
+                throw new Exception(AppResources.WeakPasswordException, ex);
+            }
+            catch (FirebaseAuthInvalidCredentialsException ex)
+            {
+                throw new Exception(AppResources.BadCredentials, ex);
             }
         }
 
