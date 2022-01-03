@@ -33,9 +33,16 @@ namespace FitnessApp01.Services
             }
         }
 
-        public static async Task UpdatePassword(string oldPassword, string oldPasswordConfirm, string password)
+        public static async Task UpdatePassword(string oldPassword, string newPassword)
         {
-            //todo
+            try
+            {
+                await auth.UpdatePassword(oldPassword, newPassword);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public static bool IsAuthenticated()
