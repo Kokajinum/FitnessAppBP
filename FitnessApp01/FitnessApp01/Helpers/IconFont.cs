@@ -18,5 +18,6 @@ namespace FitnessApp01.Helpers
 		public const string Trash = "\uf1f8";
 		public const string Plus = "\uf067";
 		public const string Cog = "\uf013";
+		public const string TimesCircle = "\uf057";
 	}
 }
