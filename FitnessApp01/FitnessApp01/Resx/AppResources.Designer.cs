@@ -61,6 +61,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O aplikaci.
+        /// </summary>
+        public static string AboutApp {
+            get {
+                return ResourceManager.GetString("AboutApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Název výrobce (volitelné).
         /// </summary>
         public static string AddFoodPage_Brand {
@@ -115,7 +124,7 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp;amp; a #.
+        ///   Looks up a localized string similar to Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp; a #.
         /// </summary>
         public static string AddFoodPage_PleaseCheckInputs {
             get {
@@ -237,6 +246,87 @@ namespace FitnessApp01.Resx {
         public static string Change {
             get {
                 return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit úroveň aktivity.
+        /// </summary>
+        public static string ChangeActivity {
+            get {
+                return ResourceManager.GetString("ChangeActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit věk.
+        /// </summary>
+        public static string ChangeAge {
+            get {
+                return ResourceManager.GetString("ChangeAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit denní přijem energie.
+        /// </summary>
+        public static string ChangeCaloriesGoal {
+            get {
+                return ResourceManager.GetString("ChangeCaloriesGoal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit emailovou adresu.
+        /// </summary>
+        public static string ChangeEmail {
+            get {
+                return ResourceManager.GetString("ChangeEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit cíl.
+        /// </summary>
+        public static string ChangeGoal {
+            get {
+                return ResourceManager.GetString("ChangeGoal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit výšku.
+        /// </summary>
+        public static string ChangeHeight {
+            get {
+                return ResourceManager.GetString("ChangeHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit heslo.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit rychlost dosažení cíle (nedoporučuje se).
+        /// </summary>
+        public static string ChangeSpeed {
+            get {
+                return ResourceManager.GetString("ChangeSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit cílovou váhu.
+        /// </summary>
+        public static string ChangeWeight {
+            get {
+                return ResourceManager.GetString("ChangeWeight", resourceCulture);
             }
         }
         
@@ -457,11 +547,38 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nové heslo.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nové heslo znovu.
+        /// </summary>
+        public static string NewPasswordConfirm {
+            get {
+                return ResourceManager.GetString("NewPasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Další.
         /// </summary>
         public static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staré heslo.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
             }
         }
         
@@ -484,6 +601,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nové heslo musí být jiné než staré heslo..
+        /// </summary>
+        public static string PasswordNotDifferent {
+            get {
+                return ResourceManager.GetString("PasswordNotDifferent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předchozí.
         /// </summary>
         public static string Previous {
@@ -502,11 +628,38 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nepodařilo se aktualizovat registrační údaje..
+        /// </summary>
+        public static string RegSettingsUpdateError {
+            get {
+                return ResourceManager.GetString("RegSettingsUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uložit.
         /// </summary>
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložit změny.
+        /// </summary>
+        public static string SaveChanged {
+            get {
+                return ResourceManager.GetString("SaveChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všechny provedené změny je potřeba uložit. V opačném případě budou při dalším spuštění aplikace vráceny do původního stavu..
+        /// </summary>
+        public static string SaveChangedWarning {
+            get {
+                return ResourceManager.GetString("SaveChangedWarning", resourceCulture);
             }
         }
         
@@ -529,6 +682,24 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Změna nastavení.
+        /// </summary>
+        public static string SettingsChange {
+            get {
+                return ResourceManager.GetString("SettingsChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odhlásit se.
+        /// </summary>
+        public static string SignOut {
+            get {
+                return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Svačina.
         /// </summary>
         public static string Snack {
@@ -543,6 +714,15 @@ namespace FitnessApp01.Resx {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podařilo se.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

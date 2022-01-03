@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutApp" xml:space="preserve">
+    <value>O aplikaci</value>
+  </data>
   <data name="AddFoodPageTitle" xml:space="preserve">
     <value>Tvorba nové potraviny</value>
   </data>
@@ -139,7 +142,7 @@
     <value>Výživové údaje na</value>
   </data>
   <data name="AddFoodPage_PleaseCheckInputs" xml:space="preserve">
-    <value>Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp;amp; a #</value>
+    <value>Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp; a #</value>
   </data>
   <data name="AddFoodPage_Portion" xml:space="preserve">
     <value>Velikost balení/porce (volitelné)</value>
@@ -176,6 +179,33 @@
   </data>
   <data name="Change" xml:space="preserve">
     <value>Změna</value>
+  </data>
+  <data name="ChangeActivity" xml:space="preserve">
+    <value>Změnit úroveň aktivity</value>
+  </data>
+  <data name="ChangeAge" xml:space="preserve">
+    <value>Změnit věk</value>
+  </data>
+  <data name="ChangeCaloriesGoal" xml:space="preserve">
+    <value>Změnit denní přijem energie</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Změnit emailovou adresu</value>
+  </data>
+  <data name="ChangeGoal" xml:space="preserve">
+    <value>Změnit cíl</value>
+  </data>
+  <data name="ChangeHeight" xml:space="preserve">
+    <value>Změnit výšku</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Změnit heslo</value>
+  </data>
+  <data name="ChangeSpeed" xml:space="preserve">
+    <value>Změnit rychlost dosažení cíle (nedoporučuje se)</value>
+  </data>
+  <data name="ChangeWeight" xml:space="preserve">
+    <value>Změnit cílovou váhu</value>
   </data>
   <data name="Diary" xml:space="preserve">
     <value>Diář</value>
@@ -249,8 +279,17 @@
   <data name="Male" xml:space="preserve">
     <value>Muž</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nové heslo</value>
+  </data>
+  <data name="NewPasswordConfirm" xml:space="preserve">
+    <value>Nové heslo znovu</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Další</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Staré heslo</value>
   </data>
   <data name="Overview" xml:space="preserve">
     <value>Přehled</value>
@@ -258,14 +297,26 @@
   <data name="PasswordConfirmError" xml:space="preserve">
     <value>Hesla se neshodují.</value>
   </data>
+  <data name="PasswordNotDifferent" xml:space="preserve">
+    <value>Nové heslo musí být jiné než staré heslo.</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
   </data>
   <data name="Reauthenticate_UnexpectedError" xml:space="preserve">
     <value>Neočekávaná chyba během ověřování uživatele.</value>
   </data>
+  <data name="RegSettingsUpdateError" xml:space="preserve">
+    <value>Nepodařilo se aktualizovat registrační údaje.</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
+  </data>
+  <data name="SaveChanged" xml:space="preserve">
+    <value>Uložit změny</value>
+  </data>
+  <data name="SaveChangedWarning" xml:space="preserve">
+    <value>Všechny provedené změny je potřeba uložit. V opačném případě budou při dalším spuštění aplikace vráceny do původního stavu.</value>
   </data>
   <data name="SelectMealPageTitle" xml:space="preserve">
     <value>Výběr potraviny</value>
@@ -273,11 +324,20 @@
   <data name="Settings" xml:space="preserve">
     <value>Nastavení</value>
   </data>
+  <data name="SettingsChange" xml:space="preserve">
+    <value>Změna nastavení</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
   <data name="Snack" xml:space="preserve">
     <value>Svačina</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Začít</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Podařilo se</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
     <value>Neznámá chyba. Zkontrolujte připojení k internetu.</value>
