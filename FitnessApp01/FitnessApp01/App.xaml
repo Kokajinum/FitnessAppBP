@@ -54,6 +54,13 @@
             <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark}, Light={StaticResource primaryTextColor}}"></Setter>
             <Setter Property="Padding" Value="0,5,0,5"></Setter>
         </Style>
+
+        <Style x:Key="settingsLine" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal"></Setter>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+            <Setter Property="HeightRequest" Value="1"></Setter>
+            <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}"></Setter>
+        </Style>
         
     </Application.Resources>
 </Application>
