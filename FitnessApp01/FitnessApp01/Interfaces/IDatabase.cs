@@ -8,6 +8,7 @@ namespace FitnessApp01.Interfaces
     public interface IDatabase
     {
         Task CreateRegistrationSettingsAsync(RegistrationSettings registrationSettings);
+        Task UpdateRegistrationSettingsAsync(RegistrationSettings registrationSettings);
         Task<RegistrationSettings> ReadRegistrationSettingsAsync();
         Task<List<Meal>> ReadMealDataAsync(string meal);
         /// <summary>

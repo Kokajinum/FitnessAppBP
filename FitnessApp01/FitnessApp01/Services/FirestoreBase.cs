@@ -34,6 +34,21 @@ namespace FitnessApp01.Services
             }
         }
 
+        public async Task UpdateRegistrationSettingsAsync(RegistrationSettings registrationSettings)
+        {
+            try
+            {
+                await CrossCloudFirestore.Current.Instance
+                    .Collection("users")
+                    .Document(AuthBase.GetUserId())
+                    .UpdateAsync(registrationSettings);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(AppResources.RegSettingsUpdateError, ex);
+            }
+        }
+
         public async Task<RegistrationSettings> ReadRegistrationSettingsAsync()
         {
             try
