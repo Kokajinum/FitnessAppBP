@@ -16,53 +16,235 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout Margin="15">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding UserEmail}"
+        <StackLayout>
+            <StackLayout IsVisible="{Binding IsAboutAppVisible}"
+                         Margin="25">
+                <Label FontFamily="FAS"
+                       Text="{Static helpers:IconFont.TimesCircle}"
+                       FontSize="40"
+                       HorizontalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding AboutAppCloseCommand}">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <Label Text="O Aplikaci"
+                       FontAttributes="Bold"
+                       FontSize="50"
+                       HorizontalOptions="Center"
+                       Margin="0,30,0,0">
+                </Label>
+                <StackLayout Margin="0,20,0,0">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Tato aplikace je součástí bakalářské práce "></Span>
+                                <Span Text="Fitness aplikace pro OS Android." TextDecorations="Underline"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="Zdroj používaných ikon:">
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="&#x2022; "></Span>
+                                <Span Text="https://fontawesome.com/ - © Fonticons, Inc." TextDecorations="Underline"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="Vytvořil:"></Label>
+                    <Label Text="&#x2022;  Petr Kozák"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Margin="15"
+                     IsVisible="{Binding IsMainSLVisible}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding UserEmail}"
                    HorizontalOptions="StartAndExpand">
-                </Label>
-                <Label FontFamily="FAS"
+                    </Label>
+                    <Label FontFamily="FAS"
                        Text="{Static helpers:IconFont.Cog}"
+                       TextColor="Black"
                        FontSize="30"
                        HorizontalOptions="End"
-                       IsVisible="{Binding IsSettingsVisible}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1">
-
-                        </TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label FontFamily="FAS"
+                       IsVisible="{Binding IsSettingsIconVisible}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding SettingsIconTapCommand}">
+                            </TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontFamily="FAS"
                        Text="{Static helpers:IconFont.User}"
+                       TextColor="Black"
                        FontSize="30"
                        HorizontalOptions="End"
-                       IsVisible="{Binding IsUserVisible}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1">
+                       IsVisible="{Binding IsUserIconVisible}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding UserIconTapCommand}">
+                            </TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout Margin="0,40,0,0"
+                         IsVisible="{Binding IsSettingsIconVisible}">
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CaloriesGoalChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeCaloriesGoal}"></Span>
+                                    <Span Text=" : " FontSize="25"></Span>
+                                    <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
+                                    <Span Text=" kcal"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AgeChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeAge}"></Span>
+                                    <Span Text=" : " FontSize="25"></Span>
+                                    <Span Text="{Binding RegistrationSettings.AgeDB}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding WeightChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeWeight}"></Span>
+                                    <Span Text=" : " FontSize="25"></Span>
+                                    <Span Text="{Binding RegistrationSettings.DesiredWeightDB}"></Span>
+                                    <Span Text=" "></Span>
+                                    <Span Text="{Binding RegistrationSettings.DesiredWeightMeasureDB}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding HeightChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeHeight}"></Span>
+                                    <Span Text=" : " FontSize="25"></Span>
+                                    <Span Text="{Binding RegistrationSettings.HeightDB}"></Span>
+                                    <Span Text=" cm"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ActivityChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeActivity}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SpeedChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Static resources:AppResources.ChangeSpeed}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                </StackLayout>
 
-                        </TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
-            <StackLayout Margin="0,40,0,0">
-                <Label Text="Změnit kalorie" Style="{StaticResource settingsLabel}">
-                </Label>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{StaticResource secondaryColor}"></StackLayout>
-                <Button Text="Změnit věk" HorizontalOptions="StartAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
-            Light={StaticResource backgroundColor}}"></Button>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{StaticResource secondaryColor}"></StackLayout>
-                <Label Text="Změnit věk" Style="{StaticResource settingsLabel}">
-                </Label>
-                <Label Text="Změnit váhu" Style="{StaticResource settingsLabel}">
-                </Label>
-                <Label Text="Změnit výšku" Style="{StaticResource settingsLabel}">
-                </Label>
-            </StackLayout>
-            <Button Text="Odhlásit se" 
+
+                <StackLayout Margin="0,40,0,0"
+                         IsVisible="{Binding IsUserIconVisible}">
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PasswordChangeCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}"
+                           Text="{Static resources:AppResources.ChangePassword}">
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AboutAppCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}"
+                           Text="{Static resources:AppResources.AboutApp}">
+                        </Label>
+                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <AbsoluteLayout VerticalOptions="EndAndExpand" IsVisible="{Binding IsUserIconVisible}">
+                    <Button Text="{Static resources:AppResources.SignOut}" 
                     Command="{Binding SignOutCommand}"
-                    VerticalOptions="EndAndExpand"
-                    Style="{StaticResource primaryButton}">
-            </Button>
+                    VerticalOptions="End"
+                    Margin="0,450,0,0"
+                    Style="{StaticResource primaryButton}"
+                    IsVisible="{Binding IsUserIconVisible}"
+                                AbsoluteLayout.LayoutBounds="0.5, 1, AutoSize, AutoSize" 
+                                AbsoluteLayout.LayoutFlags="PositionProportional">
+                    </Button>
+                </AbsoluteLayout>
+                
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               VerticalOptions="EndAndExpand"
+                               IsVisible="{Binding IsSettingsIconVisible}">
+                </ActivityIndicator>
+                <Label Text="{Static resources:AppResources.SaveChangedWarning}"
+                   IsVisible="{Binding IsSettingsIconVisible}"
+                   TextColor="Red"
+                   VerticalOptions="EndAndExpand"
+                   Opacity="{Binding SaveButtonOpacity}">
+                </Label>
+                <Button Text="{Static resources:AppResources.SaveChanged}"
+                    Command="{Binding SaveChangesCommand}"
+                    VerticalOptions="End"
+                    Style="{StaticResource primaryButton}"
+                    IsVisible="{Binding IsSettingsIconVisible}"
+                    Opacity="{Binding SaveButtonOpacity}">
+                </Button>
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

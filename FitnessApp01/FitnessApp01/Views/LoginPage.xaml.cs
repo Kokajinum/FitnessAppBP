@@ -23,7 +23,7 @@ namespace FitnessApp01.Views
             // pokud je zařízení offline a má platný token, necháme ho projít do diary
             if (AuthBase.IsAuthenticated())
             {
-                await Shell.Current.GoToAsync("//main-content");
+                await Shell.Current.GoToAsync("//DiaryPage");
             }
             else
             {

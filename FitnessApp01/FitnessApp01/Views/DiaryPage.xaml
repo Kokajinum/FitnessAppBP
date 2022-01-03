@@ -67,7 +67,7 @@
                             <FormattedString>
                                 <Span Text="{Binding DiaryPageAttributes.CaloriesCurrent}"></Span>
                                 <Span Text="Kcal/"></Span>
-                                <Span Text="{Binding DiaryPageAttributes.CaloriesGoal}"></Span>
+                                <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
                                 <Span Text="Kcal"></Span>
                             </FormattedString>
                         </Label.FormattedText>

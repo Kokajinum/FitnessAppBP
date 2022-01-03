@@ -34,7 +34,7 @@
                            TextColor="{AppThemeBinding Dark=White, Light=Black}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding HomePageAttributes.CaloriesGoal}"></Span>
+                                <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
                                 <Span Text="Kcal"></Span>
                             </FormattedString>
                         </Label.FormattedText>
@@ -121,7 +121,17 @@
                             </Label.FormattedText>
                         </Label>
                     </StackLayout>
-
+                    <Label FontSize="Large"
+                           Margin="0,40,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Váha: "></Span>
+                                <Span Text="{Binding RegistrationSettings.WeightDB}"></Span>
+                                <Span Text=" "></Span>
+                                <Span Text="{Binding RegistrationSettings.WeightMeasureDB}"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
