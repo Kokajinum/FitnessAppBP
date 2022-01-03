@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Services;
 using System;
@@ -18,11 +19,9 @@ namespace FitnessApp01.ViewModels
             CarouselSource = new ObservableCollection<string>()
             { "1","2","3","4","5","6","7" };
             WeightOptionsList = new List<string>()
-            { "kg", "lbs" };
+            { "kg" };
             NextPageCommand = new Command(execute: async () => await NextPage());
             PreviousPageCommand = new Command(execute: () => PreviousPage());
-            //FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         public void PreviousPage()
@@ -136,7 +135,7 @@ namespace FitnessApp01.ViewModels
         /// <returns></returns>
         private RegistrationSettings GenerateRegistrationSettings()
         {
-            return new RegistrationSettings
+            var rs = new RegistrationSettings
             {
                 Email = AuthBase.GetUserEmail(),
                 AgeDB = this.AgeDB,
@@ -148,13 +147,15 @@ namespace FitnessApp01.ViewModels
                 DesiredWeightDB = this.DesiredWeightDB,
                 WeightMeasureDB = this.WeightMeasureDB,
                 DesiredWeightMeasureDB = this.DesiredWeightMeasureDB,
-                CaloriesGoal = CalculateCaloriesGoal(),
                 Macros = GenerateMacros()
             };
+            rs.CaloriesGoal = CalorieGoalCalculator.Calculate(rs);
+            rs.GoalSpeed = this.GoalDB == 1 || this.GoalDB == 2 ? 0.1 : 1; 
+            return rs;
         }
 
         /// <summary>
-        /// Creates default macros
+        /// Vytvoří výchozí hodnoty pro makra
         /// </summary>
         /// <returns></returns>
         private IDictionary<string,double> GenerateMacros()

@@ -83,7 +83,8 @@ namespace FitnessApp01.ViewModels
             try
             {
                 await AuthBase.LoginUserAsync(UserEmail, UserPassword);
-                await GoToPageAsync("//main-content");
+                //await GoToPageAsync("//main-content");
+                await GoToPageAsync("//DiaryPage");
                 ResetFields();
             }
             catch(Exception ex)

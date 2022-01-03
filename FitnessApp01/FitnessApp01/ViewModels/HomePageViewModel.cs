@@ -149,6 +149,8 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _homePageAttributes, value); }
         }
 
+        
+
         #endregion
 
         #region Commands

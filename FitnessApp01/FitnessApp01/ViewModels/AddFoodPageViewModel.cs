@@ -45,7 +45,7 @@ namespace FitnessApp01.ViewModels
                 var newFood = new Food(Attrs.NameInput, (int)Attrs.KcalInput, (double)Attrs.CarbsInput, (double)Attrs.SugarInput, (double)Attrs.ProteinInput, (double)Attrs.FatInput,
                 AuthBase.GetUserId(), PickerCurrentUnit, (double)Attrs.SaturatedInput, (double)Attrs.FiberInput, (double)Attrs.SaltInput, Attrs.BrandInput, (double)Attrs.PortionSize);
                 await FirestoreBase.CreateFoodDataAsync(newFood);
-                await DisplayAlertAsync("Done", "Podařilo se", "ok");
+                await DisplaySuccessAsync("Podařilo se uložit novou potravinu.");
                 await GoToPageAsync("..");
             }
             catch (Exception)

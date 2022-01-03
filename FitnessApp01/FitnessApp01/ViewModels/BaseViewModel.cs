@@ -14,6 +14,14 @@ namespace FitnessApp01.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Notifikuje o změně property, nastavuje property a zároveň kontroluje rovnost
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storage"></param>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
@@ -48,13 +56,29 @@ namespace FitnessApp01.ViewModels
         }
 
         /// <summary>
-        /// Klasický DisplayAlert s předvyplněným title a cancel
+        /// DisplayAlert s předvyplněným title a cancel pro oznámení chyby.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         protected virtual async Task DisplayErrorAsync(string message)
         {
             await App.Current.MainPage.DisplayAlert(AppResources.Error, message, "Ok");
+        }
+
+        /// <summary>
+        /// DisplayAlert s předvyplněný title a cancel pro oznámení úspěšné operace.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        protected virtual async Task DisplaySuccessAsync(string message)
+        {
+            await App.Current.MainPage.DisplayAlert(AppResources.Success, message, "Ok");
+        }
+
+        protected virtual async Task<string> DisplayPromptAsync(string message, Keyboard keyboard, int maxLength)
+        {
+            return await App.Current.MainPage.DisplayPromptAsync
+                (title: AppResources.SettingsChange, message: message, keyboard: keyboard, maxLength: maxLength);
         }
 
         protected virtual async Task GoToPageAsync(string shellPagePath)

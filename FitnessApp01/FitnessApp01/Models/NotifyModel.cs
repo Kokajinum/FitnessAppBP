@@ -10,6 +10,14 @@ namespace FitnessApp01.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Notifikuje o změně property, nastavuje property a zároveň kontroluje rovnost
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storage"></param>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
