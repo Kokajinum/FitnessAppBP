@@ -47,6 +47,11 @@
         </ShellContent>
     </ShellItem>
 
+    <ShellItem Route="PasswordChangePage">
+        <ShellContent ContentTemplate="{DataTemplate local:PasswordChangePage}">
+        </ShellContent>
+    </ShellItem>
+
     <ShellItem Route="WelcomePage">
         <ShellContent ContentTemplate="{DataTemplate local:WelcomePage}">
         </ShellContent>
@@ -55,7 +60,8 @@
     <TabBar Route="main-content">
         <ShellContent Title="{x:Static resources:AppResources.Diary}"
                       x:Name="DiaryItem"
-                      ContentTemplate="{DataTemplate local:DiaryPage}">
+                      ContentTemplate="{DataTemplate local:DiaryPage}"
+                      Route="DiaryPage">
             <ShellContent.Icon>
                 <FontImageSource 
                     FontFamily="FAS"
