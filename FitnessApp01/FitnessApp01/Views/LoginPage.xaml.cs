@@ -18,7 +18,7 @@ namespace FitnessApp01.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            
+
             //await AuthBase.SignOut();
             // pokud je zařízení offline a má platný token, necháme ho projít do diary
             if (AuthBase.IsAuthenticated())
