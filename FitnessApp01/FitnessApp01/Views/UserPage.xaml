@@ -60,7 +60,8 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Margin="15"
-                     IsVisible="{Binding IsMainSLVisible}">
+                         IsVisible="{Binding IsMainSLVisible}"
+                         VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{Binding UserEmail}"
                    HorizontalOptions="StartAndExpand">
@@ -192,7 +193,8 @@
 
 
                 <StackLayout Margin="0,40,0,0"
-                         IsVisible="{Binding IsUserIconVisible}">
+                             IsVisible="{Binding IsUserIconVisible}"
+                             VerticalOptions="FillAndExpand">
                     <StackLayout>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PasswordChangeCommand}">
@@ -213,19 +215,15 @@
                         </Label>
                         <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <AbsoluteLayout VerticalOptions="EndAndExpand" IsVisible="{Binding IsUserIconVisible}">
                     <Button Text="{Static resources:AppResources.SignOut}" 
-                    Command="{Binding SignOutCommand}"
-                    VerticalOptions="End"
-                    Margin="0,450,0,0"
-                    Style="{StaticResource primaryButton}"
-                    IsVisible="{Binding IsUserIconVisible}"
-                                AbsoluteLayout.LayoutBounds="0.5, 1, AutoSize, AutoSize" 
-                                AbsoluteLayout.LayoutFlags="PositionProportional">
+                            Command="{Binding SignOutCommand}"
+                            Style="{StaticResource primaryButton}"
+                            IsVisible="{Binding IsUserIconVisible}"
+                            VerticalOptions="EndAndExpand">
                     </Button>
-                </AbsoluteLayout>
-                
+                </StackLayout>
+
+                               
                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                VerticalOptions="EndAndExpand"
                                IsVisible="{Binding IsSettingsIconVisible}">
