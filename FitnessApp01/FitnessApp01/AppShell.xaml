@@ -8,14 +8,7 @@
        x:Class="FitnessApp01.AppShell"
        Shell.FlyoutBehavior="Disabled"
        Shell.NavBarIsVisible="False"
-       xmlns:fontawesome="clr-namespace:FitnessApp01.Helpers" 
-       >
-
-    <!--
-        The overall app visual hierarchy is defined here, along with navigation.
-    
-        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
-    -->
+       xmlns:fontawesome="clr-namespace:FitnessApp01.Helpers">
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -69,7 +62,7 @@
                 </FontImageSource>
             </ShellContent.Icon>
         </ShellContent>
-        
+
         <ShellContent Title="{x:Static resources:AppResources.Overview}"  
                       ContentTemplate="{DataTemplate local:HomePage}">
             <ShellContent.Icon>
@@ -90,23 +83,4 @@
             </ShellContent.Icon>
         </ShellContent>
     </TabBar>
-
-    <!--<ShellItem>
-        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage">
-        </ShellContent>
-    </ShellItem>-->
-
-    
-
-    <!--<TabBar>
-        <ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
-    </TabBar>-->
-
-    <!--
-        If you would like to navigate to this content you can do so by calling
-        await Shell.Current.GoToAsync("//LoginPage");
-    -->
-
-
 </Shell>
