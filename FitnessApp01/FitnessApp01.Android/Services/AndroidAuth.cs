@@ -42,7 +42,7 @@ namespace FitnessApp01.Droid.Services
         {
             try
             {
-                // u některých metod je za určitých podmínek potřeba reauthentizace
+                // u některých metod je potřeba reauthentizace
                 await ReAuthenticate(EmailAuthProvider.GetCredential(GetUserEmail(), oldPassword));
                 await mAuth.CurrentUser.UpdatePasswordAsync(newPassword);
             }
