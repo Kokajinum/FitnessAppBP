@@ -17,11 +17,11 @@ namespace FitnessApp01.Models
             }
         }
 
-        private string _brandInput;
+        private string _brandInput = String.Empty;
         public string BrandInput
         {
             get { return _brandInput; }
-            set { SetProperty(ref _brandInput, value); }
+            set { SetProperty(ref _brandInput, value); CanSaveChanged(); }
         }
 
         private int? _kcalInput;
@@ -67,28 +67,28 @@ namespace FitnessApp01.Models
         public double? SaturatedInput
         {
             get { return _saturatedInput; }
-            set { SetProperty(ref _saturatedInput, value); }
+            set { SetProperty(ref _saturatedInput, value); CanSaveChanged(); }
         }
 
         private double? _fiberInput;
         public double? FiberInput
         {
             get { return _fiberInput; }
-            set { SetProperty(ref _fiberInput, value); }
+            set { SetProperty(ref _fiberInput, value); CanSaveChanged(); }
         }
 
         private double? _saltInput;
         public double? SaltInput
         {
             get { return _saltInput; }
-            set { SetProperty(ref _saltInput, value); }
+            set { SetProperty(ref _saltInput, value); CanSaveChanged(); }
         }
 
         private double? _portionSize;
         public double? PortionSize
         {
             get { return _portionSize; }
-            set { SetProperty(ref _portionSize, value); }
+            set { SetProperty(ref _portionSize, value); CanSaveChanged(); }
         }
 
         public bool CanSave
@@ -96,8 +96,24 @@ namespace FitnessApp01.Models
             get
             {
                 return CheckNameInput() && KcalInput > 0 && CarbsInput > 0 &&
-                     SugarInput > 0 && ProteinInput > 0 && FatInput > 0;
+                     SugarInput > 0 && ProteinInput > 0 && FatInput > 0 && CheckOptional();
             }
+        }
+
+        private bool CheckOptional()
+        {
+            bool brand;
+            if (BrandInput == null)
+            {
+                brand = true;
+            }
+            else
+            {
+                brand = !BrandInput.Contains("&") && !BrandInput.Contains("#");
+            }
+            // pokud uživatel zadá třeba do vstupu k FiberInput hodnotu: -, tak to converter převede na 0
+            return brand && !(SaturatedInput < 0) && !(FiberInput < 0)
+                && !(SaltInput < 0) && !(PortionSize < 0);
         }
 
         private bool CheckNameInput()
