@@ -44,6 +44,11 @@ namespace FitnessApp01.ViewModels
 
         public async Task AddMeal(MealGroup meals)
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
             var jsonString = JsonConvert.SerializeObject(RegistrationSettings.Macros);
             await Shell.Current.GoToAsync($"SelectMealPage?mealType={meals.Name}" +
                 $"&caloriesGoal={RegistrationSettings.CaloriesGoal}&macros={jsonString}");
