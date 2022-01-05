@@ -13,14 +13,18 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid>
-            <StackLayout x:Name="LoginStackLayout" IsVisible="{Binding LoginIsVisible}" VerticalOptions="Center" Padding="10,0,10,0">
+        <StackLayout VerticalOptions="Center">
+            <StackLayout x:Name="LoginStackLayout" 
+                         IsVisible="{Binding LoginIsVisible}" 
+                         VerticalOptions="Center" 
+                         Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}" 
-                       Text="{Binding UserEmail, Mode=TwoWay}" Keyboard="Email">
+                       Text="{Binding UserEmail, Mode=TwoWay}" 
+                       Keyboard="Email">
                 </Entry>
-                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" IsPassword="True"
-                       Text="{Binding UserPassword, Mode=TwoWay}"
-                       >
+                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" 
+                       IsPassword="True"
+                       Text="{Binding UserPassword, Mode=TwoWay}">
                 </Entry>
                 <Button Text="{x:Static resources:AppResources.LoginPage_LoginButton}"
                         Style="{x:StaticResource primaryButton}"
@@ -30,20 +34,28 @@
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.LoginPage_NoAccount}">
                     </Label>
-                    <Label Text="{x:Static resources:AppResources.LoginPage_Register}" Style="{StaticResource secondaryLabel}">
+                    <Label Text="{x:Static resources:AppResources.LoginPage_Register}" 
+                           Style="{StaticResource secondaryLabel}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RegisterLabelTapCommand}" NumberOfTapsRequired="1">
+                            <TapGestureRecognizer Command="{Binding RegisterLabelTapCommand}" 
+                                                  NumberOfTapsRequired="1">
                             </TapGestureRecognizer>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout x:Name="RegisterStackLayout" IsVisible="{Binding RegisterIsVisible}" VerticalOptions="Center" Padding="10,0,10,0">
+            <StackLayout x:Name="RegisterStackLayout" 
+                         IsVisible="{Binding RegisterIsVisible}" 
+                         VerticalOptions="Center" 
+                         Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}"
-                       Text="{Binding UserEmail, Mode=TwoWay}" Keyboard="Email"></Entry>
-                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" IsPassword="True" 
+                       Text="{Binding UserEmail, Mode=TwoWay}" 
+                       Keyboard="Email"></Entry>
+                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" 
+                       IsPassword="True" 
                        Text="{Binding UserPassword, Mode=TwoWay}"></Entry>
-                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordConfirmPlaceholder}" IsPassword="True"
+                <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordConfirmPlaceholder}" 
+                       IsPassword="True"
                        Text="{Binding UserConfirmPassword, Mode=TwoWay}"></Entry>
                 <Button Text="{x:Static resources:AppResources.LoginPage_RegisterButton}"
                         Style="{x:StaticResource primaryButton}"
@@ -52,14 +64,17 @@
                 </Button>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.LoginPage_AlreadyHaveAccount}"></Label>
-                    <Label Text="{x:Static resources:AppResources.LoginPage_Login}" Style="{StaticResource secondaryLabel}">
+                    <Label Text="{x:Static resources:AppResources.LoginPage_Login}" 
+                           Style="{StaticResource secondaryLabel}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LoginLabelTapCommand}" NumberOfTapsRequired="1">
+                            <TapGestureRecognizer Command="{Binding LoginLabelTapCommand}" 
+                                                  NumberOfTapsRequired="1">
                             </TapGestureRecognizer>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </StackLayout>
-        </Grid>
+        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
