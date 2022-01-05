@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              xmlns:converters="clr-namespace:FitnessApp01.Converters"
+             xmlns:helpers="clr-namespace:FitnessApp01.Helpers"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="True">
 
@@ -81,16 +82,23 @@
             <ActivityIndicator IsRunning="{Binding IsBusy}">
             </ActivityIndicator>
             <Button Text="Upravit záznam"
-                    VerticalOptions="EndAndExpand"
-                    Margin="100,0,100,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
                     Command="{Binding EditMealCommand}"
-                    CommandParameter="{Binding CanEdit}">
+                    Opacity="{Binding EditButtonOpacity}"
+                    Style="{StaticResource primaryButton}">
             </Button>
-            <ImageButton Source="icon_feed.png"
-                         HorizontalOptions="Center"
-                         Margin="0,0,0,100"
-                         Command="{Binding DeleteMealCommand}">
-            </ImageButton>
+            <Label FontFamily="FAS"
+                   Text="{Static helpers:IconFont.Trash}"
+                   FontSize="30"
+                   Margin="0,50,0,0"
+                   HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                          Command="{Binding DeleteMealCommand}">
+                    </TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
