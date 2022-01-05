@@ -31,16 +31,18 @@
                 </Entry>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.AddFoodPage_Nutritions}"
+                           HorizontalOptions="StartAndExpand"
                            FontSize="Large"
                            FontAttributes="Bold">
                     </Label>
                     <Label Text="100"
                            FontSize="Large"
                            FontAttributes="Bold"
-                           Margin="50,0,0,0">
+                           HorizontalOptions="Start">
                     </Label>
                     <Picker ItemsSource="{Binding PickerUnits}"
-                            SelectedItem="{Binding PickerCurrentUnit}">
+                            SelectedItem="{Binding PickerCurrentUnit}"
+                            HorizontalOptions="End">
                     </Picker>
                 </StackLayout>
                 
