@@ -14,19 +14,12 @@ using Xamarin.Forms;
 
 namespace FitnessApp01.ViewModels
 {
-    /*[QueryProperty(nameof(MealType), "mealType")]
-    [QueryProperty(nameof(FoodJson), "foodJson")]
-    [QueryProperty(nameof(CaloriesGoal), "caloriesGoal")]
-    [QueryProperty(nameof(MacrosJson), "macros")] //zbytecne?*/
     public class AddMealPageViewModel : BaseViewModel, IQueryAttributable
     {
         public AddMealPageViewModel()
         {
             AddMealCommand = new Command(
                 execute: async () => await AddMeal());
-            //FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
-            //InitializeAddMealPageViewModel();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, string> query)
@@ -112,7 +105,7 @@ namespace FitnessApp01.ViewModels
                     CleanUp(oldDay);
                 }
             } 
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -125,7 +118,6 @@ namespace FitnessApp01.ViewModels
             
         }
 
-        //bude implementovat model Day
         private void CleanUp(Day oldDay)
         {
             int i;
@@ -138,10 +130,6 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-
-        //nedava smysl, day je predavan referenci, menen, a pak i vracen --> opravit
-        //nahradit jako konstruktor v Day?
-        //zbytečná, nahradí ji UpdateExistingDay
         private Day InitializeNewDay(Day day)
         {
             day.UnixSeconds = SelectedDay.ToUnixSecondsString();
@@ -203,9 +191,6 @@ namespace FitnessApp01.ViewModels
         
 
         #region Properties 
-
-        //public IDatabase FirestoreBase { get; 
-        //    set; }
         public string MealType { get; 
             set; }
 
@@ -216,8 +201,6 @@ namespace FitnessApp01.ViewModels
             set 
             { 
                 SetProperty(ref _foodJson, value);
-                //Food = ConvertJsonToFood(value);
-                //InitializeAddMealPageViewModel();
             }
         }
 
@@ -230,7 +213,6 @@ namespace FitnessApp01.ViewModels
             set
             {
                 SetProperty(ref _macrosString, value);
-               // Macros = JsonConvert.DeserializeObject<Dictionary<string, double>>(_macrosString);
             }
         }
 
@@ -323,16 +305,7 @@ namespace FitnessApp01.ViewModels
             set 
             { 
                 SetProperty(ref _userInput, value);
-                if (_userInput == null)
-                {
-                    IsVisible = false;
-                }else
-                {
-                    CalculateNutrients();
-                    IsVisible = true;
-                }
                 CanAddChanged();
-
             }
         }
 
@@ -361,7 +334,7 @@ namespace FitnessApp01.ViewModels
         {
             get
             {
-                return UserInput != null && UserInput != 0;
+                return UserInput != null && UserInput > 0;
             }
         }
 
@@ -376,10 +349,13 @@ namespace FitnessApp01.ViewModels
         {
             if (CanAdd)
             {
+                CalculateNutrients();
+                IsVisible = true;
                 AddButtonOpacity = 1;
             }
             else
             {
+                IsVisible = false;
                 AddButtonOpacity = 0.2;
             }
         }
