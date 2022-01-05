@@ -1,6 +1,7 @@
 ﻿using FitnessApp01.Helpers;
 using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,7 @@ namespace FitnessApp01.ViewModels
         public EditMealPageViewModel()
         {
             EditMealCommand = new Command(
-                execute: async () => await EditMeal(),
-                canExecute: () => EditCanExecute());
+                execute: async () => await EditMeal());
             DeleteMealCommand = new Command(
                 execute: async () => await DeleteMeal());
             //FirestoreBase = DependencyService.Get<IDatabase>();
@@ -45,8 +45,7 @@ namespace FitnessApp01.ViewModels
                 await FirestoreBase.UpdateDayAsync(CurrentDay);
                 await FirestoreBase.DeleteMealAsync(Meal);
             }
-            //todo reseni chyb
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -61,6 +60,11 @@ namespace FitnessApp01.ViewModels
 
         public async Task EditMeal()
         {
+            if (!CanEdit)
+            {
+                await DisplayErrorAsync(AppResources.CanNotSave);
+                return;
+            }
             IsBusy = true;
             try
             {
@@ -73,8 +77,7 @@ namespace FitnessApp01.ViewModels
                 
                
             }
-            //todo
-            catch (Exception e)
+            catch (Exception)
             {
                 
             }
@@ -101,11 +104,6 @@ namespace FitnessApp01.ViewModels
 
 
         #region helpers
-
-        private bool EditCanExecute()
-        {
-            return CanEdit;
-        }
 
         private void UpdateCurrentDay()
         {
@@ -175,7 +173,6 @@ namespace FitnessApp01.ViewModels
 
         #region Properties
 
-        //private IDatabase FirestoreBase { get; set; }
         public Food Food { get; set; }
 
         public Day CurrentDay { get; set; }
@@ -218,16 +215,16 @@ namespace FitnessApp01.ViewModels
             set
             { 
                 SetProperty(ref _weightInput, value);
-                if (_weightInput == null)
-                {
-                    IsVisible = false;
-                }
-                else
-                {
-                    CalculateNutrients();
-                    IsVisible = true;
-                }
-                OnPropertyChanged("CanEdit");
+                //if (!CanEdit)
+                //{
+                //    IsVisible = false;
+                //}
+                //else
+                //{
+                //    CalculateNutrients();
+                //    IsVisible = true;
+                //}
+                CanEditMealChanged();
             }
         }
 
@@ -300,7 +297,30 @@ namespace FitnessApp01.ViewModels
         {
             get
             {
-                return WeightInput != null && WeightInput != WeightUnchanged;
+                return WeightInput != null && WeightInput != WeightUnchanged
+                    && WeightInput > 0; 
+            }
+        }
+
+        private double _editButtonOpacity = 0.2;
+        public double EditButtonOpacity
+        {
+            get { return _editButtonOpacity; }
+            set { SetProperty(ref _editButtonOpacity, value); }
+        }
+
+        private void CanEditMealChanged()
+        {
+            if (CanEdit)
+            {
+                CalculateNutrients();
+                IsVisible = true;
+                EditButtonOpacity = 1;
+            }
+            else
+            {
+                EditButtonOpacity = 0.2;
+                IsVisible = false;
             }
         }
 
