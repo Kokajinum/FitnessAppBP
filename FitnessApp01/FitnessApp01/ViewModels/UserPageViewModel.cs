@@ -54,6 +54,11 @@ namespace FitnessApp01.ViewModels
 
         private async Task SaveChanges()
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
             if (!SomethingUnsaved)
             {
                 await DisplayErrorAsync("Není co uložit.");
@@ -229,6 +234,11 @@ namespace FitnessApp01.ViewModels
 
         private async Task PasswordChange()
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
             await GoToPageAsync("PasswordChangePage");
         }
 
