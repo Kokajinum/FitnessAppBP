@@ -26,43 +26,50 @@
                 <ActivityIndicator IsRunning="{Binding IsBusy}">
                 </ActivityIndicator>
             </StackLayout>
-            <CollectionView ItemsSource="{Binding FoodCollection}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="15,5">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:SelectMealPageViewModel}},
+            <Grid RowDefinitions="*" ColumnDefinitions="*">
+                <CollectionView ItemsSource="{Binding FoodCollection}"
+                                Grid.Row="0" Grid.Column="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="15,5">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type                                   local:SelectMealPageViewModel}},
                                                                Path=FoodTapCommand}"
                                                       CommandParameter="{Binding .}"
                                                       NumberOfTapsRequired="1">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
-                            <Label Text="{Binding Name}"
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Name}"
                                    FontSize="Small"
                                    FontAttributes="Bold"
                                    TextColor="Black">
-                            </Label>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Brand}"></Label>
-                                <Label FontAttributes="Bold">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding Kcal}"></Span>
-                                            <Span Text="Kcal"></Span>
-                                        </FormattedString>
-                                    </Label.FormattedText>
                                 </Label>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Brand}"></Label>
+                                    <Label FontAttributes="Bold">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Kcal}"></Span>
+                                                <Span Text="Kcal"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Button Text="Přidat novou potravinu do databáze"
-                    Command="{Binding AddFoodCommand}"
-                    VerticalOptions="EndAndExpand"
-                    Margin="10,0,10,10"
-                    Style="{x:StaticResource primaryButton}">
-            </Button>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <StackLayout HeightRequest="70"></StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+                <Button Text="Přidat novou potravinu do databáze"
+                        Command="{Binding AddFoodCommand}"
+                        VerticalOptions="EndAndExpand"
+                        Margin="10,0,10,10"
+                        Style="{x:StaticResource primaryButton}"
+                        Grid.Row="0" Grid.Column="0">
+                </Button>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -63,8 +63,8 @@
                          IsVisible="{Binding IsMainSLVisible}"
                          VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding UserEmail}"
-                   HorizontalOptions="StartAndExpand">
+                    <Label Text="{Binding RegistrationSettings.Email}"
+                           HorizontalOptions="StartAndExpand">
                     </Label>
                     <Label FontFamily="FAS"
                        Text="{Static helpers:IconFont.Cog}"
@@ -91,108 +91,128 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-                <StackLayout Margin="0,40,0,0"
-                         IsVisible="{Binding IsSettingsIconVisible}">
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding CaloriesGoalChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeCaloriesGoal}"></Span>
-                                    <Span Text=" : " FontSize="25"></Span>
-                                    <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
-                                    <Span Text=" kcal"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                <ScrollView IsVisible="{Binding IsSettingsIconVisible}" 
+                            VerticalScrollBarVisibility="Always"
+                            VerticalOptions="Center">
+                    <StackLayout Margin="0,20,0,0">
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CaloriesGoalChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeCaloriesGoal}"></Span>
+                                        <Span Text=" : "></Span>
+                                        <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
+                                        <Span Text=" kcal"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AgeChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeAge}"></Span>
+                                        <Span Text=" : "></Span>
+                                        <Span Text="{Binding RegistrationSettings.AgeDB}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoalWeightChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeWeight}"></Span>
+                                        <Span Text=" : "></Span>
+                                        <Span Text="{Binding RegistrationSettings.DesiredWeightDB}"></Span>
+                                        <Span Text=" "></Span>
+                                        <Span Text="{Binding RegistrationSettings.DesiredWeightMeasureDB}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HeightChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeHeight}"></Span>
+                                        <Span Text=" : "></Span>
+                                        <Span Text="{Binding RegistrationSettings.HeightDB}"></Span>
+                                        <Span Text=" cm"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ActivityChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeActivity}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SpeedChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeSpeed}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>
+                        
                     </StackLayout>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AgeChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeAge}"></Span>
-                                    <Span Text=" : " FontSize="25"></Span>
-                                    <Span Text="{Binding RegistrationSettings.AgeDB}"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
-                    </StackLayout>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding WeightChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeWeight}"></Span>
-                                    <Span Text=" : " FontSize="25"></Span>
-                                    <Span Text="{Binding RegistrationSettings.DesiredWeightDB}"></Span>
-                                    <Span Text=" "></Span>
-                                    <Span Text="{Binding RegistrationSettings.DesiredWeightMeasureDB}"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
-                    </StackLayout>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding HeightChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeHeight}"></Span>
-                                    <Span Text=" : " FontSize="25"></Span>
-                                    <Span Text="{Binding RegistrationSettings.HeightDB}"></Span>
-                                    <Span Text=" cm"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
-                    </StackLayout>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ActivityChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeActivity}"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
-                    </StackLayout>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SpeedChangeCommand}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label Style="{StaticResource settingsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Static resources:AppResources.ChangeSpeed}"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
-                    </StackLayout>
+                    
+
+                </ScrollView>
+                <StackLayout>
+                    <Label Text="{Static resources:AppResources.SaveChangedWarning}"
+                           IsVisible="{Binding IsSettingsIconVisible}"
+                            TextColor="Red"
+                            Opacity="{Binding SaveButtonOpacity}">
+                    </Label>
+                    <Button Text="{Static resources:AppResources.SaveChanged}"
+                        Command="{Binding SaveChangesCommand}"
+                        Style="{StaticResource primaryButton}"
+                        IsVisible="{Binding IsSettingsIconVisible}"
+                        Opacity="{Binding SaveButtonOpacity}">
+                    </Button>
                 </StackLayout>
+                
 
 
-                <StackLayout Margin="0,40,0,0"
+                <StackLayout Margin="0,20,0,0"
                              IsVisible="{Binding IsUserIconVisible}"
                              VerticalOptions="FillAndExpand">
                     <StackLayout>
@@ -203,7 +223,7 @@
                         <Label Style="{StaticResource settingsLabel}"
                            Text="{Static resources:AppResources.ChangePassword}">
                         </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                        <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                     </StackLayout>
                     <StackLayout>
                         <StackLayout.GestureRecognizers>
@@ -213,14 +233,28 @@
                         <Label Style="{StaticResource settingsLabel}"
                            Text="{Static resources:AppResources.AboutApp}">
                         </Label>
-                        <StackLayout Style="{StaticResource settingsLine}"></StackLayout>
+                        <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                     </StackLayout>
-                    <Button Text="{Static resources:AppResources.SignOut}" 
+                    <StackLayout Margin="0,40,0,0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SignOutCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <Label Style="{StaticResource settingsLabel}"
+                               Text="{Static resources:AppResources.SignOut}"
+                               FontAttributes="Bold">
+                        </Label>
+                        <StackLayout Style="{StaticResource horizontalLine}"
+                                     BackgroundColor="Black">
+                            
+                        </StackLayout>
+                    </StackLayout>
+                    <!--<Button Text="{Static resources:AppResources.SignOut}" 
                             Command="{Binding SignOutCommand}"
                             Style="{StaticResource primaryButton}"
                             IsVisible="{Binding IsUserIconVisible}"
                             VerticalOptions="EndAndExpand">
-                    </Button>
+                    </Button>-->
                 </StackLayout>
 
                                
@@ -228,19 +262,7 @@
                                VerticalOptions="EndAndExpand"
                                IsVisible="{Binding IsSettingsIconVisible}">
                 </ActivityIndicator>
-                <Label Text="{Static resources:AppResources.SaveChangedWarning}"
-                   IsVisible="{Binding IsSettingsIconVisible}"
-                   TextColor="Red"
-                   VerticalOptions="EndAndExpand"
-                   Opacity="{Binding SaveButtonOpacity}">
-                </Label>
-                <Button Text="{Static resources:AppResources.SaveChanged}"
-                    Command="{Binding SaveChangesCommand}"
-                    VerticalOptions="End"
-                    Style="{StaticResource primaryButton}"
-                    IsVisible="{Binding IsSettingsIconVisible}"
-                    Opacity="{Binding SaveButtonOpacity}">
-                </Button>
+                
             </StackLayout>
             
         </StackLayout>

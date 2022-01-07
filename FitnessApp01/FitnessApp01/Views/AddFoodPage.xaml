@@ -24,10 +24,12 @@
         <ScrollView Margin="15">
             <StackLayout>
                 <Entry Placeholder="{Static resources:AppResources.FoodName}"
-                       Text="{Binding Attrs.NameInput, Mode=TwoWay}">
+                       Text="{Binding Attrs.NameInput, Mode=TwoWay}"
+                       Style="{StaticResource addFoodEntry}">
                 </Entry>
                 <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Brand}"
-                       Text="{Binding Attrs.BrandInput, Mode=OneWayToSource}">
+                       Text="{Binding Attrs.BrandInput, Mode=OneWayToSource}"
+                       Style="{StaticResource addFoodEntry}">
                 </Entry>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResources.AddFoodPage_Nutritions}"
@@ -38,40 +40,47 @@
                     <Label Text="100"
                            FontSize="Large"
                            FontAttributes="Bold"
-                           HorizontalOptions="Start">
+                           HorizontalOptions="Center">
                     </Label>
                     <Picker ItemsSource="{Binding PickerUnits}"
                             SelectedItem="{Binding PickerCurrentUnit}"
-                            HorizontalOptions="End">
+                            HorizontalOptions="Center"
+                            Margin="0,0,30,0"
+                            WidthRequest="30">
                     </Picker>
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal">
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Energy}"
                            Text="{Binding Attrs.KcalInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
-                           Keyboard="Numeric">
+                           Keyboard="Numeric"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Fats}"
                            Text="{Binding Attrs.FatInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                 </StackLayout>
                 <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_SaturatedFats}"
                            Text="{Binding Attrs.SaturatedInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                       Style="{StaticResource addFoodEntry}">
                 </Entry>
                 <StackLayout Orientation="Horizontal">
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Carbs}"
                            Text="{Binding Attrs.CarbsInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Sugar}"
                            Text="{Binding Attrs.SugarInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                 </StackLayout>
                 
@@ -80,24 +89,28 @@
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Fiber}"
                            Text="{Binding Attrs.FiberInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Protein}"
                            Text="{Binding Attrs.ProteinInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric" 
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                     <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Salt}"
                            Text="{Binding Attrs.SaltInput, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                            Keyboard="Numeric"
-                           HorizontalOptions="FillAndExpand">
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource addFoodEntry}">
                     </Entry>
                 </StackLayout>
                 <Entry Placeholder="{x:Static resources:AppResources.AddFoodPage_Portion}"
                        Text="{Binding Attrs.PortionSize, Mode=OneWayToSource, Converter={StaticResource stringToDouble}}"
                        Margin="0,30,0,0"
                        HorizontalOptions="Center"
-                       Keyboard="Numeric">
+                       Keyboard="Numeric"
+                       Style="{StaticResource addFoodEntry}">
                 </Entry>
                 <Label Text="{x:Static resources:AppResources.AddFoodPage_PleaseCheckInputs}"
                        TextColor="Red"

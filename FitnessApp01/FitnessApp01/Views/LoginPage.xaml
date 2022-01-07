@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>    
         <!--nastavení viewmodelu-->
@@ -13,7 +14,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
+        <Grid VerticalOptions="Center"
+              RowDefinitions="*" ColumnDefinitions="*">
             <StackLayout x:Name="LoginStackLayout" 
                          IsVisible="{Binding LoginIsVisible}" 
                          VerticalOptions="Center" 
@@ -74,7 +76,10 @@
                     </Label>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Scale="0.4">
+            </ActivityIndicator>
+        </Grid>
         
     </ContentPage.Content>
 </ContentPage>
