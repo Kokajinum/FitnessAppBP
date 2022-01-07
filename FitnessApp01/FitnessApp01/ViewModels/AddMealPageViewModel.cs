@@ -45,6 +45,7 @@ namespace FitnessApp01.ViewModels
             }
             if (Food.PortionSize != 0)
             {
+                UserInput = 1;
                 PickerSource.Add(" x " + Food.PortionSize.ToString() + Food.Measure);
                 PickerSource.Add(Food.Measure);
             }

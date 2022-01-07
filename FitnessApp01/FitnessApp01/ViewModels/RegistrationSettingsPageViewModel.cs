@@ -98,8 +98,8 @@ namespace FitnessApp01.ViewModels
                 //EventAggregator.BroadCast2();
                 CarouselPosition = 0;
                 IsBusy = false;
-                await Shell.Current.GoToAsync("//main-content");
-                
+                await Shell.Current.GoToAsync("//DiaryPage");
+
                 return;
             }
             CarouselPosition++;
@@ -150,7 +150,7 @@ namespace FitnessApp01.ViewModels
                 Macros = GenerateMacros()
             };
             rs.CaloriesGoal = CalorieGoalCalculator.Calculate(rs);
-            rs.GoalSpeed = this.GoalDB == 1 || this.GoalDB == 2 ? 0.1 : 1; 
+            rs.GoalSpeed = this.GoalDB == 1 || this.GoalDB == 2 ? 0.1 : 1;
             return rs;
         }
 
@@ -158,7 +158,7 @@ namespace FitnessApp01.ViewModels
         /// Vytvoří výchozí hodnoty pro makra
         /// </summary>
         /// <returns></returns>
-        private IDictionary<string,double> GenerateMacros()
+        private IDictionary<string, double> GenerateMacros()
         {
             return new Dictionary<string, double>
             {
@@ -174,7 +174,7 @@ namespace FitnessApp01.ViewModels
             int s = GenderDB == "male" ? 5 : -161;
             double res = ((10 * WeightDB)
                          + (6.25 * HeightDB)
-                         - (5 * AgeDB) + s) * ActivityDB;   
+                         - (5 * AgeDB) + s) * ActivityDB;
             switch (GoalDB)
             {
                 //lose weight
@@ -200,7 +200,8 @@ namespace FitnessApp01.ViewModels
                 num > 0)
             {
                 DesiredWeightDB = num;
-                DesiredWeightMeasureDB = DesiredWeightPickerIndex == 0 ? "kg" : "lbs";
+                //DesiredWeightMeasureDB = DesiredWeightPickerIndex == 0 ? "kg" : "lbs";
+                DesiredWeightMeasureDB = "kg";
                 return true;
             }
             return false;
@@ -246,8 +247,8 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage3()
         {
-            if (!HeightInput.Equals(string.Empty) && 
-                double.TryParse(HeightInput, out double num) && 
+            if (!HeightInput.Equals(string.Empty) &&
+                double.TryParse(HeightInput, out double num) &&
                 num > 0)
             {
                 HeightDB = num;
@@ -263,7 +264,8 @@ namespace FitnessApp01.ViewModels
                 num > 0)
             {
                 WeightDB = num;
-                WeightMeasureDB = WeightPickerIndex == 0 ? "kg" : "lbs";
+                //WeightMeasureDB = WeightPickerIndex == 0 ? "kg" : "lbs";
+                WeightMeasureDB = "kg";
                 return true;
             }
             return false;
@@ -279,6 +281,8 @@ namespace FitnessApp01.ViewModels
             }
             return false;
         }
+
+        
 
         #endregion
 
@@ -393,6 +397,8 @@ namespace FitnessApp01.ViewModels
 
         public ICommand NextPageCommand { get; set; }
         public ICommand PreviousPageCommand { get; set; }
+
+        public ICommand Nothing { get; set; }
 
         #endregion
     }

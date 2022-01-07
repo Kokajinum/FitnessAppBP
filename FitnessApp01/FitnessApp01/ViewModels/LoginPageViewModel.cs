@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Resx;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Resx;
 using FitnessApp01.Services;
 using System;
 using System.Net.Mail;
@@ -31,6 +32,11 @@ namespace FitnessApp01.ViewModels
 
         public async Task Register()
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
             if (!CanRegister)
             {
                 await DisplayAlertAsync(AppResources.Error, AppResources.LoginPage_NoEmailOrPassword, "Ok");
@@ -52,11 +58,14 @@ namespace FitnessApp01.ViewModels
             }
             try
             {
+                IsBusy = true;
                 //registrovaný uživatel je zároveň přihlášený
                 await AuthBase.RegisterUserAsync(UserEmail, UserPassword);
                 LoginLabelTap();
+               // await App.Current.MainPage.Navigation.PushAsync(new AppShell());
                 await GoToPageAsync("//WelcomePage");
                 ResetFields();
+                IsBusy = false;
             }
             catch(Exception ex)
             {
@@ -66,6 +75,11 @@ namespace FitnessApp01.ViewModels
 
         public async Task Login()
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
             if (!CanLogin)
             {
                 await DisplayAlertAsync(AppResources.Error, AppResources.LoginPage_NoEmailOrPassword, "Ok");
@@ -82,14 +96,22 @@ namespace FitnessApp01.ViewModels
             }
             try
             {
+                IsBusy = true;
                 await AuthBase.LoginUserAsync(UserEmail, UserPassword);
                 //await GoToPageAsync("//main-content");
                 await GoToPageAsync("//DiaryPage");
+                //App.Current.MainPage = new AppShell();
+                //await App.Current.MainPage.Navigation.PushAsync(new AppShell());
                 ResetFields();
+                
             }
             catch(Exception ex)
             {
                 await DisplayAlertAsync(AppResources.Error, ex.Message, "Ok");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

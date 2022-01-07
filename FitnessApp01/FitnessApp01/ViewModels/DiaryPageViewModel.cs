@@ -49,9 +49,9 @@ namespace FitnessApp01.ViewModels
                 await DisplayErrorAsync(AppResources.InternetRequired);
                 return;
             }
-            var jsonString = JsonConvert.SerializeObject(RegistrationSettings.Macros);
+            var jsonString = JsonConvert.SerializeObject(Diary.RegistrationSettings.Macros);
             await Shell.Current.GoToAsync($"SelectMealPage?mealType={meals.Name}" +
-                $"&caloriesGoal={RegistrationSettings.CaloriesGoal}&macros={jsonString}");
+                $"&caloriesGoal={Diary.RegistrationSettings.CaloriesGoal}&macros={jsonString}");
 
         }
 
@@ -77,82 +77,70 @@ namespace FitnessApp01.ViewModels
             SetDiaryData(selectedDay);
         }
 
-        private async void ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-            {
-                await DisplayAlertAsync(AppResources.Change, AppResources.InternetAvailable, "Ok");
-                Connectivity.ConnectivityChanged -= ConnectivityChanged;
-            }
-            else
-            {
-                await DisplayErrorAsync(AppResources.InternetRequired);
-            }
-        }
 
         public async Task InitializeDiaryPageViewModel()
         {
             //test na dostupnost internetu
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            if (!Connection.IsConnected)
             {
-                Connectivity.ConnectivityChanged += ConnectivityChanged;
                 await DisplayErrorAsync(AppResources.InternetRequired);
             }
             IsBusy = true;
-            bool isValid;
-            //nestabilni chovani po vyplneni nedokoncene registrace
-            if (RegistrationSettings == null)
+            if (Diary.RegistrationSettings == null)
             {
-                isValid = await LoadRegistrationSettings();
+                //počká na stažení RegistrationSettings
+                var isValid = await LoadRegistrationSettings();
                 if (!isValid)
                 {
                     await App.Current.MainPage
                         .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
                     await Shell.Current.GoToAsync("//RegistrationSettingsPage");
                     IsBusy = false;
+                    return;
                 }
             }
             
-            isValid = await LoadAndSetDiaryData();
-            /*if (!isValid)
+            try
             {
-                await App.Current.MainPage
-                    .DisplayAlert("Error", "spatne nactene data", "ok");
-            }*/
+                await LoadAndSetDiaryData();
+            }
+            catch (Exception ex)
+            {
+                await DisplayErrorAsync("spatne nactene data, zprava: " + ex.Message);
+            }
             IsBusy = false;
         }
 
-        
 
-        public async Task<bool> LoadAndSetDiaryData()
+
+        public async Task LoadAndSetDiaryData()
         {
             Day selectedDay;
             try
             {
-                selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
                 //Před komunikací s DB kontrola, jestli se den už nenachází v kolekci
+                selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
                 if (selectedDay == null)
                 {
                     //Pokud se den v db nenajde, vrátí se nový "prázdný" den s nastaveným UnixSeconds
                     selectedDay = await FirestoreBase.ReadDiaryDataAsync();
                     Diary.Days.Add(selectedDay);
                 }
-                return SetDiaryData(selectedDay);
+                SetDiaryData(selectedDay);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
-                Console.WriteLine(e.Message);
-                //Diary.Days = new ObservableCollection<Day>();
-                return false;
+                //await DisplayAlertAsync("Error", "Nepodařilo se stáhnout diář", "ok");
+                //Console.WriteLine(e.Message);
+                throw;
             }
         }
 
-        private bool SetDiaryData(Day selectedDay)
+        private void SetDiaryData(Day selectedDay)
         {
             try
             {
-                selectedDay.CaloriesGoal = RegistrationSettings.CaloriesGoal;
+                selectedDay.CaloriesGoal = Diary.RegistrationSettings.CaloriesGoal;
                 DiaryPageAttributes.CaloriesGoal = selectedDay.CaloriesGoal;
                 DiaryPageAttributes.CaloriesCurrent = selectedDay.CaloriesCurrent;
                 if (DiaryPageAttributes.CaloriesGoal != 0)
@@ -161,25 +149,29 @@ namespace FitnessApp01.ViewModels
                 }
                 MealGroups = selectedDay.MealGroups;
                 MessagingCenter.Send<object>(this, "diaryUpdated");
-                return true;
             }
-            catch(Exception e)
+            catch (Exception)
             {
-                DisplayAlert("Error", "Nepodařilo se nastavit diář. zpráva: " + e.Message, "ok");
-                return false;
+                //DisplayAlert("Error", "Nepodařilo se nastavit diář. zpráva: " + e.Message, "ok");
+                throw;
             }
-            
+
         }
 
         private async Task<bool> LoadRegistrationSettings()
         {
             try
             {
+                //Diary.RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
                 RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
+                if (RegistrationSettings == null)
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {
-                RegistrationSettings = new RegistrationSettings();
+                Diary.RegistrationSettings = new RegistrationSettings();
                 await DisplayAlertAsync("Error", "nepodařilo se stáhnout nastavení", "ok");
             }
             return CheckRegistrationSettings();
@@ -190,7 +182,7 @@ namespace FitnessApp01.ViewModels
         private bool CheckRegistrationSettings()
         {
             //activity always > 1, range: <1.2,1.725>
-            bool v1 = RegistrationSettings.ActivityDB > 1; 
+            bool v1 = RegistrationSettings.ActivityDB > 1;
             //double,int default value == 0
             bool v2 = RegistrationSettings.AgeDB > 0;
             bool v3 = RegistrationSettings.CaloriesGoal > 0;
@@ -204,7 +196,7 @@ namespace FitnessApp01.ViewModels
             bool v11 = RegistrationSettings.WeightMeasureDB != string.Empty;
 
             return v1 && v2 && v3 && v4 && v5 && v6 && v7 && v8 && v9 && v10 && v11;
-            
+
         }
 
         #endregion
@@ -216,19 +208,19 @@ namespace FitnessApp01.ViewModels
         public DiaryPageAttributes DiaryPageAttributes
         {
             get { return _diaryPageAttributes; }
-            set 
+            set
             {
                 if (_diaryPageAttributes != value)
                     _diaryPageAttributes = value;
             }
         }
- 
+
         private ObservableCollection<MealGroup> _mealGroups;
         public ObservableCollection<MealGroup> MealGroups
         {
             get { return _mealGroups; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _mealGroups, value);
             }
         }
@@ -239,6 +231,8 @@ namespace FitnessApp01.ViewModels
             get { return _registrationSettings; }
             set { SetProperty(ref _registrationSettings, value); }
         }
+
+        public bool WasSignedOut { get; set; }
 
         #endregion
 

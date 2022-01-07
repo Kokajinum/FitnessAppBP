@@ -1,6 +1,7 @@
 ﻿using FitnessApp01.Helpers;
 using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
+using FitnessApp01.Resx;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,25 +14,57 @@ namespace FitnessApp01.ViewModels
     {
         public HomePageViewModel()
         {
-            RefreshViewCommand = new Command(() => Refresh());
             InitializeViewModel = new Command(async () => await InitializeHomePageViewModel());
+            WeightChangeCommand = new Command(async () => await WeightChange());
 
             HomePageAttributes = new HomePageAttributes();
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
             {
-                OnMessageReceived();
+                UpdateData();
             });
         }
 
-        private void Refresh()
+        private async Task WeightChange()
         {
-            SetDiaryData();
-            HomePageAttributes.IsRefreshing = false;
+            string result = await DisplayPromptAsync("Změna aktuální váhy", Keyboard.Numeric, maxLength: 3);
+            int parsedResult;
+            if (int.TryParse(result, out parsedResult))
+            {
+                RegistrationSettings.WeightDB = parsedResult;
+                //po změně se musí přepočítat CaloriesGoal
+                RegistrationSettings.CaloriesGoal = CalorieGoalCalculator.Calculate(RegistrationSettings);
+                await SaveChanges();
+            }
+            else
+            {
+                await DisplayErrorAsync("Změna se nepovedla");
+            }
         }
 
-        private void OnMessageReceived()
+        private async Task SaveChanges()
+        {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
+            IsBusy = true;
+            try
+            {
+                await FirestoreBase.UpdateRegistrationSettingsAsync(RegistrationSettings);
+                UpdateData();
+            }
+            catch (Exception ex)
+            {
+                await DisplayErrorAsync(ex.Message);
+            }
+            IsBusy = false;
+        }
+
+        private void UpdateData()
         {
             IsBusy = true;
+            RegistrationSettings = Diary.RegistrationSettings;
             SetDiaryData();
             IsBusy = false;
         }
@@ -158,6 +191,8 @@ namespace FitnessApp01.ViewModels
         public ICommand RefreshViewCommand { get; set; }
 
         public ICommand InitializeViewModel { get; set; }
+
+        public ICommand WeightChangeCommand { get; set; }
 
         #endregion
     }

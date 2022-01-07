@@ -19,7 +19,7 @@ namespace FitnessApp01.ViewModels
             SettingsIconTapCommand = new Command(() => SettingsIconTap());
             UserIconTapCommand = new Command(() => UserIconTap());
             SaveChangesCommand = new Command(async () => await SaveChanges());
-            WeightChangeCommand = new Command(async () => await WeightChange());
+            GoalWeightChangeCommand = new Command(async () => await GoalWeightChange());
             HeightChangeCommand = new Command(async () => await HeightChange());
             ActivityChangeCommand = new Command(async () => await ActivityChange());
             SpeedChangeCommand = new Command(async () => await SpeedChange());
@@ -27,7 +27,14 @@ namespace FitnessApp01.ViewModels
             ActualPasswordChangeCommand = new Command(async () => await ActualPasswordChange());
             AboutAppCommand = new Command(() => AboutApp());
             AboutAppCloseCommand = new Command(() => AboutAppClose());
-            UserEmail = AuthBase.GetUserEmail();
+            InitializeViewModelCommand = new Command(() => InitializeViewModel());
+
+            
+        }
+
+        private void InitializeViewModel()
+        {
+            RegistrationSettings = Diary.RegistrationSettings;
         }
 
         private void AboutAppClose()
@@ -128,7 +135,7 @@ namespace FitnessApp01.ViewModels
             }
         }
 
-        private async Task WeightChange()
+        private async Task GoalWeightChange()
         {
             string result = await DisplayPromptAsync("Změna cílové váhy", Keyboard.Numeric, maxLength: 3);
             int parsedResult;
@@ -247,7 +254,11 @@ namespace FitnessApp01.ViewModels
             bool result = await AuthBase.SignOut();
             if (result)
             {
-                await Shell.Current.GoToAsync("//LoginPage");
+                if (Diary.ClearData())
+                {
+                    MessagingCenter.Send<object>(this, "signedOut");
+                }
+                await GoToPageAsync("//LoginPage");
             }
         }
 
@@ -314,11 +325,11 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _userEmail, value); }
         }
 
-        private RegistrationSettings _registrationSettings = Diary.RegistrationSettings;
+        private RegistrationSettings _registrationSettings;
         public RegistrationSettings RegistrationSettings 
         { 
             get { return _registrationSettings; }
-            set { _registrationSettings = value; }
+            set { SetProperty(ref _registrationSettings, value); }
         }
 
         private bool _isSettingsIconVisible = true;
@@ -431,7 +442,7 @@ namespace FitnessApp01.ViewModels
         public ICommand SettingsIconTapCommand { get; set; }
         public ICommand UserIconTapCommand { get; set; }
         public ICommand SaveChangesCommand { get; set; }
-        public ICommand WeightChangeCommand { get; set; }
+        public ICommand GoalWeightChangeCommand { get; set; }
         public ICommand HeightChangeCommand { get; set; }
         public ICommand ActivityChangeCommand { get; set; }
         public ICommand SpeedChangeCommand { get; set; }
@@ -439,6 +450,7 @@ namespace FitnessApp01.ViewModels
         public ICommand ActualPasswordChangeCommand { get; set; }
         public ICommand AboutAppCommand { get; set; }
         public ICommand AboutAppCloseCommand { get; set; }
+        public ICommand InitializeViewModelCommand { get; set; }
 
         #endregion
     }

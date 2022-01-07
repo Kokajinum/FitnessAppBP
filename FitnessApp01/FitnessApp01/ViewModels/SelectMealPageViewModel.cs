@@ -59,7 +59,7 @@ namespace FitnessApp01.ViewModels
                 var foodList = await SearchService.GetResultsAsync(searchString);
                 FoodCollection = new ObservableCollection<Food>(foodList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
