@@ -9,17 +9,18 @@ namespace FitnessApp01.Models
 
         public static RegistrationSettings RegistrationSettings { get; set; }
 
-        public static Day GetSelectedDay()
+        public static bool ClearData()
         {
             try
             {
-
-            } 
-            catch(Exception ex)
-            {
-
+                Days.Clear();
+                RegistrationSettings = null;
+                return true;
             }
-            return new Day();
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         //[MapTo("UnixSeconds")]
