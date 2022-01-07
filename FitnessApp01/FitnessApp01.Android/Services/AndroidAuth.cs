@@ -20,6 +20,8 @@ namespace FitnessApp01.Droid.Services
 {
     public class AndroidAuth : IAuth
     {
+        
+
         private readonly FirebaseAuth mAuth = FirebaseAuth.Instance;
         
         private async Task ReAuthenticate(AuthCredential credential)
