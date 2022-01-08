@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessApp01.Views.HomePage"
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
-             xmlns:resources="clr-namespace:FitnessApp01.Resx"
+             xmlns:resources="clr-namespace:FitnessApp01.Resx" xmlns:converters="clr-namespace:FitnessApp01.Converters"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
@@ -13,98 +13,55 @@
         <local:HomePageViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToIntConverter x:Key="stringToInt" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="30,50,30,30">
-                <StackLayout Orientation="Horizontal"
+        <Grid RowDefinitions="*" ColumnDefinitions="*">
+            <ScrollView Grid.Row="0" Grid.Column="0">
+                <StackLayout Padding="30,50,30,30">
+                    <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center">
-                    <Label FontSize="20"
+                        <Label FontSize="20"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Dark=White, Light=Black}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="{Binding HomePageAttributes.CaloriesCurrent}"></Span>
-                                <Span Text="Kcal"></Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label FontSize="20">/</Label>
-                    <Label FontSize="20"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding HomePageAttributes.CaloriesCurrent}"></Span>
+                                    <Span Text="Kcal"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="20">/</Label>
+                        <Label FontSize="20"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Dark=White, Light=Black}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
-                                <Span Text="Kcal"></Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </StackLayout>
-                
-                <ProgressBar
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding RegistrationSettings.CaloriesGoal}"></Span>
+                                    <Span Text="Kcal"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                    <ProgressBar
                     WidthRequest="300"
                     Progress="{Binding HomePageAttributes.CaloriesProgress}">
-                </ProgressBar>
-                <Frame Style="{StaticResource macronutrientsFrame}"
+                    </ProgressBar>
+                    <Frame Style="{StaticResource macronutrientsFrame}"
                        Margin="0,20,0,0">
-                    <StackLayout>
-                        <Label Style="{StaticResource macronutrientsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Sacharidy: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.CarbohydratesCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.CarbohydratesGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label Style="{StaticResource macronutrientsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Z toho cukr: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.SugarCurrent}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label Style="{StaticResource macronutrientsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Bílkoviny: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.ProteinCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.ProteinGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label Style="{StaticResource macronutrientsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Tuky: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.FatCurrent}"></Span>
-                                    <Span Text="g/"></Span>
-                                    <Span Text="{Binding HomePageAttributes.FatGoal}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label Style="{StaticResource macronutrientsLabel}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Z toho nasycené mastné kyseliny: "></Span>
-                                    <Span Text="{Binding HomePageAttributes.SaturatedFatCurrent}"></Span>
-                                    <Span Text="g"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout>
                             <Label Style="{StaticResource macronutrientsLabel}">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="Vláknina: "></Span>
-                                        <Span Text="{Binding HomePageAttributes.FiberCurrent}"></Span>
+                                        <Span Text="Sacharidy: "></Span>
+                                        <Span Text="{Binding HomePageAttributes.CarbohydratesCurrent}"></Span>
+                                        <Span Text="g/"></Span>
+                                        <Span Text="{Binding HomePageAttributes.CarbohydratesGoal}"></Span>
                                         <Span Text="g"></Span>
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -112,43 +69,161 @@
                             <Label Style="{StaticResource macronutrientsLabel}">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="Sůl: "></Span>
-                                        <Span Text="{Binding HomePageAttributes.SaltCurrent}"></Span>
+                                        <Span Text="Z toho cukr: "></Span>
+                                        <Span Text="{Binding HomePageAttributes.SugarCurrent}"></Span>
                                         <Span Text="g"></Span>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                        </StackLayout>
-                        <StackLayout HorizontalOptions="Start">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding WeightChangeCommand}">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
-                            <Label FontSize="Large"
-                           Style="{StaticResource primaryText}"
-                           Margin="0,40,0,0">
+                            <Label Style="{StaticResource macronutrientsLabel}">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="Váha: "></Span>
-                                        <Span Text="{Binding RegistrationSettings.WeightDB}"></Span>
-                                        <Span Text=" "></Span>
-                                        <Span Text="{Binding RegistrationSettings.WeightMeasureDB}"></Span>
+                                        <Span Text="Bílkoviny: "></Span>
+                                        <Span Text="{Binding HomePageAttributes.ProteinCurrent}"></Span>
+                                        <Span Text="g/"></Span>
+                                        <Span Text="{Binding HomePageAttributes.ProteinGoal}"></Span>
+                                        <Span Text="g"></Span>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                            <Label Style="{StaticResource macronutrientsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Tuky: "></Span>
+                                        <Span Text="{Binding HomePageAttributes.FatCurrent}"></Span>
+                                        <Span Text="g/"></Span>
+                                        <Span Text="{Binding HomePageAttributes.FatGoal}"></Span>
+                                        <Span Text="g"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Style="{StaticResource macronutrientsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Z toho nasycené mastné kyseliny: "></Span>
+                                        <Span Text="{Binding HomePageAttributes.SaturatedFatCurrent}"></Span>
+                                        <Span Text="g"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Style="{StaticResource macronutrientsLabel}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Vláknina: "></Span>
+                                            <Span Text="{Binding HomePageAttributes.FiberCurrent}"></Span>
+                                            <Span Text="g"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Style="{StaticResource macronutrientsLabel}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Sůl: "></Span>
+                                            <Span Text="{Binding HomePageAttributes.SaltCurrent}"></Span>
+                                            <Span Text="g"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Margin="0,40,0,0">
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding WeightChangeCommand}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                    <Label FontSize="Medium"
+                                   Style="{StaticResource primaryText}"
+                                   >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Váha: "></Span>
+                                                <Span Text="{Binding RegistrationSettings.WeightDB}"></Span>
+                                                <Span Text=" "></Span>
+                                                <Span Text="{Binding RegistrationSettings.WeightMeasureDB}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding MacrosChangeCommand}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                    <Label FontSize="Medium"
+                                        Style="{StaticResource primaryText}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Makra"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+
+
                         </StackLayout>
-                        
-                    </StackLayout>
-                </Frame>
-                <ActivityIndicator 
+                    </Frame>
+                    <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="auto,auto,auto"
+                          RowSpacing="0"
+                          VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Padding="60,0"
+                          IsVisible="{Binding IsVisibleMacroChange}">
+                        <Label Style="{StaticResource macronutrientsLabel}" 
+                               Grid.Row="0" Grid.Column="0" 
+                               Text="Bílkoviny" 
+                               VerticalOptions="Center">
+                        </Label>
+                        <Entry Grid.Row="0" Grid.Column="1" 
+                               Text="{Binding ProteinMacro, Converter={StaticResource stringToInt}}" 
+                               Keyboard="Numeric"
+                               MaxLength="2">
+                        </Entry>
+                        <Label Grid.Row="0" Grid.Column="2" 
+                               Text="%" 
+                               VerticalOptions="Center">
+                        </Label>
+                        <Label Style="{StaticResource macronutrientsLabel}" 
+                               Grid.Row="1" Grid.Column="0" 
+                               Text="Sacharidy" 
+                               VerticalOptions="Center">
+                        </Label>
+                        <Entry Grid.Row="1" Grid.Column="1" 
+                               Text="{Binding CarbsMacro, Converter={StaticResource stringToInt}}" 
+                               Keyboard="Numeric"
+                               MaxLength="2"></Entry>
+                        <Label Grid.Row="1" Grid.Column="2" 
+                               Text="%" 
+                               VerticalOptions="Center"></Label>
+                        <Label Style="{StaticResource macronutrientsLabel}" 
+                               Grid.Row="2" Grid.Column="0" 
+                               Text="Tuky" 
+                               VerticalOptions="Center"></Label>
+                        <Entry Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding FatMacro, Converter={StaticResource stringToInt}}" 
+                               Keyboard="Numeric"
+                               MaxLength="2"></Entry>
+                        <Label Grid.Row="2" Grid.Column="2" 
+                               Text="%" 
+                               VerticalOptions="Center"></Label>
+                        <Button Grid.Row="3" Grid.ColumnSpan="3"
+                                Style="{StaticResource primaryButton}"
+                                Command="{Binding ActualMacroChangeCommand}"
+                                Text="{Static resources:AppResources.Save}">
+                        </Button>
+                    </Grid>
+                   
+
+                </StackLayout>
+
+            </ScrollView>
+            <ActivityIndicator Grid.Column="0" Grid.Row="0"
                     IsRunning="{Binding IsBusy}"
                     Scale="1"
                     VerticalOptions="Center">
-                </ActivityIndicator>
-            </StackLayout>
-            
-        </ScrollView>
+            </ActivityIndicator>
+        </Grid>
         
     </ContentPage.Content>
 </ContentPage>

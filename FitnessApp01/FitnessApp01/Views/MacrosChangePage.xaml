@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FitnessApp01.Views.PasswordChangePage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:vms="clr-namespace:FitnessApp01.ViewModels"
+             x:Class="FitnessApp01.Views.MacrosChangePage"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.NavBarIsVisible="True"
              Shell.FlyoutBehavior="Disabled"
              BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
             Light={StaticResource backgroundColor}}"
-             Title="{Static resources:AppResources.ChangePassword}">
+             Title="{Static resources:AppResources.MacrosChangePage}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -17,26 +17,25 @@
 
     <ContentPage.Content>
         <StackLayout Padding="30">
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <Entry Placeholder="{Static resources:AppResources.OldPassword}"
-                   Text="{Binding OldPassword}"
-                   IsPassword="true">
-                </Entry>
+            <StackLayout VerticalOptions="CenterAndExpand" Margin="100,0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding ProteinMacro}">
+                    </Entry>
+                    <Label Text="%" VerticalOptions="Center" Style="{StaticResource settingsLabel}"></Label>
+                </StackLayout>
+                
                 <Entry Placeholder="{Static resources:AppResources.NewPassword}"
-                   Text="{Binding NewPassword}"
-                   IsPassword="true">
+                   Text="{Binding NewPassword}">
                 </Entry>
                 <Entry Placeholder="{Static resources:AppResources.NewPasswordConfirm}"
-                   Text="{Binding NewPasswordConfirm}"
-                   IsPassword="true">
+                   Text="{Binding NewPasswordConfirm}">
                 </Entry>
             </StackLayout>
-            <Button Text="{Static resources:AppResources.Save}"
+            <Button Text="OK"
                         Style="{x:StaticResource primaryButton}"
                         VerticalOptions="End"
                         Margin="50,0,50,50"
-                        Command="{Binding ActualPasswordChangeCommand}"
-                        Opacity="{Binding PasswordButtonOpacity}">
+                        Command="{Binding ActualMacrosChangeCommand}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

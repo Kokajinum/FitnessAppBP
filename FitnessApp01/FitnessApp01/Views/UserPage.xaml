@@ -163,6 +163,20 @@
                             </Label>
                             <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                         </StackLayout>
+                        <!--<StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MacrosChangeCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                            <Label Style="{StaticResource settingsLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Static resources:AppResources.ChangeMacros}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
+                        </StackLayout>-->
                         <StackLayout>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ActivityChangeCommand}">
