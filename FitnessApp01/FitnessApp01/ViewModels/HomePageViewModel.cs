@@ -3,6 +3,7 @@ using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ namespace FitnessApp01.ViewModels
         {
             InitializeViewModel = new Command(async () => await InitializeHomePageViewModel());
             WeightChangeCommand = new Command(async () => await WeightChange());
+            MacrosChangeCommand = new Command(() => MacrosChange());
+            ActualMacroChangeCommand = new Command(async () => await ActualMacroChange());
 
             HomePageAttributes = new HomePageAttributes();
             MessagingCenter.Subscribe<object>(this, "diaryUpdated", (p) =>
@@ -24,11 +27,49 @@ namespace FitnessApp01.ViewModels
             });
         }
 
+        private async Task ActualMacroChange()
+        {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
+            // pokud jsou stejné jako původní tak to neřeším
+            if ((ProteinMacro == HomePageAttributes.ProteinMacro)
+                && (CarbsMacro == HomePageAttributes.CarbohydratesMacro)
+                && (FatMacro == HomePageAttributes.FatMacro))
+            {
+                IsVisibleMacroChange = false;
+                return;
+            }
+            // musí to být 100%
+            if (ProteinMacro + CarbsMacro + FatMacro != 100)
+            {
+                await DisplayErrorAsync("Součet všech složek musí být 100");
+                return;
+            }
+            Dictionary<string, int> Macros = new Dictionary<string, int>();
+            Macros.Add("protein", ProteinMacro);
+            Macros.Add("carbohydrates", CarbsMacro);
+            Macros.Add("fat", FatMacro);
+            RegistrationSettings.Macros = Macros;
+            await SaveChanges();
+            IsVisibleMacroChange = false;
+        }
+
+        private void MacrosChange()
+        {
+            ProteinMacro = RegistrationSettings.ProteinMacro;
+            CarbsMacro = RegistrationSettings.CarbohydratesMacro;
+            FatMacro = RegistrationSettings.FatMacro;
+            IsVisibleMacroChange = true;
+        }
+
         private async Task WeightChange()
         {
-            string result = await DisplayPromptAsync("Změna aktuální váhy", Keyboard.Numeric, maxLength: 3);
-            int parsedResult;
-            if (int.TryParse(result, out parsedResult))
+            string result = await DisplayPromptAsync("Změna aktuální váhy", Keyboard.Numeric, maxLength: 5);
+            double parsedResult;
+            if (double.TryParse(result, out parsedResult))
             {
                 RegistrationSettings.WeightDB = parsedResult;
                 //po změně se musí přepočítat CaloriesGoal
@@ -58,7 +99,10 @@ namespace FitnessApp01.ViewModels
             {
                 await DisplayErrorAsync(ex.Message);
             }
-            IsBusy = false;
+            finally 
+            {
+                IsBusy = false;
+            }
         }
 
         private void UpdateData()
@@ -182,7 +226,40 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _homePageAttributes, value); }
         }
 
-        
+        #region Macros change
+
+        private int _proteinMacro;
+        public int ProteinMacro
+        {
+            get { return _proteinMacro; }
+            set { SetProperty(ref _proteinMacro, value); }
+        }
+
+        private int _carbsMacro;
+        public int CarbsMacro
+        {
+            get { return _carbsMacro; }
+            set { SetProperty(ref _carbsMacro, value); }
+        }
+
+        private int _fatMacro;
+        public int FatMacro
+        {
+            get { return _fatMacro; }
+            set { SetProperty(ref _fatMacro, value); }
+        }
+
+        private bool _isVisibleMacroChange;
+        public bool IsVisibleMacroChange
+        {
+            get { return _isVisibleMacroChange; }
+            set { SetProperty(ref _isVisibleMacroChange, value); }
+        }
+
+        #endregion
+
+
+
 
         #endregion
 
@@ -193,6 +270,10 @@ namespace FitnessApp01.ViewModels
         public ICommand InitializeViewModel { get; set; }
 
         public ICommand WeightChangeCommand { get; set; }
+
+        public ICommand MacrosChangeCommand { get; set; }
+
+        public ICommand ActualMacroChangeCommand { get; set; }
 
         #endregion
     }
