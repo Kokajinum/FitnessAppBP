@@ -158,9 +158,9 @@ namespace FitnessApp01.ViewModels
         /// Vytvoří výchozí hodnoty pro makra
         /// </summary>
         /// <returns></returns>
-        private IDictionary<string, double> GenerateMacros()
+        private IDictionary<string, int> GenerateMacros()
         {
-            return new Dictionary<string, double>
+            return new Dictionary<string, int>
             {
                 { "protein", 30 },
                 { "carbohydrates", 40 },
@@ -168,6 +168,7 @@ namespace FitnessApp01.ViewModels
             };
         }
 
+        [Obsolete("Použijte CalorieGoalCalculator")]
         private int CalculateCaloriesGoal()
         {
             //The Mifflin St Jeor equation RMR
@@ -247,7 +248,7 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage3()
         {
-            if (!HeightInput.Equals(string.Empty) &&
+            if (!string.IsNullOrEmpty(HeightInput) &&
                 double.TryParse(HeightInput, out double num) &&
                 num > 0)
             {
@@ -259,7 +260,7 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage2()
         {
-            if (!WeightInput.Equals(string.Empty) &&
+            if (!string.IsNullOrEmpty(WeightInput) &&
                 double.TryParse(WeightInput, out double num) &&
                 num > 0)
             {
@@ -347,6 +348,7 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _genderRadioButtonSelected, value); }
         }
 
+        
         private string _activityRadioButtonSelected = string.Empty;
         public string ActivityRadioButtonSelected
         {
