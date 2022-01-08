@@ -304,6 +304,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Změnit makra.
+        /// </summary>
+        public static string ChangeMacros {
+            get {
+                return ResourceManager.GetString("ChangeMacros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Změnit heslo.
         /// </summary>
         public static string ChangePassword {
@@ -534,6 +543,15 @@ namespace FitnessApp01.Resx {
         public static string Lunch {
             get {
                 return ResourceManager.GetString("Lunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změna poměru makroživin.
+        /// </summary>
+        public static string MacrosChangePage {
+            get {
+                return ResourceManager.GetString("MacrosChangePage", resourceCulture);
             }
         }
         

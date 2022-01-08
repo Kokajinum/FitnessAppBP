@@ -198,6 +198,9 @@
   <data name="ChangeHeight" xml:space="preserve">
     <value>Změnit výšku</value>
   </data>
+  <data name="ChangeMacros" xml:space="preserve">
+    <value>Změnit makra</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Změnit heslo</value>
   </data>
@@ -275,6 +278,9 @@
   </data>
   <data name="Lunch" xml:space="preserve">
     <value>Oběd</value>
+  </data>
+  <data name="MacrosChangePage" xml:space="preserve">
+    <value>Změna poměru makroživin</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Muž</value>
