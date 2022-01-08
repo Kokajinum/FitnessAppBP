@@ -1,6 +1,7 @@
 ﻿using Plugin.CloudFirestore;
 using Plugin.CloudFirestore.Attributes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FitnessApp01.Models
 {
@@ -78,6 +79,33 @@ namespace FitnessApp01.Models
         }
 
         [MapTo("macros")]
-        public IDictionary<string, double> Macros { get; set; } = new Dictionary<string, double>();
+        public IDictionary<string, int> Macros { get; set; } = new Dictionary<string, int>();
+
+        [Ignored]
+        public int ProteinMacro
+        {
+            get 
+            {
+                return Macros.Where(x => x.Key.Equals("protein")).FirstOrDefault().Value;
+            }
+        }
+
+        [Ignored]
+        public int CarbohydratesMacro
+        {
+            get 
+            {
+                var macro = Macros.Where(x => x.Key.Equals("carbohydrates")).FirstOrDefault().Value;
+                return macro;
+            }
+        }
+        [Ignored]
+        public int FatMacro
+        {
+            get
+            {
+                return Macros.Where(x => x.Key.Equals("fat")).FirstOrDefault().Value;
+            }
+        }
     }
 }
