@@ -92,6 +92,7 @@ namespace FitnessApp01.ViewModels
                 var isValid = await LoadRegistrationSettings();
                 if (!isValid)
                 {
+                    //pokus o získání nových údajů
                     await App.Current.MainPage
                         .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
                     await Shell.Current.GoToAsync("//RegistrationSettingsPage");
@@ -112,7 +113,7 @@ namespace FitnessApp01.ViewModels
         }
 
 
-
+        //najde den v seznamu, nebo v databázi a nastaví data
         public async Task LoadAndSetDiaryData()
         {
             Day selectedDay;
@@ -136,6 +137,7 @@ namespace FitnessApp01.ViewModels
             }
         }
 
+        //nastavení dat ze získaného dnu
         private void SetDiaryData(Day selectedDay)
         {
             try
