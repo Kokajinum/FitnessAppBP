@@ -103,7 +103,7 @@
         </Style>
 
         <Style x:Key="addFoodEntry" TargetType="Entry" x:Name="AddFoodEntry">
-            <Setter Property="FontSize" Value="17"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
         </Style>
         
     </Application.Resources>
