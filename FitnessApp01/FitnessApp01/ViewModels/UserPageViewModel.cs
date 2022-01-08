@@ -3,6 +3,7 @@ using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using FitnessApp01.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -48,14 +49,6 @@ namespace FitnessApp01.ViewModels
             IsMainSLVisible = false;
             IsAboutAppVisible = true;
         }
-
-
-
-
-
-
-
-
 
         #region Command implementace
 
@@ -137,9 +130,9 @@ namespace FitnessApp01.ViewModels
 
         private async Task GoalWeightChange()
         {
-            string result = await DisplayPromptAsync("Změna cílové váhy", Keyboard.Numeric, maxLength: 3);
-            int parsedResult;
-            if (int.TryParse(result, out parsedResult))
+            string result = await DisplayPromptAsync("Změna cílové váhy", Keyboard.Numeric, maxLength: 5);
+            double parsedResult;
+            if (double.TryParse(result, out parsedResult))
             {
                 RegistrationSettings.DesiredWeightDB = parsedResult;
                 //po změně se musí přepočítat CaloriesGoal
@@ -154,9 +147,9 @@ namespace FitnessApp01.ViewModels
 
         private async Task HeightChange()
         {
-            string result = await DisplayPromptAsync("Změna výšky", Keyboard.Numeric, maxLength: 3);
-            int parsedResult;
-            if (int.TryParse(result, out parsedResult))
+            string result = await DisplayPromptAsync("Změna výšky", Keyboard.Numeric, maxLength: 5);
+            double parsedResult;
+            if (double.TryParse(result, out parsedResult))
             {
                 RegistrationSettings.HeightDB = parsedResult;
                 //po změně se musí přepočítat CaloriesGoal
@@ -331,6 +324,8 @@ namespace FitnessApp01.ViewModels
             get { return _registrationSettings; }
             set { SetProperty(ref _registrationSettings, value); }
         }
+
+
 
         private bool _isSettingsIconVisible = true;
         public bool IsSettingsIconVisible
