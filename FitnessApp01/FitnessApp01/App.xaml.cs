@@ -36,7 +36,7 @@ namespace FitnessApp01
                 //funguje v případě, že dodržujeme pravidlo, že 1. je setter FontSizu, jinak použít foreach
                 SettingsLabel.Setters[0].Value = 15;
                 MacronutrientsLabel.Setters[0].Value = 13;
-                AddFoodEntry.Setters[0].Value = 15;
+                AddFoodEntry.Setters[0].Value = 13;
                 //foreach (var i in SettingsLabel.Setters)
                 //{
                 //    if (i.Property.PropertyName == "FontSize")

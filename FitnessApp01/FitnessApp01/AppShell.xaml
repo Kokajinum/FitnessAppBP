@@ -82,6 +82,11 @@
         </ShellContent>
     </ShellItem>
 
+    <ShellItem Route="MacrosChangePage">
+        <ShellContent ContentTemplate="{DataTemplate local:MacrosChangePage}">
+        </ShellContent>
+    </ShellItem>
+
     <ShellItem Route="WelcomePage">
         <ShellContent ContentTemplate="{DataTemplate local:WelcomePage}">
         </ShellContent>

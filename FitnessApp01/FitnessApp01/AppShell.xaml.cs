@@ -13,6 +13,7 @@ namespace FitnessApp01
             Routing.RegisterRoute("AddMealPage", typeof(AddMealPage));
             Routing.RegisterRoute("EditMealPage", typeof(EditMealPage));
             Routing.RegisterRoute("PasswordChangePage", typeof(PasswordChangePage));
+            Routing.RegisterRoute("MacrosChangePage", typeof(MacrosChangePage));
             Routing.RegisterRoute("DiaryPage", typeof(DiaryPage));
         }
 
