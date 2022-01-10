@@ -21,7 +21,7 @@ namespace FitnessApp01.Models
         private string _nameOfTheDay = String.Empty;
         public string NameOfTheDay
         {
-            get { return SelectedDay.Current().ToString("D", Thread.CurrentThread.CurrentCulture); }
+            get { return SelectedDay.CurrentSelected().ToString("D", Thread.CurrentThread.CurrentCulture); }
             set { SetProperty(ref _nameOfTheDay, value); }
         }
 

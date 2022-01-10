@@ -26,13 +26,17 @@ namespace FitnessApp01.ViewModels
             InitializeViewModel = new Command(execute: async () => await InitializeDiaryPageViewModel());
 
             DiaryPageAttributes = new DiaryPageAttributes();
-            MessagingCenter.Subscribe<object>(this, "mealAdded", (p) =>
+            MessagingCenter.Subscribe<object>(this, "mealAdded", async (p) =>
             {
-                OnMessageReceived();
+                await OnMessageReceived();
             });
-            MessagingCenter.Subscribe<object>(this, "mealEdited", (p) =>
+            MessagingCenter.Subscribe<object>(this, "mealEdited", async (p) =>
             {
-                OnMessageReceived();
+                await OnMessageReceived();
+            });
+            MessagingCenter.Subscribe<object>(this, "diaryUpdateData", async (p) =>
+            {
+                await OnMessageReceived();
             });
         }
 
@@ -71,10 +75,19 @@ namespace FitnessApp01.ViewModels
             await InitializeDiaryPageViewModel();
         }
 
-        private void OnMessageReceived()
+        private async Task OnMessageReceived()
         {
-            var selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
-            SetDiaryData(selectedDay);
+            try
+            {
+                /*var selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
+                SetDiaryData(selectedDay);*/
+                await LoadAndSetDiaryData();
+            }
+            catch (Exception)
+            {
+
+            }
+            
         }
 
 
@@ -142,7 +155,11 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                selectedDay.CaloriesGoal = Diary.RegistrationSettings.CaloriesGoal;
+                //opravit!!!!!!!!!!!!!!!!!!!!!!!
+                if (selectedDay.CaloriesGoal == 0 || selectedDay.UnixSeconds.Equals(SelectedDay.ActuallyCurrentDayUnixString()))
+                {
+                    selectedDay.CaloriesGoal = Diary.RegistrationSettings.CaloriesGoal;
+                }
                 DiaryPageAttributes.CaloriesGoal = selectedDay.CaloriesGoal;
                 DiaryPageAttributes.CaloriesCurrent = selectedDay.CaloriesCurrent;
                 if (DiaryPageAttributes.CaloriesGoal != 0)

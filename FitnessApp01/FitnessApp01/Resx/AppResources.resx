@@ -234,6 +234,15 @@
   <data name="Height" xml:space="preserve">
     <value>Výška</value>
   </data>
+  <data name="HomePage_Fiber" xml:space="preserve">
+    <value>Vláknina</value>
+  </data>
+  <data name="HomePage_Salt" xml:space="preserve">
+    <value>Sůl</value>
+  </data>
+  <data name="HomePage_SaturatedFats" xml:space="preserve">
+    <value>Nasycené mastné kyseliny</value>
+  </data>
   <data name="InternetAvailable" xml:space="preserve">
     <value>Připojení k internetu je dostupné.</value>
   </data>
@@ -252,6 +261,9 @@
   <data name="LoginPage_EmailPlaceHolder" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="LoginPage_ForgotPassword" xml:space="preserve">
+    <value>Zapomenuté heslo?</value>
+  </data>
   <data name="LoginPage_Login" xml:space="preserve">
     <value>Přihlásit se</value>
   </data>
@@ -269,6 +281,9 @@
   </data>
   <data name="LoginPage_PasswordPlaceholder" xml:space="preserve">
     <value>Heslo</value>
+  </data>
+  <data name="LoginPage_PasswordReset" xml:space="preserve">
+    <value>Obnovit</value>
   </data>
   <data name="LoginPage_Register" xml:space="preserve">
     <value>Registrovat</value>
@@ -294,6 +309,9 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="NothingToSave" xml:space="preserve">
+    <value>Není co uložit.</value>
+  </data>
   <data name="OldPassword" xml:space="preserve">
     <value>Staré heslo</value>
   </data>
@@ -314,6 +332,9 @@
   </data>
   <data name="RegSettingsUpdateError" xml:space="preserve">
     <value>Nepodařilo se aktualizovat registrační údaje.</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Zaslání emailu pro obnovu hesla</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>

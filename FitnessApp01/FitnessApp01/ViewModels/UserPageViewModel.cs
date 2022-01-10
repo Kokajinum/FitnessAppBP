@@ -28,9 +28,8 @@ namespace FitnessApp01.ViewModels
             ActualPasswordChangeCommand = new Command(async () => await ActualPasswordChange());
             AboutAppCommand = new Command(() => AboutApp());
             AboutAppCloseCommand = new Command(() => AboutAppClose());
-            InitializeViewModelCommand = new Command(() => InitializeViewModel());
 
-            
+            InitializeViewModelCommand = new Command(() => InitializeViewModel());
         }
 
         private void InitializeViewModel()
@@ -61,7 +60,7 @@ namespace FitnessApp01.ViewModels
             }
             if (!SomethingUnsaved)
             {
-                await DisplayErrorAsync("Není co uložit.");
+                await DisplayErrorAsync(AppResources.NothingToSave);
                 return;
             }
             IsBusy = true;
@@ -69,7 +68,9 @@ namespace FitnessApp01.ViewModels
             {
                 await FirestoreBase.UpdateRegistrationSettingsAsync(RegistrationSettings);
                 MessagingCenter.Send<object>(this, "diaryUpdated");
-                await DisplaySuccessAsync("Podařilo se aktualizovat registrační údaje.");
+                MessagingCenter.Send<object>(this, "diaryUpdateData");
+                IsBusy = false;
+                await DisplaySuccessAsync(AppResources.Success);
                 EverythingSaved();
             }
             catch (Exception ex)
@@ -252,6 +253,7 @@ namespace FitnessApp01.ViewModels
                     MessagingCenter.Send<object>(this, "signedOut");
                 }
                 await GoToPageAsync("//LoginPage");
+                UserIconTap();
             }
         }
 

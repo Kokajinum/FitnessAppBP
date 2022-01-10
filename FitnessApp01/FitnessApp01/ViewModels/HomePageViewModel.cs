@@ -59,6 +59,11 @@ namespace FitnessApp01.ViewModels
 
         private void MacrosChange()
         {
+            if (IsVisibleMacroChange == true)
+            {
+                IsVisibleMacroChange = false;
+                return;
+            }
             ProteinMacro = RegistrationSettings.ProteinMacro;
             CarbsMacro = RegistrationSettings.CarbohydratesMacro;
             FatMacro = RegistrationSettings.FatMacro;

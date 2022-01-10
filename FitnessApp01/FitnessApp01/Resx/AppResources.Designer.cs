@@ -412,6 +412,33 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vláknina.
+        /// </summary>
+        public static string HomePage_Fiber {
+            get {
+                return ResourceManager.GetString("HomePage_Fiber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sůl.
+        /// </summary>
+        public static string HomePage_Salt {
+            get {
+                return ResourceManager.GetString("HomePage_Salt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nasycené mastné kyseliny.
+        /// </summary>
+        public static string HomePage_SaturatedFats {
+            get {
+                return ResourceManager.GetString("HomePage_SaturatedFats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Připojení k internetu je dostupné..
         /// </summary>
         public static string InternetAvailable {
@@ -466,6 +493,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zapomenuté heslo?.
+        /// </summary>
+        public static string LoginPage_ForgotPassword {
+            get {
+                return ResourceManager.GetString("LoginPage_ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přihlásit se.
         /// </summary>
         public static string LoginPage_Login {
@@ -516,6 +552,15 @@ namespace FitnessApp01.Resx {
         public static string LoginPage_PasswordPlaceholder {
             get {
                 return ResourceManager.GetString("LoginPage_PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obnovit.
+        /// </summary>
+        public static string LoginPage_PasswordReset {
+            get {
+                return ResourceManager.GetString("LoginPage_PasswordReset", resourceCulture);
             }
         }
         
@@ -592,6 +637,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Není co uložit..
+        /// </summary>
+        public static string NothingToSave {
+            get {
+                return ResourceManager.GetString("NothingToSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Staré heslo.
         /// </summary>
         public static string OldPassword {
@@ -651,6 +705,15 @@ namespace FitnessApp01.Resx {
         public static string RegSettingsUpdateError {
             get {
                 return ResourceManager.GetString("RegSettingsUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaslání emailu pro obnovu hesla.
+        /// </summary>
+        public static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
         
