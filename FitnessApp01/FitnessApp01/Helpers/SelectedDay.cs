@@ -7,12 +7,26 @@ namespace FitnessApp01.Helpers
         private static DateTime Day { get; set; } = DateTime.UtcNow.Date; //je potřeba UTC!
 
         /// <summary>
-        /// Vrátí aktuální den
+        /// Vrátí zvolený den
         /// </summary>
         /// <returns></returns>
-        public static DateTime Current()
+        public static DateTime CurrentSelected()
         {
             return Day;
+        }
+
+        public static DateTime ActuallyCurrentDay()
+        {
+            return DateTime.UtcNow.Date;
+        }
+
+        /// <summary>
+        /// opravdu aktuální den, bez ohledu na to, co je nastaveno (UTC čas)
+        /// </summary>
+        /// <returns>vrátí unix timestamp ve stringu (UTC čas)</returns>
+        public static string ActuallyCurrentDayUnixString()
+        {
+            return ToUnixSecondsString(ActuallyCurrentDay());
         }
 
 
@@ -43,6 +57,11 @@ namespace FitnessApp01.Helpers
         public static string ToUnixSecondsString()
         {
             return new DateTimeOffset(Day).ToUnixTimeSeconds().ToString();
+        }
+
+        public static string ToUnixSecondsString(DateTime day)
+        {
+            return new DateTimeOffset(day).ToUnixTimeSeconds().ToString();
         }
     }
 }
