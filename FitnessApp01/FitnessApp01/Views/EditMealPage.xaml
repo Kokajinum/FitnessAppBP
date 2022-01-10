@@ -7,7 +7,8 @@
              xmlns:converters="clr-namespace:FitnessApp01.Converters"
              xmlns:helpers="clr-namespace:FitnessApp01.Helpers"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="True">
+             Shell.NavBarIsVisible="True"
+             Title="{Static resources:AppResources.EditMeal}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -22,11 +23,11 @@
 
     <ContentPage.Content>
         <StackLayout Margin="0,10,0,0">
-            <Label Text="{Static resources:AppResources.EditMeal}"
+            <!--<Label Text="{Static resources:AppResources.EditMeal}"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center">
-            </Label>
+            </Label>-->
             <StackLayout Margin="20">
                 <Label Text="{Binding MealName}"
                        FontAttributes="Bold">
@@ -39,10 +40,90 @@
                    HorizontalTextAlignment="Center"
                    Keyboard="Numeric">
             </Entry>
-            <StackLayout Orientation="Horizontal" 
-                         Margin="10,20"
-                         IsVisible="{Binding IsVisible}">
-                <Label>
+            <StackLayout IsVisible="{Binding IsVisible}"
+                         Spacing="0"
+                         Padding="20">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:AppResources.AddFoodPage_Energy}"></Span>
+                                <Span Text=":"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding KcalCalculated}"></Span>
+                                <Span Text="Kcal"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:AppResources.AddFoodPage_Carbs}"></Span>
+                                <Span Text=":"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding CarbsCalculated}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:AppResources.AddFoodPage_Fats}"></Span>
+                                <Span Text=":"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding FatCalculated}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:AppResources.AddFoodPage_Protein}"></Span>
+                                <Span Text=":"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Style="{StaticResource macronutrientsLabel}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ProteinCalculated}"></Span>
+                                <Span Text="g"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+                <!--<Label>
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Energie: "></Span>
@@ -77,7 +158,7 @@
                             <Span Text="g"></Span>
                         </FormattedString>
                     </Label.FormattedText>
-                </Label>
+                </Label>-->
             </StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}">
             </ActivityIndicator>

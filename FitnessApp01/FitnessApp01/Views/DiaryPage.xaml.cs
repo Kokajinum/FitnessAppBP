@@ -33,6 +33,10 @@ namespace FitnessApp01.Views
                 (BindingContext as ViewModels.DiaryPageViewModel).InitializeViewModel.Execute(null);
                 WasSignedOut = false;
             }
+            /*else
+            {
+                MessagingCenter.Send<object>(this, "diaryUpdateData");
+            }*/
         }
 
         private bool WasSignedOut = false;

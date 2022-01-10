@@ -55,6 +55,7 @@
                                         </Label.FormattedText>
                                     </Label>
                                 </StackLayout>
+                                <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

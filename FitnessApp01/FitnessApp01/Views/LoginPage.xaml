@@ -16,8 +16,7 @@
     <ContentPage.Content>
         <Grid VerticalOptions="Center"
               RowDefinitions="*" ColumnDefinitions="*">
-            <StackLayout x:Name="LoginStackLayout" 
-                         IsVisible="{Binding LoginIsVisible}" 
+            <StackLayout IsVisible="{Binding LoginIsVisible}" 
                          VerticalOptions="Center" 
                          Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}" 
@@ -28,6 +27,20 @@
                        IsPassword="True"
                        Text="{Binding UserPassword, Mode=TwoWay}">
                 </Entry>
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="End">
+                    <Label Text="{Static resources:AppResources.LoginPage_ForgotPassword}">
+                    </Label>
+                    <Label Text="{x:Static resources:AppResources.LoginPage_PasswordReset}" 
+                           Style="{StaticResource secondaryLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                >
+                            </TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                
                 <Button Text="{x:Static resources:AppResources.LoginPage_LoginButton}"
                         Style="{x:StaticResource primaryButton}"
                         Command="{Binding LoginCommand}"
@@ -39,15 +52,14 @@
                     <Label Text="{x:Static resources:AppResources.LoginPage_Register}" 
                            Style="{StaticResource secondaryLabel}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RegisterLabelTapCommand}" 
-                                                  NumberOfTapsRequired="1">
+                            <TapGestureRecognizer 
+                                Command="{Binding RegisterLabelTapCommand}">
                             </TapGestureRecognizer>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout x:Name="RegisterStackLayout" 
-                         IsVisible="{Binding RegisterIsVisible}" 
+            <StackLayout IsVisible="{Binding RegisterIsVisible}" 
                          VerticalOptions="Center" 
                          Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}"

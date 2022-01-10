@@ -93,7 +93,7 @@
                 </StackLayout>
                 <ScrollView IsVisible="{Binding IsSettingsIconVisible}" 
                             VerticalScrollBarVisibility="Always"
-                            VerticalOptions="Center">
+                            VerticalOptions="StartAndExpand">
                     <StackLayout Margin="0,20,0,0">
                         <StackLayout>
                             <StackLayout.GestureRecognizers>
@@ -163,20 +163,6 @@
                             </Label>
                             <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                         </StackLayout>
-                        <!--<StackLayout>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding MacrosChangeCommand}">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
-                            <Label Style="{StaticResource settingsLabel}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Static resources:AppResources.ChangeMacros}"></Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
-                        </StackLayout>-->
                         <StackLayout>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ActivityChangeCommand}">
@@ -205,12 +191,9 @@
                             </Label>
                             <StackLayout Style="{StaticResource horizontalLine}"></StackLayout>
                         </StackLayout>
-                        
                     </StackLayout>
-                    
-
                 </ScrollView>
-                <StackLayout>
+                <StackLayout VerticalOptions="End">
                     <Label Text="{Static resources:AppResources.SaveChangedWarning}"
                            IsVisible="{Binding IsSettingsIconVisible}"
                             TextColor="Red"
