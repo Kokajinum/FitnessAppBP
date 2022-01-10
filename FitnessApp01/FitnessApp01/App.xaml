@@ -90,6 +90,7 @@
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark}, 
                 Light={StaticResource primaryTextColor}}"></Setter>
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
         </Style>
         
         
