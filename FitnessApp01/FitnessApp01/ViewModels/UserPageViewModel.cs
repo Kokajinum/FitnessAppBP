@@ -166,27 +166,34 @@ namespace FitnessApp01.ViewModels
         private async Task ActivityChange()
         {
             double activityValue = RegistrationSettings.ActivityDB;
-            const string ans1 = "sedavé zaměstnání, sportování/cvičení maximálně 1x týdně";
-            const string ans2 = "sportování/cvičení 2-3x týdně";
-            const string ans3 = "sportování/cvičení 4-6x týdně";
-            const string ans4 = "náročné sportování/cvičení každý den";
+            string ans1 = "sedavé zaměstnání, sportování/cvičení maximálně 1x týdně" + 
+                (1.2 == activityValue ? " - Aktuálně zvolené" : "");
+            string ans2 = "sportování/cvičení 2-3x týdně" + 
+                (1.375 == activityValue ? " - Aktuálně zvolené" : "");
+            string ans3 = "sportování/cvičení 4-6x týdně" +
+                (1.55 == activityValue ? " - Aktuálně zvolené" : "");
+            string ans4 = "náročné sportování/cvičení každý den" +
+                (1.725 == activityValue ? " - Aktuálně zvolené" : "");
             string action = await App.Current.MainPage.DisplayActionSheet("Změna úrovně aktivity:",
                 "zrušit", null, ans1, ans2, ans3, ans4);
-            switch (action)
+
+            if (ans1.Equals(action))
             {
-                case ans1:
-                    activityValue = 1.2;
-                    break;
-                case ans2:
-                    activityValue = 1.375;
-                    break;
-                case ans3:
-                    activityValue = 1.55;
-                    break;
-                case ans4:
-                    activityValue = 1.725;
-                    break;
+                activityValue = 1.2;
             }
+            else if (ans2.Equals(action))
+            {
+                activityValue = 1.375;
+            }
+            else if (ans3.Equals(action))
+            {
+                activityValue = 1.55;
+            }
+            else if (ans4.Equals(action))
+            {
+                activityValue = 1.725;
+            }
+
             RegistrationSettings.ActivityDB = activityValue;
             RegistrationSettings.CaloriesGoal = CalorieGoalCalculator.Calculate(RegistrationSettings);
             SomethingUnsavedChanged();
@@ -209,25 +216,28 @@ namespace FitnessApp01.ViewModels
                 return;
             }
             double speedValue = RegistrationSettings.GoalSpeed;
-            const string ans1 = "0.2-0.25 kg/týden (výchozí)";
-            const string ans2 = "0.4-0.5 kg/týden";
-            const string ans3 = "0.6-0.7 kg/týden (nedoporučované)";
+            string ans1 = "0.2-0.25 kg/týden (výchozí)" +
+                (0.1 == speedValue ? " - Aktuálně zvolené" : "");
+            string ans2 = "0.4-0.5 kg/týden" +
+                (0.2 == speedValue ? " - Aktuálně zvolené" : "");
+            string ans3 = "0.6-0.7 kg/týden (nedoporučované)" +
+                (0.3 == speedValue ? " - Aktuálně zvolené" : "");
             string action = await App.Current.MainPage.DisplayActionSheet(title,
                 "zrušit", null, ans1, ans2, ans3);
-            switch (action)
+
+            if (ans1.Equals(action))
             {
-                case ans1:
-                    speedValue = 0.1;
-                    break;
-                case ans2:
-                    speedValue = 0.2;
-                    break;
-                case ans3:
-                    speedValue = 0.3;
-                    break;
-                default:
-                    return;
+                speedValue = 0.1;
             }
+            else if (ans2.Equals(action))
+            {
+                speedValue = 0.2;
+            }
+            else if (ans3.Equals(action))
+            {
+                speedValue = 0.3;
+            }
+
             RegistrationSettings.GoalSpeed = speedValue;
             RegistrationSettings.CaloriesGoal = CalorieGoalCalculator.Calculate(RegistrationSettings);
             SomethingUnsavedChanged();
