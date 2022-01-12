@@ -20,12 +20,12 @@
                          VerticalOptions="Center" 
                          Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}" 
-                       Text="{Binding UserEmail, Mode=TwoWay}" 
+                       Text="{Binding UserEmail}" 
                        Keyboard="Email">
                 </Entry>
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" 
                        IsPassword="True"
-                       Text="{Binding UserPassword, Mode=TwoWay}">
+                       Text="{Binding UserPassword}">
                 </Entry>
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="End">
@@ -63,14 +63,14 @@
                          VerticalOptions="Center" 
                          Padding="20,0,20,0">
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_EmailPlaceHolder}"
-                       Text="{Binding UserEmail, Mode=TwoWay}" 
+                       Text="{Binding UserEmail}" 
                        Keyboard="Email"></Entry>
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordPlaceholder}" 
                        IsPassword="True" 
-                       Text="{Binding UserPassword, Mode=TwoWay}"></Entry>
+                       Text="{Binding UserPassword}"></Entry>
                 <Entry Placeholder="{x:Static resources:AppResources.LoginPage_PasswordConfirmPlaceholder}" 
                        IsPassword="True"
-                       Text="{Binding UserConfirmPassword, Mode=TwoWay}"></Entry>
+                       Text="{Binding UserConfirmPassword}"></Entry>
                 <Button Text="{x:Static resources:AppResources.LoginPage_RegisterButton}"
                         Style="{x:StaticResource primaryButton}"
                         Command="{Binding RegisterCommand}"
@@ -81,8 +81,7 @@
                     <Label Text="{x:Static resources:AppResources.LoginPage_Login}" 
                            Style="{StaticResource secondaryLabel}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LoginLabelTapCommand}" 
-                                                  NumberOfTapsRequired="1">
+                            <TapGestureRecognizer Command="{Binding LoginLabelTapCommand}">
                             </TapGestureRecognizer>
                         </Label.GestureRecognizers>
                     </Label>
