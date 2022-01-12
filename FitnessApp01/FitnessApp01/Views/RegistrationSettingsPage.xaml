@@ -32,8 +32,7 @@
                        Style="{StaticResource postRegistrationEntry}"
                        Text="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
                         Path=AgeInput, Mode=TwoWay}"
-                       MaxLength="3"
-                       behavior:NaturalNumValidationBehavior.AttachBehavior="True">
+                       MaxLength="3">
                         </Entry>
                     </StackLayout>
                 </ScrollView>
