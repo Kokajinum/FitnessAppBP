@@ -168,32 +168,6 @@ namespace FitnessApp01.ViewModels
             };
         }
 
-        [Obsolete("Použijte CalorieGoalCalculator")]
-        private int CalculateCaloriesGoal()
-        {
-            //The Mifflin St Jeor equation RMR
-            int s = GenderDB == "male" ? 5 : -161;
-            double res = ((10 * WeightDB)
-                         + (6.25 * HeightDB)
-                         - (5 * AgeDB) + s) * ActivityDB;
-            switch (GoalDB)
-            {
-                //lose weight
-                case 1:
-                    //res -= 300;
-                    res *= 0.85;
-                    break;
-                //gain weight
-                case 2:
-                    res *= 1.15;
-                    break;
-                //maintain weight
-                default:
-                    break;
-            }
-            return (int)res;
-        }
-
         private bool ValidatePage7()
         {
             if (!DesiredWeightInput.Equals(string.Empty) &&
