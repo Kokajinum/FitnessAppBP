@@ -162,8 +162,8 @@ namespace FitnessApp01.ViewModels
         {
             return new Dictionary<string, int>
             {
-                { "protein", 30 },
-                { "carbohydrates", 40 },
+                { "protein", 25 },
+                { "carbohydrates", 45 },
                 { "fat", 30 }
             };
         }
