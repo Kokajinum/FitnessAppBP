@@ -210,6 +210,9 @@
   <data name="ChangeWeight" xml:space="preserve">
     <value>Změnit cílovou váhu</value>
   </data>
+  <data name="CheckEmail" xml:space="preserve">
+    <value>Zkontrolujte svou emailovou schránku.</value>
+  </data>
   <data name="Diary" xml:space="preserve">
     <value>Diář</value>
   </data>
@@ -283,7 +286,7 @@
     <value>Heslo</value>
   </data>
   <data name="LoginPage_PasswordReset" xml:space="preserve">
-    <value>Obnovit</value>
+    <value>Obnovit heslo</value>
   </data>
   <data name="LoginPage_Register" xml:space="preserve">
     <value>Registrovat</value>
@@ -324,6 +327,12 @@
   <data name="PasswordNotDifferent" xml:space="preserve">
     <value>Nové heslo musí být jiné než staré heslo.</value>
   </data>
+  <data name="PasswordResetPage_email" xml:space="preserve">
+    <value>Zadejte email vašeho účtu: </value>
+  </data>
+  <data name="PasswordResetPage_send" xml:space="preserve">
+    <value>Odeslat</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
   </data>
@@ -335,6 +344,9 @@
   </data>
   <data name="ResetPassword" xml:space="preserve">
     <value>Zaslání emailu pro obnovu hesla</value>
+  </data>
+  <data name="ResetPasswordError" xml:space="preserve">
+    <value>Problém při odesílání resetovacího emailu</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
@@ -356,6 +368,9 @@
   </data>
   <data name="SignOut" xml:space="preserve">
     <value>Odhlásit se</value>
+  </data>
+  <data name="SignOutError" xml:space="preserve">
+    <value>Chyba při odhlašování</value>
   </data>
   <data name="Snack" xml:space="preserve">
     <value>Svačina</value>

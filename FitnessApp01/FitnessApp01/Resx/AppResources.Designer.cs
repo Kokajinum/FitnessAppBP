@@ -340,6 +340,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zkontrolujte svou emailovou schránku..
+        /// </summary>
+        public static string CheckEmail {
+            get {
+                return ResourceManager.GetString("CheckEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Diář.
         /// </summary>
         public static string Diary {
@@ -556,7 +565,7 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Obnovit.
+        ///   Looks up a localized string similar to Obnovit heslo.
         /// </summary>
         public static string LoginPage_PasswordReset {
             get {
@@ -682,6 +691,24 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zadejte email vašeho účtu: .
+        /// </summary>
+        public static string PasswordResetPage_email {
+            get {
+                return ResourceManager.GetString("PasswordResetPage_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odeslat.
+        /// </summary>
+        public static string PasswordResetPage_send {
+            get {
+                return ResourceManager.GetString("PasswordResetPage_send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předchozí.
         /// </summary>
         public static string Previous {
@@ -714,6 +741,15 @@ namespace FitnessApp01.Resx {
         public static string ResetPassword {
             get {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problém při odesílání resetovacího emailu.
+        /// </summary>
+        public static string ResetPasswordError {
+            get {
+                return ResourceManager.GetString("ResetPasswordError", resourceCulture);
             }
         }
         
@@ -777,6 +813,15 @@ namespace FitnessApp01.Resx {
         public static string SignOut {
             get {
                 return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chyba při odhlašování.
+        /// </summary>
+        public static string SignOutError {
+            get {
+                return ResourceManager.GetString("SignOutError", resourceCulture);
             }
         }
         

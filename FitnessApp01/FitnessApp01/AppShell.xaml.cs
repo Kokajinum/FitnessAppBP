@@ -15,6 +15,7 @@ namespace FitnessApp01
             Routing.RegisterRoute("PasswordChangePage", typeof(PasswordChangePage));
             Routing.RegisterRoute("MacrosChangePage", typeof(MacrosChangePage));
             Routing.RegisterRoute("DiaryPage", typeof(DiaryPage));
+            Routing.RegisterRoute("PasswordResetPage", typeof(PasswordResetPage));
         }
 
     }

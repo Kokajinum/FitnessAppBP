@@ -22,7 +22,53 @@ namespace FitnessApp01.ViewModels
             RegisterCommand = new Command(
                 execute: async () => await Register());
 
+            PasswordResetCommand = new Command(
+                execute: async () => await PasswordReset());
+
+            ActualPasswordResetCommand = new Command(
+                execute: async () => await ActualPasswordReset());
+
             SettingsStartCommand = new Command(async () => await SettingsStart());
+        }
+
+        private async Task ActualPasswordReset()
+        {
+            if(!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+                return;
+            }
+            if (string.IsNullOrEmpty(ResetEmail))
+            {
+                await DisplayErrorAsync(AppResources.InvalidEmail);
+                return;
+            }
+            try
+            {
+                new MailAddress(ResetEmail);
+            }
+            catch (FormatException)
+            {
+                await DisplayErrorAsync(AppResources.InvalidEmail);
+                return;
+            }
+            try
+            {
+                await AuthBase.ResetPassword(ResetEmail);
+                await DisplaySuccessAsync(AppResources.Success + ": " +
+                    AppResources.CheckEmail);
+                ResetEmail = string.Empty;
+                await GoToPageAsync("..");
+            }
+            catch (Exception ex)
+            {
+                await DisplayErrorAsync(ex.Message);
+            }
+        }
+
+        private async Task PasswordReset()
+        {
+            await GoToPageAsync("PasswordResetPage");
         }
 
         private async Task SettingsStart()
@@ -251,6 +297,13 @@ namespace FitnessApp01.ViewModels
             }
         }
 
+        private string _resetEmail;
+        public string ResetEmail
+        {
+            get { return _resetEmail; }
+            set { SetProperty(ref _resetEmail, value); }
+        }
+
 
         #endregion
 
@@ -260,8 +313,9 @@ namespace FitnessApp01.ViewModels
         public ICommand LoginLabelTapCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
-        
         public ICommand SettingsStartCommand { get; set; }
+        public ICommand PasswordResetCommand { get; set; }
+        public ICommand ActualPasswordResetCommand { get; set; }
 
         #endregion
     }

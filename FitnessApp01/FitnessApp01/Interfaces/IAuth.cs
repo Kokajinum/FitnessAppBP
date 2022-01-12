@@ -11,5 +11,6 @@ namespace FitnessApp01.Interfaces
         string GetUserEmail();
         bool SignOut();
         Task UpdatePassword(string oldPassword, string password);
+        Task ResetPassword(string email);
     }
 }

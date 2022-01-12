@@ -81,6 +81,11 @@
         </ShellContent>
     </ShellItem>
 
+    <ShellItem Route="PasswordResetPage">
+        <ShellContent ContentTemplate="{DataTemplate local:PasswordResetPage}">
+        </ShellContent>
+    </ShellItem>
+
     <ShellItem Route="MacrosChangePage">
         <ShellContent ContentTemplate="{DataTemplate local:MacrosChangePage}">
         </ShellContent>

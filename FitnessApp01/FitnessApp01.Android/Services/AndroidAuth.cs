@@ -111,9 +111,9 @@ namespace FitnessApp01.Droid.Services
                 throw new Exception(AppResources.WeakPasswordException, ex);
             }
 
-            catch (FirebaseAuthInvalidCredentialsException e)
+            catch (FirebaseAuthInvalidCredentialsException ex)
             {
-                throw new Exception("invalid credentials " + e.Message);
+                throw new Exception(AppResources.BadCredentials, ex);
             }
             catch (FirebaseAuthUserCollisionException ex)
             {
@@ -133,13 +133,33 @@ namespace FitnessApp01.Droid.Services
                 mAuth.SignOut();
                 return true;
             }
-            catch (FirebaseAuthException e)
+            catch (FirebaseAuthException ex)
             {
-                throw new Exception("firebaseauthexception " + e.Message);
+                throw new Exception(AppResources.SignOutError, ex);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("unknown error " + e.Message);
+                throw new Exception(AppResources.UnknownError, ex);
+            }
+        }
+
+        public async Task ResetPassword(string email)
+        {
+            try
+            {
+                await mAuth.SendPasswordResetEmailAsync(email);
+            }
+            catch(FirebaseAuthEmailException ex)
+            {
+                throw new Exception(AppResources.ResetPasswordError, ex);
+            }
+            catch(FirebaseAuthInvalidUserException ex)
+            {
+                throw new Exception(AppResources.InvalidUsername, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(AppResources.UnknownError, ex);
             }
         }
     }

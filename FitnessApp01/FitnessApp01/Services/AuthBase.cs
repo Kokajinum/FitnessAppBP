@@ -73,6 +73,17 @@ namespace FitnessApp01.Services
             }
         }
 
+        public static async Task ResetPassword(string email)
+        {
+            try
+            {
+                await auth.ResetPassword(email);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
         
     }
 }
