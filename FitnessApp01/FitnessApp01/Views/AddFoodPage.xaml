@@ -119,7 +119,7 @@
                        HorizontalTextAlignment="Center"
                        IsVisible="{Binding IsVisible}">
                     </Label>
-                    
+                    <StackLayout HeightRequest="60"></StackLayout>
                 </StackLayout>
             </ScrollView>
             <Button Grid.Row="0" Grid.Column="0"
