@@ -149,8 +149,8 @@ namespace FitnessApp01.ViewModels
                 DesiredWeightMeasureDB = this.DesiredWeightMeasureDB,
                 Macros = GenerateMacros()
             };
-            rs.CaloriesGoal = CalorieGoalCalculator.Calculate(rs);
             rs.GoalSpeed = this.GoalDB == 1 || this.GoalDB == 2 ? 0.1 : 1;
+            rs.CaloriesGoal = CalorieGoalCalculator.Calculate(rs);
             return rs;
         }
 
@@ -170,7 +170,7 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage7()
         {
-            if (!DesiredWeightInput.Equals(string.Empty) &&
+            if (!string.IsNullOrEmpty(DesiredWeightInput) &&
                 double.TryParse(DesiredWeightInput, out double num) &&
                 num > 0)
             {
@@ -184,7 +184,7 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage6()
         {
-            if ((GoalsRadioButtonSelected != string.Empty) &&
+            if ((!string.IsNullOrEmpty(GoalsRadioButtonSelected)) &&
                 int.TryParse(GoalsRadioButtonSelected, out int num))
             {
                 GoalDB = num;
@@ -201,7 +201,7 @@ namespace FitnessApp01.ViewModels
         private bool ValidatePage5()
         {
             //problém s double cisly 1.1 vs 1,1 (ja pouzivam 1.1 v XAML) -> invariantculture
-            if ((ActivityRadioButtonSelected != string.Empty) &&
+            if ((!string.IsNullOrEmpty(ActivityRadioButtonSelected)) &&
                 double.TryParse(ActivityRadioButtonSelected, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out double num))
             {
                 ActivityDB = num;
@@ -212,7 +212,7 @@ namespace FitnessApp01.ViewModels
 
         private bool ValidatePage4()
         {
-            if (GenderRadioButtonSelected != string.Empty)
+            if (!string.IsNullOrEmpty(GenderRadioButtonSelected))
             {
                 GenderDB = GenderRadioButtonSelected;
                 return true;
