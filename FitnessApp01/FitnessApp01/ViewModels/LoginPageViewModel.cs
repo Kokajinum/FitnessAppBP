@@ -116,6 +116,11 @@ namespace FitnessApp01.ViewModels
             catch(Exception ex)
             {
                 await DisplayAlertAsync(AppResources.Error, ex.Message, "Ok");
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
