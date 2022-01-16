@@ -219,8 +219,7 @@
                 <StackLayout Grid.Row="0" Grid.Column="0"
                              VerticalOptions="EndAndExpand">
                     <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type local:RegistrationSettingsPageViewModel}},
-                        Path=IsBusy}"
-                                   Margin="0,80,0,0">
+                        Path=IsBusy}">
                     </ActivityIndicator>
                     <Button Style="{StaticResource primaryButton}"
                         Margin="30,0,30,0"
