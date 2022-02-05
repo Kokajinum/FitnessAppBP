@@ -6,7 +6,9 @@
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>    
         <!--nastavení viewmodelu-->

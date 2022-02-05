@@ -106,11 +106,38 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vláknina (volitelné).
+        ///   Looks up a localized string similar to Z toho vláknina.
         /// </summary>
         public static string AddFoodPage_Fiber {
             get {
                 return ResourceManager.GetString("AddFoodPage_Fiber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prosím, vyplňte energetickou hodnotu..
+        /// </summary>
+        public static string AddFoodPage_NoEnergy {
+            get {
+                return ResourceManager.GetString("AddFoodPage_NoEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prosím, vyplňte všechny hlavní složky..
+        /// </summary>
+        public static string AddFoodPage_NoReqNutrient {
+            get {
+                return ResourceManager.GetString("AddFoodPage_NoReqNutrient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Součet hlavních složek nesmí být víc než 100g.
+        /// </summary>
+        public static string AddFoodPage_NutrientsWarning {
+            get {
+                return ResourceManager.GetString("AddFoodPage_NutrientsWarning", resourceCulture);
             }
         }
         
@@ -124,6 +151,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to volitelné.
+        /// </summary>
+        public static string AddFoodPage_Optional {
+            get {
+                return ResourceManager.GetString("AddFoodPage_Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp; a #.
         /// </summary>
         public static string AddFoodPage_PleaseCheckInputs {
@@ -133,11 +169,20 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Velikost balení/porce (volitelné).
+        ///   Looks up a localized string similar to Velikost balení/porce v gramech (volitelné).
         /// </summary>
         public static string AddFoodPage_Portion {
             get {
                 return ResourceManager.GetString("AddFoodPage_Portion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Velikost balení/porce v ml (volitelné).
+        /// </summary>
+        public static string AddFoodPage_PortionMl {
+            get {
+                return ResourceManager.GetString("AddFoodPage_PortionMl", resourceCulture);
             }
         }
         
@@ -151,7 +196,7 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sůl (volitelné).
+        ///   Looks up a localized string similar to Sůl.
         /// </summary>
         public static string AddFoodPage_Salt {
             get {
@@ -160,7 +205,7 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Z toho nasycené mastné kyseliny (volitelné).
+        ///   Looks up a localized string similar to Z toho nasycené mastné kyseliny.
         /// </summary>
         public static string AddFoodPage_SaturatedFats {
             get {
@@ -174,6 +219,60 @@ namespace FitnessApp01.Resx {
         public static string AddFoodPage_Sugar {
             get {
                 return ResourceManager.GetString("AddFoodPage_Sugar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vlákniny nemůže být více než sacharidů..
+        /// </summary>
+        public static string AddFoodPage_WrongFiber {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongFiber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prosím, vyplňte název potraviny..
+        /// </summary>
+        public static string AddFoodPage_WrongNameVisible {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongNameVisible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podsložky (nenasycené mast. kys., cukry, vláknina) nesmí mít více gramů než jejich hlavní složka..
+        /// </summary>
+        public static string AddFoodPage_WrongOptSum {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongOptSum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Součet hlavních složek nesmí být více než 100 gramů. (tuky, sacharidy, bílkoviny, sůl).
+        /// </summary>
+        public static string AddFoodPage_WrongReqSum {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongReqSum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nasycených mastných kyselin nemůže být více než tuků..
+        /// </summary>
+        public static string AddFoodPage_WrongSaturated {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongSaturated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cukru nemůže být více než sacharidů..
+        /// </summary>
+        public static string AddFoodPage_WrongSugar {
+            get {
+                return ResourceManager.GetString("AddFoodPage_WrongSugar", resourceCulture);
             }
         }
         
@@ -646,6 +745,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ne.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Není co uložit..
         /// </summary>
         public static string NothingToSave {
@@ -790,6 +898,15 @@ namespace FitnessApp01.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Množství.
+        /// </summary>
+        public static string ServingSize {
+            get {
+                return ResourceManager.GetString("ServingSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nastavení.
         /// </summary>
         public static string Settings {
@@ -912,6 +1029,15 @@ namespace FitnessApp01.Resx {
         public static string WelcomeText {
             get {
                 return ResourceManager.GetString("WelcomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ano.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         

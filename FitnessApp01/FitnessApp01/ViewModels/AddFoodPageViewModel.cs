@@ -1,4 +1,5 @@
-﻿using FitnessApp01.Interfaces;
+﻿using FitnessApp01.Helpers;
+using FitnessApp01.Interfaces;
 using FitnessApp01.Models;
 using FitnessApp01.Resx;
 using FitnessApp01.Services;
@@ -31,35 +32,60 @@ namespace FitnessApp01.ViewModels
                 { "ml" }
             };
             PickerCurrentUnit = PickerUnits[0];
+
+
         }
 
         public async Task SaveFood()
         {
+            if (!Connection.IsConnected)
+            {
+                await DisplayErrorAsync(AppResources.InternetRequired);
+            }
             if (!Attrs.CanSave)
             {
                 await DisplayErrorAsync(AppResources.CanNotSave);
                 return;
             }
+            if (Attrs.KcalInput >= 1000)
+            {
+                bool result = await App.Current.MainPage.DisplayAlert("Ověření",
+                    "Opravdu má potravina " + Attrs.KcalInput.ToString() + "kcal?", AppResources.Yes, AppResources.No);
+                if (!result)
+                {
+                    return;
+                }
+            }
+            TrimNameAndBrand();
             try
             {
+                IsBusy = true;
                 var newFood = new Food(Attrs.NameInput, (int)Attrs.KcalInput, (double)Attrs.CarbsInput, (double)Attrs.SugarInput, (double)Attrs.ProteinInput, (double)Attrs.FatInput,
                 AuthBase.GetUserId(), PickerCurrentUnit, (double)Attrs.SaturatedInput, (double)Attrs.FiberInput, (double)Attrs.SaltInput, Attrs.BrandInput, (double)Attrs.PortionSize);
                 await FirestoreBase.CreateFoodDataAsync(newFood);
+                IsBusy = false;
                 await DisplaySuccessAsync("Podařilo se uložit novou potravinu.");
                 await GoToPageAsync("..");
+
             }
             catch (Exception)
             {
+                IsBusy = false;
                 await DisplayAlertAsync("Error", "Nepodařilo se uložit data", "ok");
                 await GoToPageAsync("..");
             }
+            
         }
 
-        //private bool SaveCanExecute()
-        //{
-        //    IsVisible = !Attrs.CanSave;
-        //    return Attrs.CanSave;
-        //}
+        private void TrimNameAndBrand()
+        {
+            if (Attrs.BrandInput == null)
+            {
+                Attrs.BrandInput = string.Empty;
+            }
+            Attrs.NameInput = Attrs.NameInput.Trim();
+            Attrs.BrandInput = Attrs.BrandInput.Trim();
+        }
 
         #region Properties
 
@@ -81,35 +107,25 @@ namespace FitnessApp01.ViewModels
             set { SetProperty(ref _pickerUnits, value); }
         }
         
-        public string PickerCurrentUnit { get; set; }
-
-        //public bool CanSave
-        //{
-        //    get
-        //    {
-        //        return CheckNameInput() && Attrs.KcalInput > 0 && Attrs.CarbsInput >= 0 &&
-        //             Attrs.SugarInput >= 0 && Attrs.ProteinInput >= 0 && Attrs.FatInput >= 0;
-        //    }
-        //}
-        
-        //private bool CheckNameInput()
-        //{
-        //    return !string.IsNullOrEmpty(Attrs.NameInput)
-        //        && !Attrs.NameInput.Contains("#")
-        //        && !Attrs.NameInput.Contains("&");
-        //}
-
-        //private void CanSaveChanged()
-        //{
-        //    if (CanSave)
-        //    {
-        //        SaveButtonOpacity = 1;
-        //    }
-        //    else
-        //    {
-        //        SaveButtonOpacity = 0.4;
-        //    }
-        //}
+        private string _pickerCurrentUnit;
+        public string PickerCurrentUnit 
+        {
+            get { return _pickerCurrentUnit;}
+            set 
+            { 
+                if (SetProperty(ref _pickerCurrentUnit, value))
+                {
+                    if (Attrs != null)
+                    {
+                        if (_pickerCurrentUnit == "g")
+                            Attrs.PortionSizeString = AppResources.AddFoodPage_Portion;
+                        else if (_pickerCurrentUnit == "ml")
+                            Attrs.PortionSizeString = AppResources.AddFoodPage_PortionMl;
+                    }
+                    
+                } 
+            }
+        }
 
         private bool _isVisible = true;
         public bool IsVisible

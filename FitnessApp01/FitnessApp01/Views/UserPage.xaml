@@ -68,7 +68,7 @@
                     </Label>
                     <Label FontFamily="FAS"
                        Text="{Static helpers:IconFont.Cog}"
-                       TextColor="Black"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black,Default=Black}"
                        FontSize="30"
                        HorizontalOptions="End"
                        IsVisible="{Binding IsSettingsIconVisible}">
@@ -80,7 +80,7 @@
                     </Label>
                     <Label FontFamily="FAS"
                        Text="{Static helpers:IconFont.User}"
-                       TextColor="Black"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black,Default=Black}"
                        FontSize="30"
                        HorizontalOptions="End"
                        IsVisible="{Binding IsUserIconVisible}">

@@ -13,7 +13,6 @@ using Xamarin.Forms;
 
 namespace FitnessApp01.ViewModels
 {
-   // [QueryProperty(nameof(MealString), "mealString")]
     public class EditMealPageViewModel : BaseViewModel, IQueryAttributable
     {
         public EditMealPageViewModel()
@@ -22,8 +21,6 @@ namespace FitnessApp01.ViewModels
                 execute: async () => await EditMeal());
             DeleteMealCommand = new Command(
                 execute: async () => await DeleteMeal());
-            //FirestoreBase = DependencyService.Get<IDatabase>();
-            //FirestoreBase = Services.FirestoreBase.Instance;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, string> query)

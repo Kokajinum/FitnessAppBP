@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -31,16 +32,13 @@ namespace FitnessApp01.ViewModels
         public async Task SelectMeal(Food food)
         {
             var jsonString = JsonConvert.SerializeObject(food);
-            /*
-             * food.Name nesmí obsahovat '&', '#', Json pak vyvolá výjimku
-             * a) povolit uživateli vložit '&' a poté do databáze uložit 'a'
-             * b) znemožnit uživateli vložit '&'
-             */
+            //řeší problém se znaky '#' a '&' (při deserializaci nastala chyba)
+            var jsonStringEncoded = HttpUtility.UrlEncode(jsonString);
 
             try
             {
                 if (MealType != string.Empty)
-                    await Shell.Current.GoToAsync($"AddMealPage?mealType={MealType}&foodJson={jsonString}" +
+                    await Shell.Current.GoToAsync($"AddMealPage?mealType={MealType}&foodJson={jsonStringEncoded}" +
                         $"&caloriesGoal={CaloriesGoal}&macros={MacrosString}");
             }
             catch (Exception)

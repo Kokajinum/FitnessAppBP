@@ -6,7 +6,9 @@
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="True"
-             Title="{Static resources:AppResources.SelectMealPageTitle}">
+             Title="{Static resources:AppResources.SelectMealPageTitle}"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -21,9 +23,11 @@
                        Placeholder="{Static resources:AppResources.FindFood}"
                        Margin="0,0,0,0"
                        SearchCommand="{Binding FoodSearchCommand}"
-                       SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}">
+                       SearchCommandParameter="{Binding Source={x:Reference SearchBar}, Path=Text}"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                       PlaceholderColor="Gray">
                 </SearchBar>
-                <ActivityIndicator IsRunning="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Scale="0.8">
                 </ActivityIndicator>
             </StackLayout>
             <Grid RowDefinitions="*" ColumnDefinitions="*">
@@ -42,11 +46,13 @@
                                 <Label Text="{Binding Name}"
                                    FontSize="Small"
                                    FontAttributes="Bold"
-                                   TextColor="Black">
+                                   Style="{StaticResource primaryText}">
                                 </Label>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Brand}"></Label>
-                                    <Label FontAttributes="Bold">
+                                    <Label Text="{Binding Brand}"
+                                           TextColor="{AppThemeBinding Dark=White, Light=Gray}"></Label>
+                                    <Label FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Dark=White, Light=Gray}">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding Kcal}"></Span>

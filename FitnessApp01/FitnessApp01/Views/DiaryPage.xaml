@@ -38,29 +38,32 @@
                                 Light={StaticResource backgroundColor}}"
                             WidthRequest="20" 
                             HeightRequest="20"
-                            Command="{Binding PreviousDayCommand}">
+                            Command="{Binding PreviousDayCommand}"
+                            Style="{StaticResource arrowButton}">
                             <Button.ImageSource>
                                 <FontImageSource
                                     FontFamily="FAS"
                                     Glyph="{x:Static fontawesome:IconFont.AngleLeft}"
-                                    Color="Black"
+                                    Color="{AppThemeBinding Dark=White, Light=Black,Default=Black}"
                                     Size="30">
                                 </FontImageSource>
                             </Button.ImageSource>
                         </Button>
-                        <Label Text="{Binding DiaryPageAttributes.NameOfTheDay}">
+                        <Label Text="{Binding DiaryPageAttributes.NameOfTheDay}"
+                               TextColor="{AppThemeBinding Dark=White, Light=Black}">
                         </Label>
                         <Button 
                             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
                                 Light={StaticResource backgroundColor}}"
                             WidthRequest="20" 
                             HeightRequest="20"
-                            Command="{Binding NextDayCommand}">
+                            Command="{Binding NextDayCommand}"
+                            Style="{StaticResource arrowButton}">
                             <Button.ImageSource>
                                 <FontImageSource
                                     FontFamily="FAS"
                                     Glyph="{x:Static fontawesome:IconFont.AngleRight}"
-                                    Color="Black"
+                                    Color="{AppThemeBinding Dark=White, Light=Black,Default=Black}"
                                     Size="30">
                                 </FontImageSource>
                             </Button.ImageSource>
@@ -68,7 +71,8 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="Center"
-                           FontAttributes="Bold">
+                           FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Dark=White, Light=Black}">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="{Binding DiaryPageAttributes.CaloriesCurrent}"></Span>
@@ -87,9 +91,7 @@
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>
                             <StackLayout Margin="0,15,0,0">
-                                <Frame BorderColor="{StaticResource primaryColor}"
-                                           BackgroundColor="{StaticResource primaryColor}"
-                                           CornerRadius="0"
+                                <Frame Style="{StaticResource mainFrame}"
                                            Padding="10,5,10,5">
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding ViewName}"
@@ -137,15 +139,15 @@
                                 <StackLayout Orientation="Horizontal">
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="StartAndExpand">
-                                        <Label>
+                                        <Label Style="{StaticResource diaryMealInfoLabel}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="{Binding Weight}"></Span>
-                                                    <Span Text="g"></Span>
+                                                    <Span Text="{Binding Measure}"></Span>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label>
+                                        <Label Style="{StaticResource diaryMealInfoLabel}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="{Binding Kcal}"></Span>
@@ -155,7 +157,7 @@
                                         </Label>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label>
+                                        <Label Style="{StaticResource diaryMealInfoLabel}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="S: "></Span>
@@ -164,7 +166,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label>
+                                        <Label Style="{StaticResource diaryMealInfoLabel}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="T: "></Span>
@@ -173,7 +175,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label>
+                                        <Label Style="{StaticResource diaryMealInfoLabel}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="B: "></Span>

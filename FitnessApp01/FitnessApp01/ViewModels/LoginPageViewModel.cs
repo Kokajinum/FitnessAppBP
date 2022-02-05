@@ -108,7 +108,6 @@ namespace FitnessApp01.ViewModels
                 //registrovaný uživatel je zároveň přihlášený
                 await AuthBase.RegisterUserAsync(UserEmail, UserPassword);
                 LoginLabelTap();
-               // await App.Current.MainPage.Navigation.PushAsync(new AppShell());
                 await GoToPageAsync("//WelcomePage");
                 ResetFields();
                 IsBusy = false;
@@ -149,10 +148,7 @@ namespace FitnessApp01.ViewModels
             {
                 IsBusy = true;
                 await AuthBase.LoginUserAsync(UserEmail, UserPassword);
-                //await GoToPageAsync("//main-content");
                 await GoToPageAsync("//DiaryPage");
-                //App.Current.MainPage = new AppShell();
-                //await App.Current.MainPage.Navigation.PushAsync(new AppShell());
                 ResetFields();
                 
             }
@@ -189,7 +185,6 @@ namespace FitnessApp01.ViewModels
             UserConfirmPassword = string.Empty;
         }
 
-        //TODO
         private bool ValidateEmail()
         {
             return true;

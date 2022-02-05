@@ -30,6 +30,21 @@
             <Setter Property="TextColor" Value="{StaticResource secondaryColor}"></Setter>
         </Style>
 
+        <!--<VisualStateGroupList x:Key="mainVSM">
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter Property="Scale" Value="1"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                    <VisualState.Setters>
+                        <Setter Property="Scale" Value="0.9"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>-->
+
         <Style
             x:Key="primaryButton"
             TargetType="Button">
@@ -54,11 +69,31 @@
             </Setter>
         </Style>
 
+        <Style x:Key="arrowButton" TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="1"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="0.9"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
         <Style x:Key="postRegistrationHeaders" TargetType="Label">
             <Setter Property="HorizontalOptions" Value="Center"></Setter>
             <Setter Property="FontSize" Value="Large"></Setter>
             <Setter Property="FontAttributes" Value="Bold"></Setter>
-            <Setter Property="TextColor" Value="Black"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark},
+                Light={StaticResource primaryTextColor}}"></Setter>
         </Style>
 
         <Style x:Key="postRegistrationEntry" TargetType="Entry">
@@ -77,6 +112,11 @@
             <Setter Property="FontSize" Value="Default"></Setter>
             <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource primaryTextColorDark}, 
                 Light={StaticResource primaryTextColor}}"></Setter>
+        </Style>
+
+        <Style x:Key="diaryMealInfoLabel" TargetType="Label" x:Name="DiaryInfoLabel">
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={Static Color.WhiteSmoke}, Light=Gray}"></Setter>
         </Style>
 
         <Style x:Key="horizontalLine" TargetType="StackLayout">
@@ -100,11 +140,27 @@
             <Setter Property="CornerRadius" Value="8"></Setter>
             <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource TabbarColorDark}, 
                 Light={StaticResource TabbarColor}}"></Setter>
-            <!--<Setter Property="BackgroundColor" Value="{StaticResource TabbarColor}"></Setter>-->
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=#2C2C2C,
+                Light=White,Default=White}"></Setter>
         </Style>
 
         <Style x:Key="addFoodEntry" TargetType="Entry" x:Name="AddFoodEntry">
             <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="WidthRequest" Value="80"></Setter>
+            <Setter Property="PlaceholderColor" Value="Gray"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark=White,
+                Light=Black}"></Setter>
+        </Style>
+        <Style x:Key="addFoodLabel" TargetType="Label" x:Name="AddFoodLabel">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"></Setter>
+        </Style>
+
+        <Style x:Key="mainFrame" TargetType="Frame">
+            <Setter Property="BorderColor" Value="{StaticResource primaryColor}"></Setter>
+            <Setter Property="BackgroundColor" Value="{StaticResource primaryColor}"></Setter>
+            <Setter Property="CornerRadius" Value="0"></Setter>
         </Style>
         
     </Application.Resources>

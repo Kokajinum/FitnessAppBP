@@ -29,7 +29,7 @@ namespace FitnessApp01
         {
             var activity = DependencyService.Get<IStatusBar>();
             OSAppTheme currentTheme = Application.Current.RequestedTheme;
-            if ((currentTheme == OSAppTheme.Dark) || (currentTheme == OSAppTheme.Unspecified))
+            if (currentTheme == OSAppTheme.Dark)
             {
                 //var color = Application.Current.Resources
                 //    .Where(x => x.Key.Equals("TabbarColor")).FirstOrDefault().Value;
@@ -56,6 +56,7 @@ namespace FitnessApp01
                 SettingsLabel.Setters[0].Value = 15;
                 MacronutrientsLabel.Setters[0].Value = 13;
                 AddFoodEntry.Setters[0].Value = 13;
+                AddFoodLabel.Setters[0].Value = 13;
                 //foreach (var i in SettingsLabel.Setters)
                 //{
                 //    if (i.Property.PropertyName == "FontSize")

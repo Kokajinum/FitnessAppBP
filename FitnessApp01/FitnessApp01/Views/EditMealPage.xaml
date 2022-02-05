@@ -8,7 +8,9 @@
              xmlns:helpers="clr-namespace:FitnessApp01.Helpers"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="True"
-             Title="{Static resources:AppResources.EditMeal}">
+             Title="{Static resources:AppResources.EditMeal}"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -17,33 +19,40 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:StringToDoubleConverter x:Key="stringToDouble" />
+            <converters:StringToDoubleOptionalConverter x:Key="stringToDouble" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout Margin="0,10,0,0">
-            <!--<Label Text="{Static resources:AppResources.EditMeal}"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalTextAlignment="Center">
-            </Label>-->
-            <StackLayout Margin="20">
+            <StackLayout Margin="20,10">
                 <Label Text="{Binding MealName}"
-                       FontAttributes="Bold">
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=Gray, Dark=White}">
                 </Label>
                 <Label Text="{Binding MealBrand}"
-                       FontAttributes="Bold">
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=Gray, Dark=White}">
                 </Label>
             </StackLayout>
-            <Entry Text="{Binding WeightInput, Converter={StaticResource stringToDouble}}"
+            <Grid ColumnDefinitions="auto" HorizontalOptions="Center">
+                <Entry Grid.Column="0"
+                    Text="{Binding WeightInput, Converter={StaticResource stringToDouble}}"
+                   TextColor="{AppThemeBinding Light=Black, Dark=White}"
                    HorizontalTextAlignment="Center"
-                   Keyboard="Numeric">
-            </Entry>
+                   Keyboard="Numeric"
+                   MaxLength="4"
+                   WidthRequest="100"
+                       Placeholder="{Static resources:AppResources.ServingSize}"
+                       PlaceholderColor="Gray">
+                </Entry>
+            </Grid>
+            
             <StackLayout IsVisible="{Binding IsVisible}"
                          Spacing="0"
                          Padding="20">
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AliceBlue,
+                                Dark=#003447}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -63,7 +72,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AntiqueWhite,
+                                Dark=#E5886E}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -83,7 +93,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AliceBlue,
+                                Dark=#003447}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -103,7 +114,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AntiqueWhite,
+                                Dark=#E5886E}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -123,42 +135,6 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <!--<Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Energie: "></Span>
-                            <Span Text="{Binding KcalCalculated}"></Span>
-                            <Span Text="Kcal"></Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Sacharidy: "></Span>
-                            <Span Text="{Binding CarbsCalculated}"></Span>
-                            <Span Text="g"></Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Tuky: "></Span>
-                            <Span Text="{Binding FatCalculated}"></Span>
-                            <Span Text="g"></Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Bílkoviny: "></Span>
-                            <Span Text="{Binding ProteinCalculated}"></Span>
-                            <Span Text="g"></Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>-->
             </StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}">
             </ActivityIndicator>
@@ -173,7 +149,8 @@
                    Text="{Static helpers:IconFont.Trash}"
                    FontSize="30"
                    Margin="0,50,0,0"
-                   HorizontalOptions="Center">
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Dark=White, Light=Black}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
                                           Command="{Binding DeleteMealCommand}">

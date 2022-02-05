@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -19,7 +21,7 @@
                    HorizontalOptions="CenterAndExpand"
                    FontSize="40"
                    FontAttributes="Bold"
-                   TextColor="Black"/>
+                   Style="{StaticResource primaryText}"/>
 
             <Label Text="{Static resources:AppResources.WelcomeText}"
                    FontSize="20"
@@ -29,12 +31,12 @@
             </Label>
 
             <Button Text="{Static resources:AppResources.Start}"
-                    CornerRadius="100"
                     WidthRequest="120"
                     Margin="0,140,0,0"
                     HorizontalOptions="Center"
                     VerticalOptions="StartAndExpand"
-                    Command="{Binding SettingsStartCommand}">
+                    Command="{Binding SettingsStartCommand}"
+                    Style="{StaticResource primaryButton}">
             </Button>
         </StackLayout>
     </ContentPage.Content>

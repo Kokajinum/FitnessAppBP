@@ -23,6 +23,10 @@ namespace FitnessApp01.Helpers
             //hubnutí
             if (rs.DesiredWeightDB < rs.WeightDB)
             {
+                if (rs.GoalSpeed == 1)
+                {
+                    rs.GoalSpeed = 0.1;
+                }
                 rs.GoalDB = 1;
                 //zrychlit nabírání/hubnutí lze o 0.1(10%), 0.2(20%), 0.3(30%)
                 speedConstant = 1 - rs.GoalSpeed;
@@ -30,6 +34,10 @@ namespace FitnessApp01.Helpers
             //nabírání
             else if (rs.DesiredWeightDB > rs.WeightDB)
             {
+                if (rs.GoalSpeed == 1)
+                {
+                    rs.GoalSpeed = 0.1;
+                }
                 rs.GoalDB = 2;
                 speedConstant = 1 + rs.GoalSpeed + 0.05;
             }
@@ -37,6 +45,7 @@ namespace FitnessApp01.Helpers
             else
             {
                 rs.GoalDB = 3;
+                rs.GoalSpeed = 1;
                 //u udržení zrychlení neexistuje
             }
 

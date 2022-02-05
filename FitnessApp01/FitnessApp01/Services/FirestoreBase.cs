@@ -119,15 +119,19 @@ namespace FitnessApp01.Services
                     var model = doc.ToObject<Day>();
                     //
                     var breakfastListMeals = await ReadMealDataAsync("breakfast");
+                    CheckAndSetMeasures(breakfastListMeals);
                     model.MealGroups.Add(new MealGroup("breakfast", AppResources.Breakfast, breakfastListMeals));
                     //
                     var lunchListMeals = await ReadMealDataAsync("lunch");
+                    CheckAndSetMeasures(lunchListMeals);
                     model.MealGroups.Add(new MealGroup("lunch", AppResources.Lunch, lunchListMeals));
                     //
                     var snackListMeals = await ReadMealDataAsync("snack");
+                    CheckAndSetMeasures(snackListMeals);
                     model.MealGroups.Add(new MealGroup("snack", AppResources.Snack, snackListMeals));
                     //
                     var dinnerListMeals = await ReadMealDataAsync("dinner");
+                    CheckAndSetMeasures(dinnerListMeals);
                     model.MealGroups.Add(new MealGroup("dinner", AppResources.Dinner, dinnerListMeals));
                     //
                     //obs.Add(model);
@@ -145,6 +149,17 @@ namespace FitnessApp01.Services
                 var obs = new ObservableCollection<Day>();
                 obs.Add(CreateEmptyDay());
                 return CreateEmptyDay();
+            }
+        }
+
+        private void CheckAndSetMeasures(List<Meal> meals)
+        {
+            for (int i = 0; i < meals.Count; i++)
+            {
+                if (string.IsNullOrEmpty(meals[i].Measure))
+                {
+                    meals[i].Measure = "g";
+                }
             }
         }
 

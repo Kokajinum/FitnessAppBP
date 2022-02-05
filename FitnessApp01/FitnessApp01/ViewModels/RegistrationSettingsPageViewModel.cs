@@ -172,7 +172,7 @@ namespace FitnessApp01.ViewModels
         {
             if (!string.IsNullOrEmpty(DesiredWeightInput) &&
                 double.TryParse(DesiredWeightInput, out double num) &&
-                num > 0)
+                num > 0 && num <= 250)
             {
                 DesiredWeightDB = num;
                 //DesiredWeightMeasureDB = DesiredWeightPickerIndex == 0 ? "kg" : "lbs";
@@ -224,7 +224,7 @@ namespace FitnessApp01.ViewModels
         {
             if (!string.IsNullOrEmpty(HeightInput) &&
                 double.TryParse(HeightInput, out double num) &&
-                num > 0)
+                num > 0 && num <= 250)
             {
                 HeightDB = num;
                 return true;
@@ -236,7 +236,7 @@ namespace FitnessApp01.ViewModels
         {
             if (!string.IsNullOrEmpty(WeightInput) &&
                 double.TryParse(WeightInput, out double num) &&
-                num > 0)
+                num > 0 && num <= 250)
             {
                 WeightDB = num;
                 //WeightMeasureDB = WeightPickerIndex == 0 ? "kg" : "lbs";
@@ -249,7 +249,7 @@ namespace FitnessApp01.ViewModels
         private bool ValidatePage1()
         {
             int num;
-            if (int.TryParse(AgeInput, out num) && num > 0)
+            if (int.TryParse(AgeInput, out num) && num > 0 && num <= 120)
             {
                 AgeDB = num;
                 return true;

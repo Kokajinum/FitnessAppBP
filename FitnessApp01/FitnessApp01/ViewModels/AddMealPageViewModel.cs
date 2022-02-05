@@ -64,13 +64,17 @@ namespace FitnessApp01.ViewModels
                 await DisplayErrorAsync(AppResources.CanNotSave);
                 return;
             }
+            if (string.IsNullOrEmpty(Food.Measure))
+            {
+                Food.Measure = "g";
+            }
             IsBusy = true;
             MealGroup mealGroup;
             Day oldDay;
             var meal = new Meal(Food.Name, Food.Brand, WeightCalculated, KcalCalculated, CarbsCalculated, SugarCalculated,
                     ProteinCalculated, FatCalculated, SaturatedCalculated, FiberCalculated, SaltCalculated, MealType,
                     Food.Kcal, Food.Carbohydrates, Food.Sugar, Food.Protein, Food.Fat, Food.SaturatedFat, Food.Fiber,
-                    Food.Salt);
+                    Food.Salt, Food.Measure);
             
             try
             {

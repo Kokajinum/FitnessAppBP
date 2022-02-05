@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -43,7 +44,9 @@ namespace FitnessApp01.ViewModels
         private async Task ItemTap(Meal meal)
         {
             var jsonString = JsonConvert.SerializeObject(meal);
-            await Shell.Current.GoToAsync($"EditMealPage?mealString={jsonString}");
+            //řeší problém se znaky '#' a '&' (JsonConvert má problém s těmito znaky)
+            var jsonStringEncoded = HttpUtility.UrlEncode(jsonString);
+            await Shell.Current.GoToAsync($"EditMealPage?mealString={jsonStringEncoded}");
         }
 
         public async Task AddMeal(MealGroup meals)
@@ -57,10 +60,6 @@ namespace FitnessApp01.ViewModels
             await Shell.Current.GoToAsync($"SelectMealPage?mealType={meals.Name}" +
                 $"&caloriesGoal={Diary.RegistrationSettings.CaloriesGoal}&macros={jsonString}");
 
-        }
-
-        private void OnInitializeComplete(Task arg)
-        {
         }
 
         public async Task NextDay()
@@ -79,8 +78,6 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                /*var selectedDay = Diary.Days.FirstOrDefault(x => x.UnixSeconds == SelectedDay.ToUnixSecondsString());
-                SetDiaryData(selectedDay);*/
                 await LoadAndSetDiaryData();
             }
             catch (Exception)
@@ -105,7 +102,7 @@ namespace FitnessApp01.ViewModels
                 var isValid = await LoadRegistrationSettings();
                 if (!isValid)
                 {
-                    //pokus o získání nových údajů
+                    //pokus o získání nových údajů v případě nevalidních dat
                     await App.Current.MainPage
                         .DisplayAlert("Error", "nedokončená registrace - prosím znovu vyplňtě údaje", "ok");
                     await Shell.Current.GoToAsync("//RegistrationSettingsPage");
@@ -155,7 +152,6 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                //opravit!!!!!!!!!!!!!!!!!!!!!!!
                 if (selectedDay.CaloriesGoal == 0 || selectedDay.UnixSeconds.Equals(SelectedDay.ActuallyCurrentDayUnixString()))
                 {
                     selectedDay.CaloriesGoal = Diary.RegistrationSettings.CaloriesGoal;
@@ -181,7 +177,6 @@ namespace FitnessApp01.ViewModels
         {
             try
             {
-                //Diary.RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
                 RegistrationSettings = await FirestoreBase.ReadRegistrationSettingsAsync();
                 if (RegistrationSettings == null)
                 {

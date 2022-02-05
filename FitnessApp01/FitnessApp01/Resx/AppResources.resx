@@ -136,28 +136,61 @@
     <value>Tuky</value>
   </data>
   <data name="AddFoodPage_Fiber" xml:space="preserve">
-    <value>Vláknina (volitelné)</value>
+    <value>Z toho vláknina</value>
+  </data>
+  <data name="AddFoodPage_NoEnergy" xml:space="preserve">
+    <value>Prosím, vyplňte energetickou hodnotu.</value>
+  </data>
+  <data name="AddFoodPage_NoReqNutrient" xml:space="preserve">
+    <value>Prosím, vyplňte všechny hlavní složky.</value>
+  </data>
+  <data name="AddFoodPage_NutrientsWarning" xml:space="preserve">
+    <value>Součet hlavních složek nesmí být víc než 100g</value>
   </data>
   <data name="AddFoodPage_Nutritions" xml:space="preserve">
     <value>Výživové údaje na</value>
+  </data>
+  <data name="AddFoodPage_Optional" xml:space="preserve">
+    <value>volitelné</value>
   </data>
   <data name="AddFoodPage_PleaseCheckInputs" xml:space="preserve">
     <value>Prosím, zkontrolujte, zda máte vyplněné všechny povinné údaje a zda nepoužíváte znaky &amp; a #</value>
   </data>
   <data name="AddFoodPage_Portion" xml:space="preserve">
-    <value>Velikost balení/porce (volitelné)</value>
+    <value>Velikost balení/porce v gramech (volitelné)</value>
+  </data>
+  <data name="AddFoodPage_PortionMl" xml:space="preserve">
+    <value>Velikost balení/porce v ml (volitelné)</value>
   </data>
   <data name="AddFoodPage_Protein" xml:space="preserve">
     <value>Bílkoviny</value>
   </data>
   <data name="AddFoodPage_Salt" xml:space="preserve">
-    <value>Sůl (volitelné)</value>
+    <value>Sůl</value>
   </data>
   <data name="AddFoodPage_SaturatedFats" xml:space="preserve">
-    <value>Z toho nasycené mastné kyseliny (volitelné)</value>
+    <value>Z toho nasycené mastné kyseliny</value>
   </data>
   <data name="AddFoodPage_Sugar" xml:space="preserve">
     <value>Z toho cukry</value>
+  </data>
+  <data name="AddFoodPage_WrongFiber" xml:space="preserve">
+    <value>Vlákniny nemůže být více než sacharidů.</value>
+  </data>
+  <data name="AddFoodPage_WrongNameVisible" xml:space="preserve">
+    <value>Prosím, vyplňte název potraviny.</value>
+  </data>
+  <data name="AddFoodPage_WrongOptSum" xml:space="preserve">
+    <value>Podsložky (nenasycené mast. kys., cukry, vláknina) nesmí mít více gramů než jejich hlavní složka.</value>
+  </data>
+  <data name="AddFoodPage_WrongReqSum" xml:space="preserve">
+    <value>Součet hlavních složek nesmí být více než 100 gramů. (tuky, sacharidy, bílkoviny, sůl)</value>
+  </data>
+  <data name="AddFoodPage_WrongSaturated" xml:space="preserve">
+    <value>Nasycených mastných kyselin nemůže být více než tuků.</value>
+  </data>
+  <data name="AddFoodPage_WrongSugar" xml:space="preserve">
+    <value>Cukru nemůže být více než sacharidů.</value>
   </data>
   <data name="Age" xml:space="preserve">
     <value>Věk</value>
@@ -312,6 +345,9 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
   <data name="NothingToSave" xml:space="preserve">
     <value>Není co uložit.</value>
   </data>
@@ -360,6 +396,9 @@
   <data name="SelectMealPageTitle" xml:space="preserve">
     <value>Výběr potraviny</value>
   </data>
+  <data name="ServingSize" xml:space="preserve">
+    <value>Množství</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Nastavení</value>
   </data>
@@ -401,6 +440,9 @@
   </data>
   <data name="WelcomeText" xml:space="preserve">
     <value>Nyní Vás aplikace provede základním nastavením.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
   </data>
   <data name="YourActivity" xml:space="preserve">
     <value>Úrověň fyzické aktivity</value>

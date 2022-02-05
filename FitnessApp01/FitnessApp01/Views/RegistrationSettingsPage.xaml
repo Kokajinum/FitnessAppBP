@@ -5,9 +5,10 @@
              xmlns:local="clr-namespace:FitnessApp01.ViewModels"
              xmlns:services="clr-namespace:FitnessApp01.Services"
              xmlns:resources="clr-namespace:FitnessApp01.Resx"
-             xmlns:behavior="clr-namespace:FitnessApp01.Behaviors"
              Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding Nothing}">

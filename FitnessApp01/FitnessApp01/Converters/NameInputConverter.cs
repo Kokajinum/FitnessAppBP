@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Xamarin.Forms;
 
 namespace FitnessApp01.Converters
 {
-    public class StringToDoubleConverter : IValueConverter
+    public class NameInputConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -12,17 +14,12 @@ namespace FitnessApp01.Converters
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((string)value == "" || value == null)
+        { 
+            if (value == null)
             {
-                return (double)-1;
+                return string.Empty;
             }
-            if (!double.TryParse((string)value, out double num))
-            {
-                return (double)-1;
-            }
-            
-            return num;
+            return value;
         }
     }
 }

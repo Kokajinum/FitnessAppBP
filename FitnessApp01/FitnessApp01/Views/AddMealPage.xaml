@@ -7,7 +7,9 @@
              xmlns:converters="clr-namespace:FitnessApp01.Converters"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="True"
-             Title="{Binding Food.Name}">
+             Title="{Binding Food.Name}"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource backgroundColorDark}, 
+            Light={StaticResource backgroundColor}}">
 
     <ContentPage.BindingContext>
         <!--nastavení viewmodelu-->
@@ -17,6 +19,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:StringToDoubleConverter x:Key="stringToDouble" />
+            <converters:StringToDoubleOptionalConverter x:Key="stringToDoubleOpt"></converters:StringToDoubleOptionalConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -27,10 +30,12 @@
                    FontAttributes="Bold">
             </Label>-->
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Food.Brand}">
+                <Label Text="{Binding Food.Brand}"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black}">
                 </Label>
                 <Label FontSize="Medium"
-                       FontAttributes="Bold">
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black}">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding Food.Kcal}"></Span>
@@ -42,12 +47,16 @@
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center"
                          Margin="0,50,0,0">
-                <Entry Placeholder="váha"
+                <Entry Placeholder="{Static resources:AppResources.ServingSize}"
                        Keyboard="Numeric"
-                       Text="{Binding UserInput, Converter={StaticResource stringToDouble}}">
+                       Text="{Binding UserInput, Converter={StaticResource stringToDoubleOpt}}"
+                       MaxLength="4"
+                       TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                       PlaceholderColor="Gray">
                 </Entry>
                 <Picker ItemsSource="{Binding PickerSource}"
-                        SelectedItem="{Binding PickerCurrentItem}">
+                        SelectedItem="{Binding PickerCurrentItem}"
+                        TextColor="{AppThemeBinding Dark=White, Light=Black}">
                 </Picker>
                 <!--<Label Text="g"
                        FontSize="Medium"
@@ -58,7 +67,8 @@
             <StackLayout Spacing="0" 
                          Padding="20"
                          IsVisible="{Binding IsVisible}">
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AliceBlue,
+                                Dark=#003447}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -78,7 +88,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AntiqueWhite,
+                                Dark=#E5886E}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -98,7 +109,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AliceBlue">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AliceBlue,
+                                Dark=#003447}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>
@@ -118,7 +130,8 @@
                         </Label.FormattedText>
                     </Label>
                 </Grid>
-                <Grid ColumnDefinitions="*, auto" BackgroundColor="AntiqueWhite">
+                <Grid ColumnDefinitions="*, auto" BackgroundColor="{AppThemeBinding Light=AntiqueWhite,
+                                Dark=#E5886E}">
                     <Label Style="{StaticResource macronutrientsLabel}"
                            Grid.Column="0">
                         <Label.FormattedText>

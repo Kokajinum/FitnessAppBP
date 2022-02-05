@@ -9,7 +9,9 @@
        Shell.FlyoutBehavior="Disabled"
        Shell.NavBarIsVisible="False"
        xmlns:fontawesome="clr-namespace:FitnessApp01.Helpers"
-       NavigationPage.HasNavigationBar="False">
+       NavigationPage.HasNavigationBar="False"
+       Shell.BackgroundColor="{AppThemeBinding Dark={StaticResource TabbarColorDark},
+                    Light={StaticResource TabbarColor}}">
 
     <Shell.Resources>
         <ResourceDictionary>

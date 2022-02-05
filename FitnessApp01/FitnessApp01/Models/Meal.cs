@@ -28,6 +28,8 @@ namespace FitnessApp01.Models
         public double Weight { get; set; }
         [MapTo("mealType")]
         public string MealType { get; set; }
+        [MapTo("measure")]
+        public string Measure { get; set; }
         [MapTo("kcalOrig")]
         public int KcalOrig { get; set; }
         [MapTo("carbohydratesOrig")]
@@ -52,7 +54,7 @@ namespace FitnessApp01.Models
         public Meal(string name, string brand, double weight, int kcal, double carbs, double sugar,
             double protein, double fat, double saturated, double fiber, double salt, string mealType,
             int kcalOrig, double carbohydratesOrig, double sugarOrig, double proteinOrig, double fatOrig,
-            double saturatedFatOrig, double fiberOrig, double saltOrig)
+            double saturatedFatOrig, double fiberOrig, double saltOrig, string measure)
         {
             Name = name;
             Weight = weight;
@@ -74,6 +76,7 @@ namespace FitnessApp01.Models
             SaturatedFatOrig = saturatedFatOrig;
             FiberOrig = fiberOrig;
             SaltOrig = saltOrig;
+            Measure = measure;
         }
     }   
 }
