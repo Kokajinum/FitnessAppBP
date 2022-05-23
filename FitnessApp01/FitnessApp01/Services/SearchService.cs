@@ -23,11 +23,11 @@ namespace FitnessApp01.Services
 
         private async Task<SearchResponse<Food>> GetResponseAsync(string searchString)
         {
-            var result = await Index.SearchAsync<Food>(new Query(searchString)
+            var response = await Index.SearchAsync<Food>(new Query(searchString)
             {
                 //pro případné omezení počtu výsledků je HitsPerPage
             });
-            return result;
+            return response;
         }
 
         private IEnumerable<Food> GetHits(SearchResponse<Food> searchResponse)
